@@ -51,44 +51,33 @@ spark = SparkSession.builder \
 # 3) LOAD & FLATTEN ELECTION RESULTS
 ################################################################################
 
-with open("data/election_results.json", "r", encoding="utf-8") as f:
-    election_data = json.load(f)
-
-records = []
-for year_str, data in election_data.items():
-    year = int(year_str)
-    for wahlkreis in data.get("wahlkreise", {}).values():
-        for bezirk in wahlkreis.get("bezirke", {}).values():
-            for municipality_id, details in bezirk.get("municipalities", {}).items():
-                votes = details.get("votes", {})
-                # Extract party votes (ignoring summary keys)
-                party_votes = {
-                    k: v for k, v in votes.items()
-                    if k not in ["Wahlberechtigte", "abgegebene Stimmen", "gültige Stimmen", "Wahlbeteiligung"]
-                }
-                winning_party = max(party_votes, key=party_votes.get) if party_votes else None
-                records.append({
-                    "Year": year,
-                    "Municipality_ID": municipality_id,
-                    "Municipality_Name": details.get("name", None),
-                    "Wahlberechtigte": votes.get("Wahlberechtigte"),
-                    "abgegebene_Stimmen": votes.get("abgegebene Stimmen"),
-                    "gueltige_Stimmen": votes.get("gültige Stimmen"),
-                    "Wahlbeteiligung": votes.get("Wahlbeteiligung"),
-                    "Winning_Party": winning_party
-                })
-
-# Create a Spark DataFrame from the records list
-election_df = spark.createDataFrame(records)
-
-# Add a slug column for municipalities
-election_df = election_df.withColumn(
-    "Municipality_Lowercase",
-    F.regexp_replace(F.lower(F.trim(col("Municipality_Name"))), r"\s+", "-")
+# Load the merged dataset from the first script instead of election_results.json
+merged_data_path = "data/merged_data.csv"
+merged_df = (
+    spark.read
+         .option("header", True)
+         .option("inferSchema", True)
+         .option("sep", ",")
+         .csv(merged_data_path)
+         .drop("_c0")  # Drop unnecessary column if exists
 )
 
-print("Election data (sample):")
-election_df.show(10, truncate=False)
+# Ensure proper data types
+merged_df = merged_df.withColumn("Year", F.col("Year").cast("integer"))
+
+# Rename columns if necessary (to match expectations)
+if "Municipality" in merged_df.columns:
+    merged_df = merged_df.withColumnRenamed("Municipality", "Municipality_Name")
+
+# Add Municipality_Lowercase if not already present
+if "Municipality_Lowercase" not in merged_df.columns:
+    merged_df = merged_df.withColumn(
+        "Municipality_Lowercase",
+        F.regexp_replace(F.lower(F.trim(col("Municipality_Name"))), r"\s+", "-")
+    )
+
+print("Loaded merged data sample:")
+merged_df.show(5, truncate=False)
 
 ################################################################################
 # 4) LOAD SPENDING CSV WITH SUBCATEGORIES & PIVOT THE DATA
@@ -142,7 +131,7 @@ pivot_spend.show(10, truncate=False)
 # 5) MERGE ELECTION RESULTS WITH SPENDING DATA
 ################################################################################
 
-merged_df = election_df.join(pivot_spend, on=["Municipality_Lowercase", "Year"], how="inner")
+merged_df = merged_df.join(pivot_spend, on=["Municipality_Lowercase", "Year"], how="inner")
 # Drop rows with missing Winning_Party
 merged_df = merged_df.na.drop(subset=["Winning_Party"])
 
@@ -199,7 +188,7 @@ label_indexer = StringIndexer(inputCol="Winning_Party", outputCol="label", handl
 assembler = VectorAssembler(inputCols=feature_cols, outputCol="features", handleInvalid="skip")
 
 # Step 3: Define a Random Forest classifier.
-rf_classifier = RandomForestClassifier(featuresCol="features", labelCol="label", numTrees=50, maxDepth=5, seed=42)
+rf_classifier = RandomForestClassifier(featuresCol="features", labelCol="label", numTrees=30, maxDepth=5, seed=42)
 
 # Create the pipeline
 pipeline = Pipeline(stages=[label_indexer, assembler, rf_classifier])
@@ -240,7 +229,7 @@ print("\nStringIndexer label mapping (0.0-based):", model.stages[0].labels)
 assembler_ovr = VectorAssembler(inputCols=feature_cols, outputCol="features_ovr", handleInvalid="skip")
 
 # Define the parties for which to build a binary classifier.
-parties = ["ÖVP", "SPÖ", "FPÖ"]
+parties = ["OVP", "SPO", "FPO"]
 results_ovr = []
 
 for party in parties:
@@ -253,7 +242,7 @@ for party in parties:
     train_party, test_party = df_party.randomSplit([0.8, 0.2], seed=42)
     
     # Train a Random Forest classifier for this binary task.
-    rf_bin = RandomForestClassifier(labelCol="target", featuresCol="features_ovr", numTrees=50, maxDepth=5, seed=42)
+    rf_bin = RandomForestClassifier(labelCol="target", featuresCol="features_ovr", numTrees=30, maxDepth=5, seed=42)
     rf_bin_model = rf_bin.fit(train_party)
     
     # Predict on the test set.
@@ -292,7 +281,7 @@ merged_data = merged_data.withColumn("Turnout_Category",
                                      .otherwise("Low Turnout"))
 
 # Count FPÖ wins in each turnout category.
-fpö_wins = merged_data.filter(col("Winning_Party") == "FPÖ") \
+fpö_wins = merged_data.filter(col("Winning_Party") == "FPO") \
                       .groupBy("Turnout_Category") \
                       .count()
                       
