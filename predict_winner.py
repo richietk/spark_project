@@ -134,26 +134,33 @@ df_age = df_age.select("Municipality_Lowercase", "orig_year", "Pop_65plus_Ratio"
 # We join on Municipality_Lowercase and compute the absolute difference in years.
 # Then, by partitioning on the unique ID (added above) we select the row with minimum difference.
 
+
+print((merged_df.count(), len(merged_df.columns)))
+print((df_nation.count(), len(df_nation.columns)))
+print((df_edu.count(), len(df_edu.columns)))
+print((df_age.count(), len(df_age.columns)))
+
 # --- Helper function for "closest" join ---
 # Adjust the closest_demographic_join function to handle ties by orig_year descending
-def closest_demographic_join(merged, demo_df, ratio_col, diff_alias):
+def closest_demographic_join(merged, demo_df, ratio_col):
+    # Join without filtering to calculate the absolute year difference
     joined = merged.join(demo_df, on="Municipality_Lowercase", how="left") \
-                   .withColumn(diff_alias, F.abs(F.col("Year") - F.col("orig_year")))
-    # Order by diff ascending, then orig_year descending to pick the latest year on ties
-    win = Window.partitionBy("id").orderBy(F.col(diff_alias).asc(), F.col("orig_year").desc())
-    closest = joined.withColumn("row_num", F.row_number().over(win)) \
-                   .filter(F.col("row_num") == 1) \
-                   .select("id", ratio_col)
+                   .withColumn("year_diff", F.abs(F.col("Year") - F.col("orig_year")))
+
+    # Find the row with the smallest difference using groupBy
+    closest = (
+        joined.groupBy("id")
+              .agg(F.first(F.struct("year_diff", ratio_col)).alias("best_match"))
+              .select("id", F.col("best_match." + ratio_col).alias(ratio_col))
+    )
+
     return closest
 
-# --- Nation: Austria_Ratio ---
-nation_closest = closest_demographic_join(merged_df, df_nation, "Austria_Ratio", "nation_diff")
-# --- Education: Uni_Grad_Ratio ---
-edu_closest = closest_demographic_join(merged_df, df_edu, "Uni_Grad_Ratio", "edu_diff")
-# --- Age: Pop_65plus_Ratio ---
-age_closest = closest_demographic_join(merged_df, df_age, "Pop_65plus_Ratio", "age_diff")
 
-# Now join the ratios back to the merged_df (using the unique id)
+nation_closest = closest_demographic_join(merged_df, df_nation, "Austria_Ratio")
+edu_closest = closest_demographic_join(merged_df, df_edu, "Uni_Grad_Ratio")
+age_closest = closest_demographic_join(merged_df, df_age, "Pop_65plus_Ratio")
+
 merged_df = merged_df.join(nation_closest, on="id", how="left") \
                      .join(edu_closest, on="id", how="left") \
                      .join(age_closest, on="id", how="left")
@@ -172,8 +179,8 @@ merged_df = merged_df.replace(float("inf"), None).replace(float("-inf"), None)
 # Drop rows with missing key columns (including those with inf converted to null)
 cols_required = ["Spending_Summe", "Wahlbeteiligung", "Winning_Party",
                  "Austria_Ratio", "Uni_Grad_Ratio", "Pop_65plus_Ratio"]
-for colname in cols_required:
-    merged_df = merged_df.filter(F.col(colname).isNotNull())
+                 
+merged_df = merged_df.dropna(subset=cols_required)
     
 print(f"Spark: Row count after filtering nulls: {merged_df.count()}")
 print(f"Number of rows after cleaning: {merged_df.count()}")
@@ -217,12 +224,11 @@ assembler = VectorAssembler(
     handleInvalid="skip"
 )
 
-# Define a RandomForest classifier
 rf_classifier = RandomForestClassifier(
     featuresCol="features",
     labelCol="label",
-    numTrees=50,
-    maxDepth=5,
+    numTrees=50,  # Number of trees
+    maxDepth=5,  # Maximum depth of trees
     seed=42
 )
 
@@ -232,6 +238,8 @@ pipeline = Pipeline(stages=[label_indexer, assembler, rf_classifier])
 # ------------------------------------------------------------------------------
 # 7. TRAIN/TEST SPLIT, TRAIN MODEL, AND EVALUATE
 # ------------------------------------------------------------------------------
+merged_df.select("Winning_Party").distinct().show()
+
 train_df, test_df = merged_df.randomSplit([0.8, 0.2], seed=42)
 model = pipeline.fit(train_df)
 

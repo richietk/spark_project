@@ -1,33 +1,38 @@
-#!/usr/bin/env python3
-# Filename: spark_elections_spending.py
-
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, regexp_replace
-import json
+from pyspark.sql.functions import col, regexp_replace, when, lit, expr
+import pyspark.sql.functions as F
 import os
+from unidecode import unidecode  # Install with: pip install unidecode
 
-################################################################################
-# 1. Initialize Spark
-################################################################################
+# -------------------------
+# Helper Functions
+# -------------------------
+
+def standardize_municipality(col_name):
+    """Convert a municipality name to lowercase, trim whitespace, and replace spaces with dashes."""
+    return F.regexp_replace(F.lower(F.trim(F.col(col_name))), " ", "-")
+
+# -------------------------
+# Main Script
+# -------------------------
+
+# Initialize Spark
 spark = (
     SparkSession.builder
     .appName("MunicipalSpendingAndElectionAnalysis")
     .getOrCreate()
 )
 
-################################################################################
-# 2. Read & Transform Municipal Spending Data
-################################################################################
+# --- Read & Transform Municipal Spending Data ---
 spending_csv = "data/Bildungsausgaben_Gemeinden_Oberösterreich_data_2007_bis_2019.csv"
 df_spending = (
     spark.read
     .option("header", "true")
-    .option("inferSchema", "true")    # So numeric columns become floats/ints
-    .option("encoding", "UTF-8")      # Change if your CSV uses different encoding
+    .option("inferSchema", "true")
+    .option("encoding", "UTF-8")
     .csv(spending_csv)
 )
 
-# Rename columns to something consistent
 df_spending = (df_spending
     .withColumnRenamed("Gemeinde", "Municipality")
     .withColumnRenamed("Year", "Year")
@@ -35,88 +40,38 @@ df_spending = (df_spending
     .withColumnRenamed("Betrag in Euro", "Spending")
 )
 
-# Fix odd encodings in the Category column
 df_spending = df_spending.withColumn(
     "Category",
     regexp_replace(col("Category"), "FĂ¶rderung", "Förderung")
 )
 df_spending = df_spending.withColumn(
     "Category",
-    regexp_replace(col("Category"), "Sport und auĂźerschulische Leibeserziehung", "Sport und außerschulische Leibeserziehung")
+    regexp_replace(col("Category"), "Sport und auĂźerschulische Leibeserziehung",
+                   "Sport und außerschulische Leibeserziehung")
 )
 
-# Cast columns to proper types
 df_spending = df_spending.withColumn("Year", col("Year").cast("int"))
 df_spending = df_spending.withColumn("Spending", col("Spending").cast("float"))
 
-# Convert rows into the nested JSON structure
-municipal_data = {}  # { municipality -> { year -> { "Summe": float, "Details": {...} } } }
+df_spending_agg = (
+    df_spending
+    .groupBy("Municipality", "Year")
+    .agg(F.sum("Spending").alias("Spending_Summe"))
+)
 
-# Using collect() because the dataset is presumably not huge. Otherwise, consider rdd aggregation.
-for row in df_spending.collect():
-    municipality = row["Municipality"]
-    year = row["Year"]
-    category = row["Category"]
-    spending_val = row["Spending"]
+df_spending_agg = df_spending_agg.withColumn("Municipality_Lowercase", standardize_municipality("Municipality"))
 
-    if municipality not in municipal_data:
-        municipal_data[municipality] = {}
-    if year not in municipal_data[municipality]:
-        municipal_data[municipality][year] = {
-            "Summe": None,
-            "Details": {}
-        }
-    if category == "Summe":
-        municipal_data[municipality][year]["Summe"] = spending_val
-    else:
-        municipal_data[municipality][year]["Details"][category] = spending_val
-
-# Write out JSON for municipal spending
-spending_json_path = "data/municipal_spending_new.json"
-with open(spending_json_path, "w", encoding="utf-8") as f:
-    json.dump(municipal_data, f, indent=4, ensure_ascii=False)
-
-print(f"Municipal spending JSON saved to: {spending_json_path}")
-
-################################################################################
-# 3. Read & Transform Election Data (Votes + Mandates)
-################################################################################
-
-# The years we want
+# --- Read & Transform Election Data ---
 election_yrs = [2008, 2013, 2017, 2019, 2024]
+all_election_df = spark.createDataFrame([], schema="Year INT, Municipality_ID STRING, Municipality_Name STRING, Wahlberechtigte INT, abgegebene_Stimmen INT, gueltige_Stimmen INT, Wahlbeteiligung STRING, Winning_Party STRING, Municipality_Lowercase STRING")
 
-# Master dictionaries to hold results
-election_data = {}  # For votes
-mandates_data = {}  # For mandates
-
-# Function to identify "level" of location ID
-def get_id_level(loc_id_str):
-    """
-    Example logic matching your original scripts:
-      - ends with '000' -> wahlkreis
-      - ends with '099' -> wahlkarten
-      - ends with '00'  -> bezirk
-      - else           -> municipality
-    """
-    if loc_id_str.endswith("000"):
-        return "wahlkreis"
-    elif loc_id_str.endswith("099"):
-        return "wahlkarten"
-    elif loc_id_str.endswith("00"):
-        return "bezirk"
-    else:
-        return "municipality"
-
-# Loop over each election year and read the two CSVs
 for year in election_yrs:
     votes_file = f"data/OÖ_{year}_Stimmen.csv"
-    mandates_file = f"data/OÖ_{year}_Mandate.csv"
 
-    if not os.path.exists(votes_file) or not os.path.exists(mandates_file):
+    if not os.path.exists(votes_file):
         print(f"[WARNING] Missing CSV(s) for year {year} -> Skipping.")
         continue
 
-    # Read votes CSV with Spark
     votes_df = (
         spark.read
         .option("header", "true")
@@ -125,139 +80,60 @@ for year in election_yrs:
         .csv(votes_file)
     )
 
-    # Read mandates CSV with Spark
-    mandate_df = (
-        spark.read
-        .option("header", "true")
-        .option("inferSchema", "true")
-        .option("encoding", "latin1")
-        .csv(mandates_file)
-    )
+    # Normalize column names to remove special characters and standardize them
+    renamed_columns = {c: unidecode(c.strip()).replace(" ", "_") for c in votes_df.columns}
+    votes_df = votes_df.selectExpr(*[f"`{old}` as `{new}`" for old, new in renamed_columns.items()])
 
-    ############################################################################
-    # 3A. Build election_data[year] (Votes)
-    ############################################################################
-    election_data[str(year)] = {
-        "name": "Land Oberösterreich",
-        "wahlkreise": {}
-    }
+    print("Columns found in votes_df:", votes_df.columns)  # Debugging
 
-    # Collect all rows from votes_df
-    all_votes = votes_df.collect()
+    # Identify party columns dynamically
+    party_columns = [c for c in votes_df.columns if c not in {
+        "Nr.", "Name", "Wahlberechtigte", "abgegeb._Stimmen", "gultige", "Wahlbet.", "ungultige"
+    }]
 
-    # Common party columns that appear in your data
-    # Adjust as needed if your CSV has slightly different or more parties
+    print("Party columns:", party_columns)  # Debugging
 
-    for row in all_votes:
-        loc_id = str(row["Nr."])  # e.g. 40000
-        name = row["Name"]
+    # Ensure necessary columns exist
+    votes_df = votes_df.withColumnRenamed("Nr.", "Municipality_ID")
+    votes_df = votes_df.withColumnRenamed("Name", "Municipality_Name")
+    votes_df = votes_df.withColumnRenamed("Wahlberechtigte", "Wahlberechtigte")
+    votes_df = votes_df.withColumnRenamed("abgegeb._Stimmen", "abgegebene_Stimmen")
+    votes_df = votes_df.withColumnRenamed("gultige", "gueltige_Stimmen")
+    votes_df = votes_df.withColumnRenamed("Wahlbet.", "Wahlbeteiligung")
 
-        # Fix weird "Ober�sterreich" if needed:
-        if isinstance(name, str) and "Ober�sterreich" in name:
-            name = name.replace("Ober�sterreich", "Oberösterreich")
+    # Cast party columns to int
+    for party_col in party_columns:
+        print(f"Processing column: {party_col}")  # Debugging
+        votes_df = votes_df.withColumn(f"votes_{party_col}", col(party_col).cast("int"))
 
-        # Construct the "votes" dict matching your original script’s keys
-        votes_entry = {
-            "name": name,
-            "votes": {}
-        }
+    # Determine winning party
+    vote_cols = [F.coalesce(col(f"votes_{party_col}"), lit(0)) for party_col in party_columns]
+    votes_df = votes_df.withColumn("max_votes", F.greatest(*vote_cols))
 
-        # Check for columns: "Wahlberechtigte", "abgegeb. Stimmen", "gültige", "Wahlbet."
-        if "Wahlberechtigte" in votes_df.columns:
-            votes_entry["votes"]["Wahlberechtigte"] = row["Wahlberechtigte"]
-        if "abgegeb. Stimmen" in votes_df.columns:
-            votes_entry["votes"]["abgegebene Stimmen"] = row["abgegeb. Stimmen"]
-        if "gültige" in votes_df.columns:
-            votes_entry["votes"]["gültige Stimmen"] = row["gültige"]
-        if "Wahlbet." in votes_df.columns:
-            votes_entry["votes"]["Wahlbeteiligung"] = row["Wahlbet."]
+    winning_party_cases = [when(col("max_votes") == col(f"votes_{party_col}"), lit(party_col)) for party_col in party_columns]
+    votes_df = votes_df.withColumn("Winning_Party", F.coalesce(*winning_party_cases))
 
-        party_columns = [col for col in votes_df.columns if col not in {"Nr.", "Name", "Wahlberechtigte", "abgegeb. Stimmen", "gültige", "Wahlbet.", "ungültige"}]
+    # Drop temporary columns
+    for party_col in party_columns:
+        votes_df = votes_df.drop(f"votes_{party_col}")
 
-        for party_col in party_columns:
-            votes_entry["votes"][party_col] = row[party_col]
+    votes_df = votes_df.drop("max_votes")
 
-        # Insert into the nested structure
-        level = get_id_level(loc_id)
-        if level == "wahlkreis":
-            # This is a top-level wahlkreis
-            election_data[str(year)]["wahlkreise"][loc_id] = {
-                "name": name,
-                "bezirke": {}
-            }
-        elif level == "bezirk":
-            # Insert under parent wahlkreis
-            parent_wahlkreis = loc_id[:2] + "000"  # e.g. "40100" -> "40000"
-            if parent_wahlkreis in election_data[str(year)]["wahlkreise"]:
-                election_data[str(year)]["wahlkreise"][parent_wahlkreis]["bezirke"][loc_id] = {
-                    "name": name,
-                    "municipalities": {}
-                }
-        elif level == "municipality":
-            parent_bezirk = loc_id[:3] + "00"    # e.g. "40101" -> "40100"
-            parent_wahlkreis = loc_id[:2] + "000"
-            # Make sure parent objects exist
-            if (
-                parent_wahlkreis in election_data[str(year)]["wahlkreise"] and
-                parent_bezirk in election_data[str(year)]["wahlkreise"][parent_wahlkreis]["bezirke"]
-            ):
-                election_data[str(year)]["wahlkreise"][parent_wahlkreis]["bezirke"][parent_bezirk]["municipalities"][loc_id] = votes_entry
+    # Add Year & Municipality Lowercase for merging
+    votes_df = votes_df.withColumn("Year", lit(year))
+    votes_df = votes_df.withColumn("Municipality_Lowercase", standardize_municipality("Municipality_Name"))
+    votes_df = votes_df.filter(col("Municipality_ID").rlike("^[0-9]+$"))
 
-    ############################################################################
-    # 3B. Build mandates_data[year]
-    ############################################################################
-    mandates_data[str(year)] = {}
+    # Add to main dataset
+    all_election_df = all_election_df.unionByName(votes_df.select(
+        "Year", "Municipality_ID", "Municipality_Name", "Wahlberechtigte",
+        "abgegebene_Stimmen", "gueltige_Stimmen", "Wahlbeteiligung", "Winning_Party", "Municipality_Lowercase"
+    ))
 
-    all_mandates = mandate_df.collect()
+# --- Merging and Output ---
+merged_df = all_election_df.join(df_spending_agg, on=["Municipality_Lowercase", "Year"], how="inner").drop("Municipality")
+merged_df.coalesce(1).write.mode("overwrite").option("header", "true").option("encoding", "latin1").csv("data/merged_data.csv")
+print("Merged data sample:")
+merged_df.show(5, truncate=False)
 
-    # Potential party columns in mandates
-
-
-    for row in all_mandates:
-        loc_id = str(row["Nr."])
-        name = row["Name"]
-        if isinstance(name, str) and "Ober�sterreich" in name:
-            name = name.replace("Ober�sterreich", "Oberösterreich")
-            
-        # Match the keys from your old script exactly:
-        valid_votes = row["gültige Stimmen"] if "gültige Stimmen" in mandate_df.columns else None
-        wahlzahl = row["Wahlzahl"] if "Wahlzahl" in mandate_df.columns else None
-        total_mandates = row["zu vergebende Mandate"] if "zu vergebende Mandate" in mandate_df.columns else None
-
-        # Build dictionary of party mandates
-        pm_dict = {}
-        party_cols_for_mandates = [col for col in mandate_df.columns if col not in {"Nr.", "Name", "gültige Stimmen", "ungültige", "Wahlzahl", "zu vergebende Mandate"}]
-        
-        for pc in party_cols_for_mandates:
-            if pc in mandate_df.columns:
-                pm_dict[pc] = row[pc]
-
-        # Final entry
-        mandate_entry = {
-            "name": name,
-            "valid_votes": valid_votes,
-            "wahlzahl": wahlzahl,
-            "total_mandates": total_mandates,
-            "party_mandates": pm_dict
-        }
-
-        mandates_data[str(year)][loc_id] = mandate_entry
-
-################################################################################
-# 4. Write the Final JSON Files (Elections)
-################################################################################
-votes_json_path = "data/election_results_new.json"
-mandates_json_path = "data/mandates_new.json"
-
-with open(votes_json_path, "w", encoding="utf-8") as f:
-    json.dump(election_data, f, indent=4, ensure_ascii=False)
-print(f"Votes JSON saved to: {votes_json_path}")
-
-with open(mandates_json_path, "w", encoding="utf-8") as f:
-    json.dump(mandates_data, f, indent=4, ensure_ascii=False)
-print(f"Mandates JSON saved to: {mandates_json_path}")
-
-################################################################################
-# 5. Done
-################################################################################
 print("All done!")
