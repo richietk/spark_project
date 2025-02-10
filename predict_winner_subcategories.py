@@ -1,41 +1,54 @@
 #!/usr/bin/env python3
+"""
+Scalable Election and Spending Analysis with Spark
 
-import pandas as pd
-import numpy as np
+This script replaces Pandas operations with Spark so that the entire workflow is scalable.
+It:
+  - Loads and flattens a JSON file with election results.
+  - Reads and pivots a CSV of spending data (with subcategories).
+  - Merges the two datasets on municipality (using a slug) and year.
+  - Builds a Spark ML pipeline to predict the winning party using a random forest.
+  - Trains one-vs-rest binary classifiers for selected parties.
+  - Computes FPÖ win distribution by turnout level using Spark.
+"""
+
 import json
 import re
 
-# PySpark imports
-import pyspark.sql.functions as F
-from pyspark.sql import Row
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col
+import pyspark.sql.functions as F
+from pyspark.sql.window import Window
+from pyspark.sql.functions import col, when, regexp_replace, udf
+from pyspark.sql.types import StringType, IntegerType, FloatType
 from pyspark.ml.feature import VectorAssembler, StringIndexer
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml import Pipeline
-from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-from pyspark.sql.functions import when
-from pyspark.sql.types import IntegerType
-from pyspark.ml.evaluation import BinaryClassificationEvaluator
+from pyspark.ml.evaluation import MulticlassClassificationEvaluator, BinaryClassificationEvaluator
 
 ################################################################################
 # 1) HELPER FUNCTIONS
 ################################################################################
 
-def slugify_municipality(name: str) -> str:
+def clean_subcat_name(name: str) -> str:
     """
-    Convert a municipality string to lowercase, strip whitespace,
-    and replace spaces with dashes (and remove other weird chars if needed).
+    Remove special characters from a subcategory name and add a prefix.
+    e.g. 'Allgemeinbildender Unterricht' -> 'Sp_Allgemeinbildender_Unterricht'
     """
-    if not isinstance(name, str):
-        return None
-    name = name.lower().strip()
-    # Replace spaces with dashes
-    name = re.sub(r"\\s+", "-", name)
-    return name
+    c = re.sub(r"[^a-zA-Z0-9]+", "_", name.strip())
+    return f"Sp_{c}"
 
 ################################################################################
-# 2) LOAD & FLATTEN ELECTION RESULTS (similar to spending_turnout.py)
+# 2) INITIALIZE SPARK SESSION
+################################################################################
+
+spark = SparkSession.builder \
+    .appName("ScalableElectionAnalysis") \
+    .config("spark.network.timeout", "600s") \
+    .config("spark.executor.heartbeatInterval", "60s") \
+    .getOrCreate()
+
+################################################################################
+# 3) LOAD & FLATTEN ELECTION RESULTS
 ################################################################################
 
 with open("data/election_results.json", "r", encoding="utf-8") as f:
@@ -48,7 +61,7 @@ for year_str, data in election_data.items():
         for bezirk in wahlkreis.get("bezirke", {}).values():
             for municipality_id, details in bezirk.get("municipalities", {}).items():
                 votes = details.get("votes", {})
-                # Extract party votes (excluding 'Wahlberechtigte', 'abgegebene Stimmen', etc.)
+                # Extract party votes (ignoring summary keys)
                 party_votes = {
                     k: v for k, v in votes.items()
                     if k not in ["Wahlberechtigte", "abgegebene Stimmen", "gültige Stimmen", "Wahlbeteiligung"]
@@ -65,290 +78,235 @@ for year_str, data in election_data.items():
                     "Winning_Party": winning_party
                 })
 
-election_df = pd.DataFrame(records)
+# Create a Spark DataFrame from the records list
+election_df = spark.createDataFrame(records)
 
-# Create municipality slug
-election_df["Municipality_Lowercase"] = election_df["Municipality_Name"].apply(slugify_municipality)
+# Add a slug column for municipalities
+election_df = election_df.withColumn(
+    "Municipality_Lowercase",
+    F.regexp_replace(F.lower(F.trim(col("Municipality_Name"))), r"\s+", "-")
+)
 
-print("Election data (head):\n", election_df.head(), "\n")
+print("Election data (sample):")
+election_df.show(10, truncate=False)
 
 ################################################################################
-# 3) LOAD SPENDING CSV WITH SUBCATEGORIES
-#
-# This CSV has columns like:
-#   Gemeinde | Year | Abschnitt | Betrag in Euro
-# We'll pivot the data so each subcategory (Abschnitt) becomes its own column.
+# 4) LOAD SPENDING CSV WITH SUBCATEGORIES & PIVOT THE DATA
 ################################################################################
 
 csv_path = "data/Bildungsausgaben_Gemeinden_Oberösterreich_data_2007_bis_2019.csv"
 
-# NOTE: If this file is truly tab-delimited, use sep='\\t'.
-# If it's something else (e.g. semicolon), adjust accordingly.
-spend_raw = pd.read_csv(csv_path, sep=",", engine="python")
+# Read the CSV into a Spark DataFrame
+spend_raw = spark.read.csv(csv_path, header=True, sep=",", inferSchema=True)
 
-# Example columns: "Gemeinde", "Year", "Abschnitt", "Betrag in Euro"
-spend_raw.rename(
-    columns={
-        "Gemeinde": "Municipality",
-        "Year": "Year",
-        "Abschnitt": "Subcategory",
-        "Betrag in Euro": "Spending"
-    },
-    inplace=True
-)
-spend_raw["Municipality_Lowercase"] = spend_raw["Municipality"].apply(slugify_municipality) # might be redundant
-spend_raw["Year"] = spend_raw["Year"].astype(int)
-spend_raw["Spending"] = pd.to_numeric(spend_raw["Spending"], errors="coerce")
+# Rename columns for clarity
+spend_raw = spend_raw.withColumnRenamed("Gemeinde", "Municipality")\
+                     .withColumnRenamed("Year", "Year")\
+                     .withColumnRenamed("Abschnitt", "Subcategory")\
+                     .withColumnRenamed("Betrag in Euro", "Spending")
 
-print("Raw subcategory spending sample:\n", spend_raw.head(), "\n")
-
-# Pivot to wide format: each row is (Municipality_Lowercase, Year) with
-# separate columns for each subcategory (e.g. 'Allgemeinbildender Unterricht', etc.)
-pivot_spend = spend_raw.pivot_table(
-    index=["Municipality_Lowercase","Year"],
-    columns="Subcategory",
-    values="Spending",
-    aggfunc="sum"  # In case there's more than one row per subcategory
-).reset_index()
-
-# Some subcategory names can have strange chars, so let's do a safe rename
-# for each subcategory col => "Sp_{clean_subcat_name}"
-def clean_subcat_name(name):
-    # remove special chars, spaces, unify
-    # e.g. 'Allgemeinbildender Unterricht' -> 'Sp_Allgemeinbildender_Unterricht'
-    c = re.sub(r"[^a-zA-Z0-9]+", "_", name.strip())
-    return f"Sp_{c}"
-
-# We skip the first two columns in pivot_spend (Municipality_Lowercase, Year).
-cat_cols = pivot_spend.columns[2:]
-renamer = {}
-for cat in cat_cols:
-    new_col = clean_subcat_name(str(cat))
-    renamer[cat] = new_col
-
-pivot_spend.rename(columns=renamer, inplace=True)
-print("Pivoted subcategories (head):\n", pivot_spend.head(6), "\n")
-
-################################################################################
-# 4) MERGE ELECTION_DF WITH SUBCATEGORY SPEND DF
-################################################################################
-
-merged_df = pd.merge(
-    election_df,
-    pivot_spend,
-    on=["Municipality_Lowercase","Year"],
-    how="inner"
+# Add a lowercase municipality column for joining later
+spend_raw = spend_raw.withColumn(
+    "Municipality_Lowercase",
+    F.regexp_replace(F.lower(F.trim(col("Municipality"))), r"\s+", "-")
 )
 
-print("Merged election + subcat spend (head):\n", merged_df.head(), "\n")
+# Ensure proper types
+spend_raw = spend_raw.withColumn("Year", col("Year").cast("int"))\
+                     .withColumn("Spending", col("Spending").cast("float"))
+
+print("Raw subcategory spending sample:")
+spend_raw.show(10, truncate=False)
+
+# Pivot the spending data so that each subcategory becomes its own column.
+pivot_spend = spend_raw.groupBy("Municipality_Lowercase", "Year") \
+                       .pivot("Subcategory") \
+                       .agg(F.sum("Spending"))
+
+# Replace any nulls with 0
+pivot_spend = pivot_spend.na.fill(0)
+
+print("Pivoted spending data (pre-renaming):")
+pivot_spend.show(10, truncate=False)
+
+# Rename each subcategory column to a safe name (prefix with "Sp_")
+for old_col in pivot_spend.columns:
+    if old_col not in ["Municipality_Lowercase", "Year"]:
+        new_col = clean_subcat_name(old_col)
+        pivot_spend = pivot_spend.withColumnRenamed(old_col, new_col)
+
+print("Pivoted spending data (with cleaned column names):")
+pivot_spend.show(10, truncate=False)
 
 ################################################################################
-# 5) BUILD A SPARK MODEL
-#    We'll treat each subcategory column as a separate feature. We can also
-#    include 'Wahlbeteiligung' if we want it as a feature. 
-#
-#    For brevity, we skip demographics. You can do the same
-#    'closest year' approach if desired. 
+# 5) MERGE ELECTION RESULTS WITH SPENDING DATA
 ################################################################################
 
-# Convert numeric columns
-#  - We might want to treat 'Wahlbeteiligung' as numeric if we want it as a feature
-#  - We'll parse it removing % if needed.
-def clean_numeric(series):
-    return (series.astype(str)
-            .str.replace("%","", regex=False)
-            .str.replace(",",".", regex=False)
-            .str.replace("[^\\d.]", "", regex=True)
-            .astype(float))
+merged_df = election_df.join(pivot_spend, on=["Municipality_Lowercase", "Year"], how="inner")
+# Drop rows with missing Winning_Party
+merged_df = merged_df.na.drop(subset=["Winning_Party"])
 
-merged_df["Wahlbeteiligung"] = clean_numeric(merged_df["Wahlbeteiligung"])
+# Fill missing numeric values with 0 (for all numeric columns)
+numeric_cols = [f.name for f in merged_df.schema.fields if f.dataType in [IntegerType(), FloatType()]]
+for ncol in numeric_cols:
+    merged_df = merged_df.withColumn(ncol, when(col(ncol).isNull(), 0).otherwise(col(ncol)))
 
-# Drop rows with missing key info
-merged_df = merged_df.dropna(subset=["Winning_Party"])
-# Also drop if subcategories are all NaN
-# Alternatively, we can fillna(0) if that makes sense
-merged_df.fillna(0, inplace=True)
+print("Merged election + spending data (sample):")
+merged_df.cache()
+merged_df.show(10, truncate=False)
 
-# Start Spark
-spark = SparkSession.builder.appName("PredictWinningParty_SubcategorySpending").getOrCreate()
+################################################################################
+# 6) PREPARE THE DATA FOR MODELING
+################################################################################
 
-# Convert to Spark DF
-spark_df = spark.createDataFrame(merged_df)
+# Clean the "Wahlbeteiligung" column: remove "%" signs, replace commas with dots, remove extraneous characters.
+merged_df = merged_df.withColumn("Wahlbeteiligung_clean",
+                                 regexp_replace(col("Wahlbeteiligung"), "%", ""))
+merged_df = merged_df.withColumn("Wahlbeteiligung_clean",
+                                 regexp_replace(col("Wahlbeteiligung_clean"), ",", "."))
+merged_df = merged_df.withColumn("Wahlbeteiligung_clean",
+                                 regexp_replace(col("Wahlbeteiligung_clean"), "[^\\d.]", ""))
+merged_df = merged_df.withColumn("Wahlbeteiligung_clean", col("Wahlbeteiligung_clean").cast("float"))
 
-# Identify subcategory columns
-all_cols = list(merged_df.columns)
-# We'll gather columns that start with "Sp_" as features
-subcat_cols = [c for c in pivot_spend.columns if c.startswith("Sp_") and c != "Sp_Summe"]
-# Then build feature_cols from subcat_cols + maybe "Wahlbeteiligung"
+# Replace the original column with the cleaned one
+merged_df = merged_df.drop("Wahlbeteiligung") \
+                     .withColumnRenamed("Wahlbeteiligung_clean", "Wahlbeteiligung")
+
+# Identify subcategory columns (columns that start with "Sp_")—excluding any unwanted ones (e.g. "Sp_Summe")
+all_cols = merged_df.columns
+subcat_cols = [c for c in all_cols if c.startswith("Sp_") and c != "Sp_Summe"]
+# We’ll use these plus "Wahlbeteiligung" as our feature set
 feature_cols = subcat_cols + ["Wahlbeteiligung"]
-print("Using feature columns:\n", feature_cols)
 
-# Cast numeric features
-for fcol in feature_cols:
-    spark_df = spark_df.withColumn(fcol, col(fcol).cast("float"))
+print("Feature columns used for modeling:", feature_cols)
 
-# Index label (Winning_Party)
-label_indexer = StringIndexer(
-    inputCol="Winning_Party",
-    outputCol="label",
-    handleInvalid="skip"
-)
+# Ensure that all feature columns are of type float
+for f in feature_cols:
+    merged_df = merged_df.withColumn(f, col(f).cast("float"))
 
-# Assemble features
-assembler = VectorAssembler(
-    inputCols=feature_cols,
-    outputCol="features",
-    handleInvalid="skip"
-)
+merged_df.cache()
+print("Merged data (post cleaning):")
+merged_df.show(10, truncate=False)
 
-# Random Forest
-rf_classifier = RandomForestClassifier(
-    featuresCol="features",
-    labelCol="label",
-    numTrees=50,
-    maxDepth=5,
-    seed=42
-)
+################################################################################
+# 7) BUILD THE SPARK ML PIPELINE AND TRAIN A RANDOM FOREST MODEL
+################################################################################
 
+# Step 1: Convert the Winning_Party string label into a numeric label.
+label_indexer = StringIndexer(inputCol="Winning_Party", outputCol="label", handleInvalid="skip")
+
+# Step 2: Assemble all feature columns into a feature vector.
+assembler = VectorAssembler(inputCols=feature_cols, outputCol="features", handleInvalid="skip")
+
+# Step 3: Define a Random Forest classifier.
+rf_classifier = RandomForestClassifier(featuresCol="features", labelCol="label", numTrees=50, maxDepth=5, seed=42)
+
+# Create the pipeline
 pipeline = Pipeline(stages=[label_indexer, assembler, rf_classifier])
 
-# Train/Test split
-train_df, test_df = spark_df.randomSplit([0.8, 0.2], seed=42)
+# Split the data into training and testing sets.
+train_df, test_df = merged_df.randomSplit([0.8, 0.2], seed=42)
 
+# Train the pipeline.
 model = pipeline.fit(train_df)
+
+# Make predictions on the test set.
 predictions = model.transform(test_df)
 
-predictions.select(
-    "Municipality_Name","Year","Winning_Party","prediction"
-).show(10, truncate=False)
+print("Predictions (sample):")
+predictions.select("Municipality_Name", "Year", "Winning_Party", "prediction").show(10, truncate=False)
 
-# Evaluate
+# Evaluate the model's accuracy.
 evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
 accuracy = evaluator.evaluate(predictions)
 print(f"\nTest Accuracy = {accuracy * 100:.2f}%\n")
 
-# Feature Importances
+# Display feature importances.
 rf_model = model.stages[-1]
 importances = rf_model.featureImportances
 print("Random Forest Feature Importances:\n", importances)
 
-# Map indices to subcategory col names
-feat_cols = assembler.getInputCols()  # same as feature_cols
 print("\nFeature importances by column:")
-for i, col_name in enumerate(feat_cols):
-    print(f"  {col_name}: {importances[i]:.4f}")
+for i, feat_name in enumerate(assembler.getInputCols()):
+    print(f"  {feat_name}: {importances[i]:.4f}")
 
-# Label mapping
-label_stage = model.stages[0]
-print("\nStringIndexer label mapping (0.0-based):", label_stage.labels)
+print("\nStringIndexer label mapping (0.0-based):", model.stages[0].labels)
 
-# We'll build a new VectorAssembler for our binary tasks
-assembler_ovr = VectorAssembler(
-    inputCols=feature_cols,
-    outputCol="features_ovr",
-    handleInvalid="skip"
-)
+################################################################################
+# 8) ONE-VS-REST BINARY CLASSIFICATION FOR SELECTED PARTIES
+################################################################################
 
-# We define the parties of interest
+# Assemble a separate features vector for one-vs-rest classifiers.
+assembler_ovr = VectorAssembler(inputCols=feature_cols, outputCol="features_ovr", handleInvalid="skip")
+
+# Define the parties for which to build a binary classifier.
 parties = ["ÖVP", "SPÖ", "FPÖ"]
-
-# We'll store results for each party's classifier
 results_ovr = []
 
 for party in parties:
     print(f"\n=== One-vs-Rest for: {party} vs. ALL ===")
+    # Create a binary label: 1 if Winning_Party equals the current party, else 0.
+    df_party = merged_df.withColumn("target", when(col("Winning_Party") == party, 1).otherwise(0).cast(IntegerType()))
+    df_party = assembler_ovr.transform(df_party)
     
-    # 1) Create a new binary label: 1 if Winning_Party == party, else 0
-    df_party = spark_df.withColumn(
-        "target",
-        when(col("Winning_Party") == party, 1).otherwise(0).cast(IntegerType())
-    )
+    # Split into training and testing sets.
+    train_party, test_party = df_party.randomSplit([0.8, 0.2], seed=42)
     
-    # 2) Assemble features
-    df_party_assembled = assembler_ovr.transform(df_party)
+    # Train a Random Forest classifier for this binary task.
+    rf_bin = RandomForestClassifier(labelCol="target", featuresCol="features_ovr", numTrees=50, maxDepth=5, seed=42)
+    rf_bin_model = rf_bin.fit(train_party)
     
-    # 3) Split train/test
-    train_df, test_df = df_party_assembled.randomSplit([0.8, 0.2], seed=42)
+    # Predict on the test set.
+    predictions_bin = rf_bin_model.transform(test_party)
     
-    # 4) Train a RandomForest on labelCol="target", featuresCol="features_ovr"
-    rf_bin = RandomForestClassifier(
-        labelCol="target",
-        featuresCol="features_ovr",
-        numTrees=50,
-        maxDepth=5,
-        seed=42
-    )
-    
-    rf_bin_model = rf_bin.fit(train_df)
-    
-    # 5) Predict on test set
-    predictions_bin = rf_bin_model.transform(test_df)
-    
-    # 6) Evaluate with a binary metric (e.g. areaUnderROC or accuracy)
-    evaluator_bin = BinaryClassificationEvaluator(
-        labelCol="target",
-        rawPredictionCol="rawPrediction",  
-        metricName="areaUnderROC"  # or 'areaUnderPR'
-    )
+    # Evaluate using areaUnderROC.
+    evaluator_bin = BinaryClassificationEvaluator(labelCol="target", rawPredictionCol="rawPrediction", metricName="areaUnderROC")
     auc = evaluator_bin.evaluate(predictions_bin)
     
-    # Alternatively, we can measure accuracy by converting 
-    # the predicted probability to 0/1 threshold:
-    # We'll do a quick approach using a small helper:
-    bin_evaluator_accuracy = BinaryClassificationEvaluator(
-        labelCol="target",
-        rawPredictionCol="rawPrediction",
-        metricName="areaUnderROC"  # We'll do areaUnderROC as a proxy
-    )
-    # If you want an actual accuracy measure, you'd do:
-    # from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-    # ... but that requires a label of 0/1 which we do have, 
-    # just note it's a 2-class confusion matrix.
-
     print(f"Area Under ROC for {party} vs. All: {auc:.3f}")
     
-    # 7) Print feature importances for this binary classifier
+    # Print feature importances for this classifier.
     importances_bin = rf_bin_model.featureImportances
-    # Map indices -> feature_cols
     for i, feat_name in enumerate(feature_cols):
         print(f"  {feat_name}: {importances_bin[i]:.4f}")
     
-    # Store results for later analysis
-    results_ovr.append({
-        "party": party,
-        "AUC": auc,
-        "importances": importances_bin
-    })
-
-# After this loop, you'll have separate random forests 
-# that treat each party as "1" and everything else as "0".
-# That yields per-party feature importance and performance metrics.
+    results_ovr.append({"party": party, "AUC": auc, "importances": importances_bin})
 
 print("\nDone with one-vs-rest training for the 3 major parties.\n")
 
+################################################################################
+# 9) ANALYZE FPÖ WIN DISTRIBUTION BY TURNOUT LEVEL USING SPARK
+################################################################################
+
+# Load a merged CSV file into Spark (this file should contain columns including "Wahlbeteiligung" and "Winning_Party")
+merged_data = spark.read.csv("data/merged_data.csv", header=True, inferSchema=True)
+merged_data = merged_data.withColumn("Wahlbeteiligung", col("Wahlbeteiligung").cast("float"))
+
+# Compute the median turnout using approxQuantile.
+median_turnout = merged_data.approxQuantile("Wahlbeteiligung", [0.5], 0.01)[0]
+print(f"Median Turnout: {median_turnout:.2f}%")
+
+# Classify each municipality as "High Turnout" or "Low Turnout"
+merged_data = merged_data.withColumn("Turnout_Category",
+                                     when(col("Wahlbeteiligung") >= median_turnout, "High Turnout")
+                                     .otherwise("Low Turnout"))
+
+# Count FPÖ wins in each turnout category.
+fpö_wins = merged_data.filter(col("Winning_Party") == "FPÖ") \
+                      .groupBy("Turnout_Category") \
+                      .count()
+                      
+total_count = fpö_wins.agg(F.sum("count").alias("total_count")).collect()[0]["total_count"]
+
+# Calculate percentage
+fpö_wins = fpö_wins.withColumn("Percentage", (col("count") / total_count) * 100)
+
+print("FPÖ Win Distribution by Turnout Level:")
+fpö_wins.show()
+
+################################################################################
+# FINISH UP
+################################################################################
+
 spark.stop()
 print("\nDone. Script finished successfully.")
-
-
-# misc: does FPÖ win in places where turnout is high, or where it's low?
-df = pd.read_csv("data/merged_data.csv")
-
-# Ensure numeric format for turnout
-df["Wahlbeteiligung"] = pd.to_numeric(df["Wahlbeteiligung"], errors="coerce")
-
-# Compute median turnout
-median_turnout = df["Wahlbeteiligung"].median()
-
-# Classify municipalities as "High Turnout" or "Low Turnout"
-df["Turnout_Category"] = df["Wahlbeteiligung"].apply(lambda x: "High Turnout" if x >= median_turnout else "Low Turnout")
-
-# Count FPÖ wins in both categories
-fpö_wins = df[df["Winning_Party"] == "FPÖ"].groupby("Turnout_Category").size()
-
-# Compute percentage distribution
-fpö_win_percentages = (fpö_wins / fpö_wins.sum()) * 100
-
-# Print results
-print(f"Median Turnout: {median_turnout:.2f}%\n")
-print("FPÖ Win Distribution by Turnout Level:")
-print(fpö_win_percentages)
