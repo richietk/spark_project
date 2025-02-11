@@ -1,1 +1,3 @@
-The data is scraped using BeautifulSoup. Since the election xls files have human inconsistencies, these are cleaned manually and turned into xlsx.
+## Full data (html, ipynb, csv/xlsx files) in /Project
+
+Spark Project for DP2 Team 1
