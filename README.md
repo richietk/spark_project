@@ -1,6 +1,6 @@
 ### Municipal Spending and Election Analysis Project
 
-This project analyzes municipal education spending and election outcomes in Upper Austria scalably using Apache Spark. The goal is to understand the relationship between public spending, voter turnout, and election results. We predict election winners using machine learning models and analyze factors influencing political outcomes.
+This project analyzes municipal education spending and election outcomes in Upper Austria scalably using Apache Spark. The goal is to understand the relationship between public spending, voter turnout, and election results. We predict election winners using a Random Forest model and analyze factors influencing political outcomes.
 
 **Project Structure**
 - `webscraper.ipynb`: Scrapes municipal spending data from a government website.
