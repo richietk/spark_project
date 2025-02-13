@@ -14260,7 +14260,6 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>ETL (Extract Transform Load) Script for getting the data. We first scrape the data using bs4. See <code>webscraper.py</code>. Afterwards we get the election data and process them and merge them together into a single csv.</p>
-<p><strong>TODO how did we get the gemeinden list?</strong></p>
 
 </div>
 </div>
@@ -14286,17 +14285,88 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Afterwards, we get the data for the elections. We will use spark from now on, to ensure scalability.</p>
-<p><strong>TODO how did we get election data</strong></p>
-<p>Since the election data was originally provided in an inconsistent XLS format—with irregular merged cells, random empty lines, and other structural issues—we manually formatted the data to ensure consistency and saved it as an XLSX file for better usability.</p>
-<p>Since we had only 5 XLS files for election data, this was the easiest option. However, this can be automated using a script for formatting if we were to automate and scale this project. However, this is out of scope for now.</p>
-<p>Afterward, we used a small script to convert these XLSX files to CSV. Given the limited number of election datasets and the straightforward nature of the conversion, the added complexity and overhead of Spark are not justified. Therefore, we will use Pandas for this conversion. However, if scalability in this specific conversion becomes a concern, the script can be rewritten to use PySpark.</p>
+<p>Afterwards, we get the data for the elections.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">URLs for the data.gv.at pages:</span>
+<span class="sd">Date accessed: 2/13/2025 4:57PM</span>
+
+<span class="sd">Wahlen - Nationalratswahl</span>
+<span class="sd">https://www.data.gv.at/katalog/dataset/f60be404-20e7-4af0-915a-a6150e2b10e6</span>
+
+<span class="sd">The download urls can be found on the [URL]#resources tab</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">urls</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;2024&quot;</span><span class="p">:</span> <span class="s2">&quot;https://e-gov.ooe.gv.at/at.gv.ooe.ogd2-citi/api/file/BWFvnVburV1I_YlT-LldGg/stat_download_nr24.xls&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2019&quot;</span><span class="p">:</span> <span class="s2">&quot;https://e-gov.ooe.gv.at/at.gv.ooe.ogd2-citi/api/file/IyoXYrkvgXb3pTADU8FwWg/stat_download_nr19.xls&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2017&quot;</span><span class="p">:</span> <span class="s2">&quot;https://e-gov.ooe.gv.at/at.gv.ooe.ogd2-citi/api/file/1GFS-glgSvlnahS5Y6-LjQ/stat_download_nr17.xls&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2013&quot;</span><span class="p">:</span> <span class="s2">&quot;https://e-gov.ooe.gv.at/at.gv.ooe.ogd2-citi/api/file/OZt-Kng6f57_7NccQIc-5g/stat_download_nr13.xls&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;2008&quot;</span><span class="p">:</span> <span class="s2">&quot;https://e-gov.ooe.gv.at/at.gv.ooe.ogd2-citi/api/file/ChzSHnjmkdknD1HxQELD3A/stat_download_nr08.xls&quot;</span>
+<span class="p">}</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">year</span><span class="p">,</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;OÖ </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">.xls&quot;</span><span class="p">)</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloaded: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error downloading </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Downloaded: data/OÖ 2024.xls
+Downloaded: data/OÖ 2019.xls
+Downloaded: data/OÖ 2017.xls
+Downloaded: data/OÖ 2013.xls
+Downloaded: data/OÖ 2008.xls
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Since the election data was originally provided in an inconsistent XLS format—with irregular merged cells, random empty lines, and other structural issues—we manually formatted the data to ensure consistency and saved it as an XLSX file for better usability.</p>
+<p>Since we had only 5 XLS files for election data, this was the easiest option. However, this can be automated using a script for formatting if we were to automate and scale this project. However, this is out of scope for now.</p>
+<p>Afterwards, we used a small script to convert these XLSX files to CSV. Given the limited number of election datasets and the straightforward nature of the conversion, the added complexity and overhead of Spark are not justified. Therefore, we will use Pandas for this conversion. However, if scalability in this specific conversion becomes a concern, the script can be rewritten to use PySpark.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -14370,7 +14440,7 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>rm data/OÖ_2013_whlsortgemnr.csv
@@ -14386,7 +14456,7 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
 </div>We now start with extracting the data from the CSV files. First, we initialize spark.<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
@@ -14426,7 +14496,7 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># helper function</span>
@@ -14517,7 +14587,7 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># --- read &amp; transform election data ---</span>
@@ -14642,7 +14712,7 @@ only showing top 5 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
