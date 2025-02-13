@@ -23,7 +23,7 @@ This project analyzes municipal education spending and election outcomes in Uppe
 - Run spending_turnout.ipynb for further analysis.
 
 **Notes**
-- Data is stored in the data folder.
+- CSV/XLSX data is stored in the data folder.
 - The pipeline is scalable and designed to handle large datasets.
 
 ![Project Flowchart](flowchart_mermaid.png)

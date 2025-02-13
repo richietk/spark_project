@@ -1,0 +1,1161 @@
+,Year,Municipality_ID,Municipality_Name,Wahlberechtigte,abgegebene_Stimmen,gueltige_Stimmen,Wahlbeteiligung,Winning_Party,Municipality_Lowercase,Spending_Summe
+0,2008,40101,Linz,142125,96209,94496,67.69,SPÖ,linz,60176748.0
+1,2008,40201,Steyr             ,28962,20765,20335,71.7,SPÖ,steyr,16889444.0
+2,2008,40301,Wels,40994,28803,28288,70.26,SPÖ,wels,27539992.0
+3,2008,40402,Aspach                        ,1869,1390,1346,74.37,ÖVP,aspach,716897.25
+4,2008,40403,Auerbach                      ,411,310,301,75.43,ÖVP,auerbach,80000.6015625
+5,2008,40404,Braunau am Inn                ,12539,8091,7901,64.53,SPÖ,braunau-am-inn,6667537.0
+6,2008,40405,Burgkirchen                   ,2036,1477,1424,72.54,ÖVP,burgkirchen,1184581.375
+7,2008,40406,Eggelsberg                    ,1670,1096,1035,65.63,ÖVP,eggelsberg,1207218.875
+8,2008,40409,Geretsberg                    ,820,551,525,67.2,ÖVP,geretsberg,288982.25
+9,2008,40410,Gilgenberg am Weilhart        ,978,670,648,68.51,ÖVP,gilgenberg-am-weilhart,320843.90625
+10,2008,40411,Haigermoos                    ,480,340,331,70.83,ÖVP,haigermoos,151532.90625
+11,2008,40414,Hochburg-Ach                  ,2268,1514,1459,66.75,ÖVP,hochburg-ach,650892.25
+12,2008,40417,Kirchberg bei Mattighofen     ,860,667,642,77.56,ÖVP,kirchberg-bei-mattighofen,283749.375
+13,2008,40418,Lengau                        ,3422,2553,2438,74.61,SPÖ,lengau,1928097.75
+14,2008,40420,Maria Schmolln                ,1111,823,786,74.08,ÖVP,maria-schmolln,331418.28125
+15,2008,40421,Mattighofen                   ,3662,2512,2458,68.6,SPÖ,mattighofen,3838396.5
+16,2008,40422,Mauerkirchen                  ,1638,1100,1072,67.16,SPÖ,mauerkirchen,585611.1875
+17,2008,40423,Mining                        ,933,701,672,75.13,ÖVP,mining,303548.9375
+18,2008,40424,Moosbach                      ,737,534,515,72.46,ÖVP,moosbach,208002.0625
+19,2008,40426,Munderfing                    ,2072,1547,1490,74.66,ÖVP,munderfing,904155.9375
+20,2008,40428,Ostermiething                 ,2341,1513,1453,64.63,ÖVP,ostermiething,808267.75
+21,2008,40429,Palting                       ,725,541,526,74.62,ÖVP,palting,208442.9375
+22,2008,40430,Perwang am Grabensee          ,624,477,463,76.44,ÖVP,perwang-am-grabensee,649853.5
+23,2008,40431,Pfaffstätt                    ,752,547,531,72.74,ÖVP,pfaffstätt,357873.09375
+24,2008,40432,Pischelsdorf am Engelbach     ,1264,935,905,73.97,ÖVP,pischelsdorf-am-engelbach,429723.15625
+25,2008,40442,Schwand im Innkreis           ,681,517,505,75.92,ÖVP,schwand-im-innkreis,157819.453125
+26,2008,40443,Tarsdorf                      ,1578,1062,1010,67.3,ÖVP,tarsdorf,620974.9375
+27,2008,40445,Überackern                    ,445,297,293,66.74,ÖVP,überackern,148559.859375
+28,2008,40446,Weng im Innkreis              ,1115,816,784,73.18,ÖVP,weng-im-innkreis,431790.875
+29,2008,40501,Alkoven                       ,4224,3360,3276,79.55,SPÖ,alkoven,926476.4375
+30,2008,40503,Eferding                      ,2751,2016,1959,73.28,SPÖ,eferding,1842366.0
+31,2008,40504,Fraham                        ,1704,1380,1350,80.99,SPÖ,fraham,709173.6875
+32,2008,40505,Haibach ob der Donau          ,1068,852,824,79.78,ÖVP,haibach-ob-der-donau,301495.3125
+33,2008,40506,Hartkirchen                   ,3398,2798,2703,82.34,ÖVP,hartkirchen,602010.5
+34,2008,40507,Hinzenbach                    ,1529,1291,1266,84.43,SPÖ,hinzenbach,638294.625
+35,2008,40508,Prambachkirchen               ,2262,1833,1780,81.03,ÖVP,prambachkirchen,678587.5625
+36,2008,40509,Pupping                       ,1582,1254,1225,79.27,SPÖ,pupping,277660.5625
+37,2008,40511,Scharten                      ,1652,1358,1336,82.2,SPÖ,scharten,667076.25
+38,2008,40512,Stroheim                      ,1241,1012,963,81.55,ÖVP,stroheim,377658.625
+39,2008,40601,Freistadt                     ,5848,4664,4549,79.75,SPÖ,freistadt,1816093.0
+40,2008,40602,Grünbach                      ,1480,1194,1143,80.68,ÖVP,grünbach,612270.0
+41,2008,40603,Gutau                         ,2146,1710,1667,79.68,ÖVP,gutau,489849.75
+42,2008,40604,Hagenberg im Mühlkreis        ,2097,1661,1622,79.21,SPÖ,hagenberg-im-mühlkreis,1107259.5
+43,2008,40605,Hirschbach im Mühlkreis       ,919,758,714,82.48,ÖVP,hirschbach-im-mühlkreis,349900.28125
+44,2008,40606,Kaltenberg                    ,510,448,429,87.84,ÖVP,kaltenberg,127419.671875
+45,2008,40608,Königswiesen                  ,2518,2031,1963,80.66,ÖVP,königswiesen,715746.0
+46,2008,40609,Lasberg                       ,2269,1826,1777,80.48,ÖVP,lasberg,346780.375
+47,2008,40610,Leopoldschlag                 ,856,684,648,79.91,ÖVP,leopoldschlag,226772.5625
+48,2008,40611,Liebenau                      ,1450,1148,1108,79.17,ÖVP,liebenau,364880.875
+49,2008,40612,Neumarkt im Mühlkreis         ,2496,2051,1969,82.17,ÖVP,neumarkt-im-mühlkreis,1095501.25
+50,2008,40613,Pierbach                      ,806,649,627,80.52,ÖVP,pierbach,252752.21875
+51,2008,40614,Pregarten                     ,3944,3287,3202,83.34,SPÖ,pregarten,1290815.125
+52,2008,40615,Rainbach im Mühlkreis         ,2301,1823,1737,79.23,ÖVP,rainbach-im-mühlkreis,1102389.0
+53,2008,40619,Schönau im Mühlkreis          ,1504,1288,1255,85.64,ÖVP,schönau-im-mühlkreis,732560.1875
+54,2008,40620,Tragwein                      ,2439,2072,2012,84.95,SPÖ,tragwein,847444.375
+55,2008,40621,Unterweißenbach               ,1925,1587,1523,82.44,ÖVP,unterweißenbach,1095881.625
+56,2008,40622,Unterweitersdorf              ,1513,1280,1253,84.6,SPÖ,unterweitersdorf,848286.5625
+57,2008,40624,Wartberg ob der Aist          ,3217,2618,2512,81.38,SPÖ,wartberg-ob-der-aist,1241367.625
+58,2008,40625,Weitersfelden                 ,878,735,718,83.71,ÖVP,weitersfelden,206947.203125
+59,2008,40626,Windhaag bei Freistadt        ,1298,1059,999,81.59,ÖVP,windhaag-bei-freistadt,603452.6875
+60,2008,40627,Bad Zell                      ,2168,1813,1742,83.63,ÖVP,bad-zell,1991461.875
+61,2008,40701,Altmünster                    ,7733,5922,5714,76.58,SPÖ,altmünster,2159325.25
+62,2008,40703,Bad Ischl                     ,11043,7649,7435,69.27,SPÖ,bad-ischl,4518580.0
+63,2008,40705,Gmunden                       ,10267,7336,7149,71.45,ÖVP,gmunden,5485709.5
+64,2008,40706,Gosau                         ,1553,1154,1121,74.31,SPÖ,gosau,528475.8125
+65,2008,40707,Grünau im Almtal              ,1665,1316,1271,79.04,SPÖ,grünau-im-almtal,319585.9375
+66,2008,40708,Gschwandt                     ,1980,1542,1472,77.88,SPÖ,gschwandt,670311.8125
+67,2008,40709,Hallstatt                     ,718,572,548,79.67,SPÖ,hallstatt,199786.15625
+68,2008,40710,Kirchham                      ,1513,1153,1107,76.21,ÖVP,kirchham,1420781.75
+69,2008,40711,Laakirchen                    ,6983,5382,5223,77.07,SPÖ,laakirchen,3506895.0
+70,2008,40712,Obertraun                     ,586,475,458,81.06,SPÖ,obertraun,142382.9375
+71,2008,40713,Ohlsdorf                      ,3810,2965,2855,77.82,SPÖ,ohlsdorf,976750.0
+72,2008,40714,Pinsdorf                      ,2820,2194,2124,77.8,SPÖ,pinsdorf,1118930.25
+73,2008,40718,Traunkirchen                  ,1381,1021,997,73.93,SPÖ,traunkirchen,752285.4375
+74,2008,40719,Scharnstein                   ,3657,2789,2701,76.26,SPÖ,scharnstein,1430062.5
+75,2008,40720,Vorchdorf                     ,5682,4477,4337,78.79,SPÖ,vorchdorf,2522095.75
+76,2008,40801,Aistersheim                   ,646,517,494,80.03,ÖVP,aistersheim,261782.5
+77,2008,40802,Bad Schallerbach              ,2683,2006,1954,74.77,SPÖ,bad-schallerbach,1402711.625
+78,2008,40804,Eschenau im Hausruckkreis     ,899,725,692,80.65,ÖVP,eschenau-im-hausruckkreis,135641.421875
+79,2008,40805,Gallspach                     ,1868,1389,1369,74.36,SPÖ,gallspach,588100.3125
+80,2008,40806,Gaspoltshofen                 ,2840,2069,1952,72.85,ÖVP,gaspoltshofen,892006.875
+81,2008,40807,Geboltskirchen                ,1104,839,795,76.0,ÖVP,geboltskirchen,331469.59375
+82,2008,40808,Grieskirchen                  ,3650,2852,2763,78.14,ÖVP,grieskirchen,2662745.75
+83,2008,40809,Haag am Hausruck              ,1606,1248,1203,77.71,ÖVP,haag-am-hausruck,769451.1875
+84,2008,40810,Heiligenberg                  ,541,450,424,83.18,ÖVP,heiligenberg,209104.84375
+85,2008,40812,Kallham                       ,2064,1637,1567,79.31,ÖVP,kallham,967681.25
+86,2008,40813,Kematen am Innbach            ,1022,758,740,74.17,FPÖ,kematen-am-innbach,223045.140625
+87,2008,40814,Meggenhofen                   ,1015,807,763,79.51,ÖVP,meggenhofen,285017.625
+88,2008,40816,Natternbach                   ,1909,1500,1438,78.58,ÖVP,natternbach,702748.125
+89,2008,40818,Neumarkt im Hausruckkreis     ,1156,845,821,73.1,SPÖ,neumarkt-im-hausruckkreis,389054.6875
+90,2008,40819,Peuerbach                     ,1755,1304,1249,74.3,ÖVP,peuerbach,2171910.0
+91,2008,40820,Pötting                       ,442,375,356,84.84,ÖVP,pötting,100090.90625
+92,2008,40821,Pollham                       ,733,603,577,82.26,ÖVP,pollham,304930.9375
+93,2008,40823,Rottenbach                    ,831,667,627,80.26,ÖVP,rottenbach,308783.875
+94,2008,40828,Steegen                       ,861,626,592,72.71,ÖVP,steegen,210669.703125
+95,2008,40830,Tollet                        ,684,569,557,83.19,ÖVP,tollet,106792.9921875
+96,2008,40831,Waizenkirchen                 ,2915,2300,2227,78.9,ÖVP,waizenkirchen,911521.5
+97,2008,40833,Weibern                       ,1241,940,896,75.75,ÖVP,weibern,1564495.25
+98,2008,40834,Wendling                      ,620,500,474,80.65,ÖVP,wendling,142700.34375
+99,2008,40901,Edlbach                       ,525,405,397,77.14,ÖVP,edlbach,118844.359375
+100,2008,40902,Grünburg                      ,2879,2234,2175,77.6,SPÖ,grünburg,1106453.75
+101,2008,40907,Kremsmünster                  ,4734,3557,3451,75.14,ÖVP,kremsmünster,2926981.25
+102,2008,40912,Pettenbach                    ,3734,2895,2807,77.53,ÖVP,pettenbach,1288560.875
+103,2008,40917,Schlierbach                   ,2122,1660,1620,78.23,ÖVP,schlierbach,668177.625
+104,2008,40918,Spital am Pyhrn               ,1739,1271,1236,73.09,SPÖ,spital-am-pyhrn,686114.375
+105,2008,40919,Steinbach am Ziehberg         ,661,520,505,78.67,ÖVP,steinbach-am-ziehberg,165462.015625
+106,2008,40921,Vorderstoder                  ,650,470,454,72.31,ÖVP,vorderstoder,336085.71875
+107,2008,40923,Windischgarsten               ,1944,1439,1396,74.02,SPÖ,windischgarsten,1325613.0
+108,2008,41101,Allerheiligen im Mühlkreis    ,933,796,773,85.32,ÖVP,allerheiligen-im-mühlkreis,559184.3125
+109,2008,41102,Arbing                        ,1117,931,903,83.35,ÖVP,arbing,368870.34375
+110,2008,41103,Baumgartenberg                ,1254,1039,1020,82.92,ÖVP,baumgartenberg,649016.875
+111,2008,41105,Grein                         ,2460,1988,1928,80.81,SPÖ,grein,1266799.75
+112,2008,41106,Katsdorf                      ,2204,1814,1768,82.3,SPÖ,katsdorf,672512.375
+113,2008,41107,Klam                          ,675,561,534,83.11,ÖVP,klam,244872.203125
+114,2008,41108,Bad Kreuzen                   ,1761,1460,1399,82.91,ÖVP,bad-kreuzen,699503.6875
+115,2008,41111,Mauthausen                    ,3697,2887,2803,78.09,SPÖ,mauthausen,2770745.75
+116,2008,41113,Münzbach                      ,1316,1086,1033,82.52,ÖVP,münzbach,619771.25
+117,2008,41115,Pabneukirchen                 ,1362,1106,1067,81.2,ÖVP,pabneukirchen,767617.5
+118,2008,41116,Perg                          ,5777,4486,4341,77.65,SPÖ,perg,2950069.75
+119,2008,41117,Rechberg                      ,716,611,596,85.34,ÖVP,rechberg,219202.890625
+120,2008,41123,Saxen                         ,1355,1186,1146,87.53,ÖVP,saxen,871822.6875
+121,2008,41124,Schwertberg                   ,4026,3237,3154,80.4,SPÖ,schwertberg,1287311.5
+122,2008,41125,Waldhausen im Strudengau      ,2306,1957,1894,85.05,ÖVP,waldhausen-im-strudengau,1012403.5
+123,2008,41201,Andrichsfurt                  ,571,404,386,70.75,ÖVP,andrichsfurt,186207.8125
+124,2008,41202,Antiesenhofen                 ,825,606,594,73.45,ÖVP,antiesenhofen,303108.65625
+125,2008,41203,Aurolzmünster                 ,2319,1657,1592,71.45,FPÖ,aurolzmünster,1128782.25
+126,2008,41204,Eberschwang                   ,2667,2075,1986,77.8,SPÖ,eberschwang,459597.375
+127,2008,41205,Eitzing                       ,587,459,447,78.19,ÖVP,eitzing,210040.421875
+128,2008,41206,Geiersberg                    ,441,327,315,74.15,ÖVP,geiersberg,172084.3125
+129,2008,41207,Geinberg                      ,1045,788,761,75.41,FPÖ,geinberg,1197106.125
+130,2008,41208,Gurten                        ,896,689,666,76.9,ÖVP,gurten,330660.03125
+131,2008,41209,Hohenzell                     ,1596,1224,1176,76.69,ÖVP,hohenzell,1011634.75
+132,2008,41210,Kirchdorf am Inn              ,469,387,380,82.52,ÖVP,kirchdorf-am-inn,183173.953125
+133,2008,41211,Kirchheim im Innkreis         ,548,447,426,81.57,ÖVP,kirchheim-im-innkreis,566845.5625
+134,2008,41212,Lambrechten                   ,1028,800,776,77.82,ÖVP,lambrechten,414373.03125
+135,2008,41213,Lohnsburg am Kobernaußerwald  ,1831,1319,1286,72.04,ÖVP,lohnsburg-am-kobernaußerwald,542167.625
+136,2008,41214,Mehrnbach                     ,1871,1408,1364,75.25,FPÖ,mehrnbach,618425.5625
+137,2008,41215,Mettmach                      ,2028,1480,1411,72.98,FPÖ,mettmach,510454.375
+138,2008,41216,Mörschwang                    ,237,185,176,78.06,ÖVP,mörschwang,46374.0
+139,2008,41217,Mühlheim am Inn               ,507,393,379,77.51,SPÖ,mühlheim-am-inn,256156.734375
+140,2008,41218,Neuhofen im Innkreis          ,1731,1285,1243,74.23,ÖVP,neuhofen-im-innkreis,475378.78125
+141,2008,41219,Obernberg am Inn              ,1210,798,784,65.95,FPÖ,obernberg-am-inn,508519.34375
+142,2008,41220,Ort im Innkreis               ,916,690,670,75.33,ÖVP,ort-im-innkreis,1141616.125
+143,2008,41221,Pattigham                     ,700,548,529,78.29,ÖVP,pattigham,265575.0625
+144,2008,41222,Peterskirchen                 ,571,433,419,75.83,ÖVP,peterskirchen,172451.4375
+145,2008,41223,Pramet                        ,804,624,607,77.61,ÖVP,pramet,315464.46875
+146,2008,41224,Reichersberg                  ,1077,803,767,74.56,ÖVP,reichersberg,284150.875
+147,2008,41225,Ried im Innkreis              ,8551,6027,5877,70.48,SPÖ,ried-im-innkreis,6496111.5
+148,2008,41229,Schildorn                     ,852,673,655,78.99,ÖVP,schildorn,353978.25
+149,2008,41230,Senftenbach                   ,575,472,446,82.09,ÖVP,senftenbach,184215.46875
+150,2008,41231,Taiskirchen im Innkreis       ,1930,1510,1454,78.24,ÖVP,taiskirchen-im-innkreis,752136.6875
+151,2008,41232,Tumeltsham                    ,1193,920,889,77.12,ÖVP,tumeltsham,759288.25
+152,2008,41233,Utzenaich                     ,1182,905,877,76.57,ÖVP,utzenaich,383836.25
+153,2008,41234,Waldzell                      ,1703,1279,1228,75.1,ÖVP,waldzell,1338004.5
+154,2008,41235,Weilbach                      ,486,370,356,76.13,ÖVP,weilbach,160645.203125
+155,2008,41236,Wippenham                     ,447,375,358,83.89,ÖVP,wippenham,118940.4375
+156,2008,41305,Arnreit                       ,882,747,712,84.69,ÖVP,arnreit,277340.21875
+157,2008,41306,Atzesberg                     ,380,324,308,85.26,ÖVP,atzesberg,61525.94921875
+158,2008,41307,Auberg                        ,422,330,320,78.2,ÖVP,auberg,113113.2890625
+159,2008,41311,Hörbich                       ,318,266,257,83.65,ÖVP,hörbich,68831.2109375
+160,2008,41312,Hofkirchen im Mühlkreis       ,1188,898,862,75.59,ÖVP,hofkirchen-im-mühlkreis,439902.0625
+161,2008,41313,Julbach                       ,1321,1043,1004,78.96,SPÖ,julbach,390295.625
+162,2008,41314,Kirchberg ob der Donau        ,859,709,693,82.54,ÖVP,kirchberg-ob-der-donau,290700.21875
+163,2008,41315,Klaffer am Hochficht          ,1037,820,795,79.07,ÖVP,klaffer-am-hochficht,341753.8125
+164,2008,41316,Kleinzell im Mühlkreis        ,1144,875,840,76.49,ÖVP,kleinzell-im-mühlkreis,341658.75
+165,2008,41317,Kollerschlag                  ,1196,943,892,78.85,ÖVP,kollerschlag,1000709.75
+166,2008,41318,Lembach im Mühlkreis          ,1279,1001,956,78.26,ÖVP,lembach-im-mühlkreis,546052.125
+167,2008,41319,Lichtenau im Mühlkreis        ,451,359,333,79.6,ÖVP,lichtenau-im-mühlkreis,93415.953125
+168,2008,41320,Nebelberg                     ,513,441,428,85.96,ÖVP,nebelberg,120164.3203125
+169,2008,41321,Neufelden                     ,974,747,713,76.69,ÖVP,neufelden,546469.0625
+170,2008,41322,Niederkappel                  ,845,672,626,79.53,ÖVP,niederkappel,197363.109375
+171,2008,41323,Niederwaldkirchen             ,1394,1138,1099,81.64,ÖVP,niederwaldkirchen,1090171.375
+172,2008,41324,Oberkappel                    ,542,403,384,74.35,ÖVP,oberkappel,321633.625
+173,2008,41325,Oepping                       ,1299,992,959,76.37,ÖVP,oepping,690406.1875
+174,2008,41326,Peilstein im Mühlviertel      ,1310,1028,975,78.47,ÖVP,peilstein-im-mühlviertel,624436.4375
+175,2008,41327,Pfarrkirchen im Mühlkreis     ,1171,909,874,77.63,ÖVP,pfarrkirchen-im-mühlkreis,408035.1875
+176,2008,41328,Putzleinsdorf                 ,1238,951,927,76.82,ÖVP,putzleinsdorf,220064.203125
+177,2008,41329,Neustift im Mühlkreis         ,1154,896,873,77.64,ÖVP,neustift-im-mühlkreis,339077.96875
+178,2008,41338,Sarleinsbach                  ,1810,1448,1395,80.0,ÖVP,sarleinsbach,520510.46875
+179,2008,41341,Schwarzenberg am Böhmerwald   ,513,390,374,76.02,ÖVP,schwarzenberg-am-böhmerwald,106573.78125
+180,2008,41342,Ulrichsberg                   ,2462,1891,1831,76.81,ÖVP,ulrichsberg,653189.875
+181,2008,41402,Andorf                        ,3921,2983,2911,76.08,ÖVP,andorf,1129108.25
+182,2008,41404,Diersbach                     ,1288,997,974,77.41,ÖVP,diersbach,414418.9375
+183,2008,41406,Eggerding                     ,1014,809,772,79.78,ÖVP,eggerding,333413.90625
+184,2008,41408,Enzenkirchen                  ,1438,1110,1070,77.19,SPÖ,enzenkirchen,372279.6875
+185,2008,41411,Kopfing im Innkreis           ,1636,1192,1139,72.86,ÖVP,kopfing-im-innkreis,604283.6875
+186,2008,41412,Mayrhof                       ,214,179,166,83.64,ÖVP,mayrhof,30397.44921875
+187,2008,41414,Raab                          ,1835,1416,1342,77.17,ÖVP,raab,871341.25
+188,2008,41415,Rainbach im Innkreis          ,1192,930,915,78.02,ÖVP,rainbach-im-innkreis,315144.0625
+189,2008,41416,Riedau                        ,1544,1171,1135,75.84,SPÖ,riedau,932798.25
+190,2008,41424,Sigharting                    ,635,538,529,84.72,ÖVP,sigharting,259934.71875
+191,2008,41425,Suben                         ,961,713,697,74.19,ÖVP,suben,276610.0625
+192,2008,41427,Vichtenstein                  ,489,358,349,73.21,ÖVP,vichtenstein,209673.484375
+193,2008,41429,Wernstein am Inn              ,1215,939,922,77.28,ÖVP,wernstein-am-inn,313098.09375
+194,2008,41501,Adlwang                       ,1293,994,970,76.88,ÖVP,adlwang,1029609.25
+195,2008,41503,Bad Hall                      ,3802,2820,2728,74.17,SPÖ,bad-hall,1176498.75
+196,2008,41504,Dietach                       ,2147,1742,1707,81.14,SPÖ,dietach,1459330.625
+197,2008,41505,Gaflenz                       ,1467,1181,1146,80.5,ÖVP,gaflenz,864492.125
+198,2008,41506,Garsten                       ,5259,4171,4053,79.31,SPÖ,garsten,1242216.875
+199,2008,41507,Großraming                    ,2261,1925,1870,85.14,SPÖ,großraming,786607.5625
+200,2008,41509,Losenstein                    ,1375,1102,1078,80.15,SPÖ,losenstein,1032805.375
+201,2008,41510,Maria Neustift                ,1339,1143,1109,85.36,ÖVP,maria-neustift,357049.875
+202,2008,41511,Pfarrkirchen bei Bad Hall     ,1694,1332,1286,78.63,SPÖ,pfarrkirchen-bei-bad-hall,381460.625
+203,2008,41512,Reichraming                   ,1503,1274,1249,84.76,SPÖ,reichraming,780492.5
+204,2008,41513,Rohr im Kremstal              ,962,762,755,79.21,ÖVP,rohr-im-kremstal,337432.25
+205,2008,41515,Schiedlberg                   ,994,801,786,80.58,ÖVP,schiedlberg,438725.625
+206,2008,41516,Sierning                      ,7227,5838,5699,80.78,SPÖ,sierning,2343426.25
+207,2008,41517,Ternberg                      ,2719,2161,2087,79.48,SPÖ,ternberg,465265.21875
+208,2008,41518,Waldneukirchen                ,1723,1415,1374,82.12,ÖVP,waldneukirchen,503741.65625
+209,2008,41521,Wolfern                       ,2425,1967,1921,81.11,ÖVP,wolfern,646749.9375
+210,2008,41522,Weyer  ,3652,2810,2729,76.94,SPÖ,weyer,2573189.25
+211,2008,41602,Altenberg bei Linz            ,3451,2808,2731,81.37,ÖVP,altenberg-bei-linz,873293.625
+212,2008,41603,Bad Leonfelden                ,3159,2520,2399,79.77,ÖVP,bad-leonfelden,1236159.25
+213,2008,41604,Eidenberg                     ,1547,1251,1207,80.87,ÖVP,eidenberg,538128.375
+214,2008,41605,Engerwitzdorf                 ,6590,5107,4944,77.5,SPÖ,engerwitzdorf,1441901.25
+215,2008,41607,Gallneukirchen                ,4940,3811,3713,77.15,SPÖ,gallneukirchen,1743819.375
+216,2008,41608,Goldwörth                     ,728,580,558,79.67,ÖVP,goldwörth,218923.03125
+217,2008,41610,Haibach im Mühlkreis          ,660,551,527,83.48,ÖVP,haibach-im-mühlkreis,173868.734375
+218,2008,41611,Hellmonsödt                   ,1721,1354,1320,78.68,ÖVP,hellmonsödt,506864.5
+219,2008,41612,Herzogsdorf                   ,1936,1489,1439,76.91,ÖVP,herzogsdorf,701328.125
+220,2008,41613,Kirchschlag bei Linz          ,1585,1242,1192,78.36,ÖVP,kirchschlag-bei-linz,1180819.25
+221,2008,41614,Lichtenberg                   ,2119,1735,1681,81.88,ÖVP,lichtenberg,641490.75
+222,2008,41615,Oberneukirchen                ,2533,1997,1910,78.84,ÖVP,oberneukirchen,783967.5625
+223,2008,41616,Ottenschlag im Mühlkreis      ,403,315,302,78.16,ÖVP,ottenschlag-im-mühlkreis,66578.6875
+224,2008,41617,Ottensheim                    ,3579,2765,2693,77.26,ÖVP,ottensheim,1376090.75
+225,2008,41618,Puchenau                      ,3781,2757,2685,72.92,SPÖ,puchenau,1639753.625
+226,2008,41619,Reichenau im Mühlkreis        ,953,782,764,82.06,ÖVP,reichenau-im-mühlkreis,381813.53125
+227,2008,41620,Reichenthal                   ,1121,905,876,80.73,ÖVP,reichenthal,695142.25
+228,2008,41622,Schenkenfelden                ,1259,1014,970,80.54,ÖVP,schenkenfelden,531926.5625
+229,2008,41623,Sonnberg im Mühlkreis         ,639,535,505,83.72,ÖVP,sonnberg-im-mühlkreis,321721.09375
+230,2008,41624,Steyregg                      ,3856,2996,2932,77.7,SPÖ,steyregg,813407.4375
+231,2008,41625,Vorderweißenbach              ,1623,1387,1332,85.46,ÖVP,vorderweißenbach,1201308.625
+232,2008,41626,Walding                       ,3159,2521,2433,79.8,SPÖ,walding,1052587.5
+233,2008,41701,Ampflwang im Hausruckwald     ,2803,2222,2149,79.27,SPÖ,ampflwang-im-hausruckwald,1443676.25
+234,2008,41703,Attnang-Puchheim              ,6341,4617,4501,72.81,SPÖ,attnang-puchheim,2626058.25
+235,2008,41705,Aurach am Hongar              ,1242,1010,979,81.32,SPÖ,aurach-am-hongar,423059.375
+236,2008,41706,Berg im Attergau              ,761,608,592,79.89,ÖVP,berg-im-attergau,140845.546875
+237,2008,41707,Desselbrunn                   ,1297,1056,1033,81.42,ÖVP,desselbrunn,247615.328125
+238,2008,41708,Fornach                       ,724,614,594,84.81,ÖVP,fornach,145642.9375
+239,2008,41709,Frankenburg am Hausruck       ,3942,3225,3078,81.81,SPÖ,frankenburg-am-hausruck,1122812.625
+240,2008,41710,Frankenmarkt                  ,2697,1980,1910,73.41,ÖVP,frankenmarkt,1262428.25
+241,2008,41711,Gampern                       ,2016,1580,1508,78.37,ÖVP,gampern,1004415.375
+242,2008,41714,Manning                       ,637,525,508,82.42,ÖVP,manning,130471.59375
+243,2008,41715,Mondsee                       ,2375,1591,1564,66.99,ÖVP,mondsee,1914696.5
+244,2008,41717,Niederthalheim                ,813,649,630,79.83,ÖVP,niederthalheim,837423.625
+245,2008,41719,Oberhofen am Irrsee           ,1104,883,856,79.98,ÖVP,oberhofen-am-irrsee,388216.34375
+246,2008,41720,Oberndorf bei Schwanenstadt   ,1123,872,845,77.65,SPÖ,oberndorf-bei-schwanenstadt,185148.34375
+247,2008,41721,Oberwang                      ,1238,968,916,78.19,ÖVP,oberwang,388611.625
+248,2008,41723,Pfaffing                      ,1077,876,846,81.34,SPÖ,pfaffing,284165.53125
+249,2008,41724,Pilsbach                      ,499,425,412,85.17,ÖVP,pilsbach,84079.171875
+250,2008,41725,Pitzenberg                    ,402,289,283,71.89,ÖVP,pitzenberg,77316.21875
+251,2008,41726,Pöndorf                       ,1823,1433,1371,78.61,ÖVP,pöndorf,856651.875
+252,2008,41727,Puchkirchen am Trattberg      ,753,603,584,80.08,ÖVP,puchkirchen-am-trattberg,217648.625
+253,2008,41728,Pühret                        ,472,393,378,83.26,ÖVP,pühret,67982.1171875
+254,2008,41729,Redleiten                     ,381,293,288,76.9,ÖVP,redleiten,63190.6015625
+255,2008,41730,Redlham                       ,1115,882,847,79.1,SPÖ,redlham,192386.84375
+256,2008,41731,Regau                         ,4683,3701,3584,79.03,SPÖ,regau,1263949.0
+257,2008,41732,Rüstorf                       ,1573,1211,1174,76.99,SPÖ,rüstorf,592986.375
+258,2008,41733,Rutzenham                     ,202,175,168,86.63,ÖVP,rutzenham,176228.984375
+259,2008,41736,Schlatt                       ,1025,791,760,77.17,ÖVP,schlatt,230039.515625
+260,2008,41737,Schörfling am Attersee        ,2584,1927,1879,74.57,SPÖ,schörfling-am-attersee,821567.125
+261,2008,41738,Schwanenstadt                 ,3045,2254,2217,74.02,SPÖ,schwanenstadt,2412064.75
+262,2008,41739,Seewalchen am Attersee        ,4134,3035,2947,73.42,SPÖ,seewalchen-am-attersee,738058.25
+263,2008,41740,Steinbach am Attersee         ,682,521,505,76.39,ÖVP,steinbach-am-attersee,186756.90625
+264,2008,41742,Tiefgraben                    ,2667,1985,1910,74.43,ÖVP,tiefgraben,1128097.375
+265,2008,41744,Ungenach                      ,1104,918,887,83.15,ÖVP,ungenach,392795.125
+266,2008,41745,Unterach am Attersee          ,1119,770,753,68.81,ÖVP,unterach-am-attersee,354304.9375
+267,2008,41746,Vöcklabruck                   ,9144,6508,6344,71.17,SPÖ,vöcklabruck,4273539.5
+268,2008,41747,Vöcklamarkt                   ,3621,2808,2712,77.55,ÖVP,vöcklamarkt,1328969.0
+269,2008,41748,Weißenkirchen im Attergau     ,754,595,566,78.91,ÖVP,weißenkirchen-im-attergau,212934.28125
+270,2008,41749,Weyregg am Attersee           ,1256,896,872,71.34,ÖVP,weyregg-am-attersee,292524.96875
+271,2008,41750,Wolfsegg am Hausruck          ,1586,1191,1151,75.09,SPÖ,wolfsegg-am-hausruck,588658.5
+272,2008,41752,Zell am Pettenfirst           ,920,743,714,80.76,ÖVP,zell-am-pettenfirst,176732.6875
+273,2008,41801,Aichkirchen                   ,415,348,339,83.86,ÖVP,aichkirchen,180016.015625
+274,2008,41802,Bachmanning                   ,458,376,364,82.1,ÖVP,bachmanning,204589.484375
+275,2008,41803,Bad Wimsbach-Neydharting      ,1896,1523,1466,80.33,ÖVP,bad-wimsbach-neydharting,595728.75
+276,2008,41804,Buchkirchen                   ,2995,2435,2387,81.3,SPÖ,buchkirchen,4233738.5
+277,2008,41805,Eberstalzell                  ,1769,1430,1393,80.84,ÖVP,eberstalzell,797532.6875
+278,2008,41806,Edt bei Lambach               ,1628,1265,1243,77.7,SPÖ,edt-bei-lambach,555257.75
+279,2008,41808,Gunskirchen                   ,4325,3423,3352,79.14,SPÖ,gunskirchen,1834316.0
+280,2008,41810,Krenglbach                    ,2351,1930,1879,82.09,SPÖ,krenglbach,754550.625
+281,2008,41811,Lambach                       ,2443,1751,1717,71.67,SPÖ,lambach,1045382.375
+282,2008,41812,Marchtrenk                    ,8964,6948,6765,77.51,SPÖ,marchtrenk,4879093.0
+283,2008,41814,Offenhausen                   ,1225,978,948,79.84,ÖVP,offenhausen,326789.78125
+284,2008,41816,Pichl bei Wels                ,2071,1691,1634,81.65,ÖVP,pichl-bei-wels,961840.0
+285,2008,41817,Sattledt                      ,1781,1429,1401,80.24,ÖVP,sattledt,915440.3125
+286,2008,41818,Schleißheim                   ,876,719,696,82.08,ÖVP,schleißheim,205691.203125
+287,2008,41820,Stadl-Paura                   ,3705,2682,2617,72.39,SPÖ,stadl-paura,1440737.875
+288,2008,41822,Steinhaus                     ,1500,1250,1213,83.33,FPÖ,steinhaus,313390.40625
+289,2008,41823,Thalheim bei Wels             ,4189,3171,3108,75.7,SPÖ,thalheim-bei-wels,1121746.25
+290,2013,40101,Linz,140809,87131,85460,61.88,SPÖ,linz,77040952.0
+291,2013,40201,Steyr             ,28386,18660,18315,65.74,SPÖ,steyr,16850316.0
+292,2013,40301,Wels,40671,26608,26197,65.42,SPÖ,wels,34037160.0
+293,2013,40402,Aspach                        ,1966,1366,1322,69.48,ÖVP,aspach,667361.1875
+294,2013,40403,Auerbach                      ,403,315,304,78.16,ÖVP,auerbach,91917.8828125
+295,2013,40404,Braunau am Inn                ,12066,7021,6878,58.19,SPÖ,braunau-am-inn,6621313.5
+296,2013,40405,Burgkirchen                   ,2026,1371,1332,67.67,ÖVP,burgkirchen,843405.4375
+297,2013,40406,Eggelsberg                    ,1756,1147,1105,65.32,ÖVP,eggelsberg,2422041.0
+298,2013,40409,Geretsberg                    ,848,530,513,62.5,ÖVP,geretsberg,302147.375
+299,2013,40410,Gilgenberg am Weilhart        ,1006,666,650,66.2,ÖVP,gilgenberg-am-weilhart,498276.0
+300,2013,40411,Haigermoos                    ,464,319,311,68.75,ÖVP,haigermoos,205143.953125
+301,2013,40414,Hochburg-Ach                  ,2198,1344,1313,61.15,ÖVP,hochburg-ach,1196194.5
+302,2013,40417,Kirchberg bei Mattighofen     ,913,623,606,68.24,ÖVP,kirchberg-bei-mattighofen,393197.65625
+303,2013,40418,Lengau                        ,3489,2399,2316,68.76,SPÖ,lengau,1597845.375
+304,2013,40420,Maria Schmolln                ,1143,789,760,69.03,ÖVP,maria-schmolln,417091.90625
+305,2013,40421,Mattighofen                   ,3734,2294,2236,61.44,SPÖ,mattighofen,2956417.75
+306,2013,40422,Mauerkirchen                  ,1629,940,917,57.7,FPÖ,mauerkirchen,1048200.5
+307,2013,40423,Mining                        ,933,660,637,70.74,ÖVP,mining,351587.90625
+308,2013,40424,Moosbach                      ,757,537,528,70.94,FPÖ,moosbach,222828.5625
+309,2013,40426,Munderfing                    ,2212,1475,1419,66.68,ÖVP,munderfing,929106.0625
+310,2013,40428,Ostermiething                 ,2389,1454,1385,60.86,ÖVP,ostermiething,1029658.75
+311,2013,40429,Palting                       ,760,531,510,69.87,ÖVP,palting,349548.0
+312,2013,40430,Perwang am Grabensee          ,719,497,480,69.12,ÖVP,perwang-am-grabensee,435868.46875
+313,2013,40431,Pfaffstätt                    ,746,503,483,67.43,ÖVP,pfaffstätt,939798.9375
+314,2013,40432,Pischelsdorf am Engelbach     ,1302,931,910,71.51,ÖVP,pischelsdorf-am-engelbach,545668.6875
+315,2013,40442,Schwand im Innkreis           ,709,505,493,71.23,ÖVP,schwand-im-innkreis,205249.515625
+316,2013,40443,Tarsdorf                      ,1615,1074,1037,66.5,ÖVP,tarsdorf,592718.875
+317,2013,40445,Überackern                    ,441,261,253,59.18,ÖVP,überackern,260565.5
+318,2013,40446,Weng im Innkreis              ,1139,798,773,70.06,ÖVP,weng-im-innkreis,357010.5
+319,2013,40501,Alkoven                       ,4391,3324,3239,75.7,SPÖ,alkoven,2214295.25
+320,2013,40503,Eferding                      ,2868,2016,1972,70.29,SPÖ,eferding,2693251.5
+321,2013,40504,Fraham                        ,1834,1386,1353,75.57,SPÖ,fraham,679035.625
+322,2013,40505,Haibach ob der Donau          ,1091,808,783,74.06,ÖVP,haibach-ob-der-donau,941286.4375
+323,2013,40506,Hartkirchen                   ,3378,2527,2479,74.81,ÖVP,hartkirchen,699045.375
+324,2013,40507,Hinzenbach                    ,1566,1218,1192,77.78,ÖVP,hinzenbach,570630.0625
+325,2013,40508,Prambachkirchen               ,2259,1717,1669,76.01,ÖVP,prambachkirchen,962809.6875
+326,2013,40509,Pupping                       ,1578,1080,1063,68.44,ÖVP,pupping,402818.90625
+327,2013,40511,Scharten                      ,1714,1360,1334,79.35,FPÖ,scharten,568516.125
+328,2013,40512,Stroheim                      ,1313,999,957,76.09,ÖVP,stroheim,567867.125
+329,2013,40601,Freistadt                     ,5893,4269,4177,72.44,SPÖ,freistadt,2446371.25
+330,2013,40602,Grünbach                      ,1523,1111,1075,72.95,ÖVP,grünbach,628612.9375
+331,2013,40603,Gutau                         ,2200,1677,1627,76.23,ÖVP,gutau,700599.5
+332,2013,40604,Hagenberg im Mühlkreis        ,2211,1596,1564,72.18,SPÖ,hagenberg-im-mühlkreis,2156574.75
+333,2013,40605,Hirschbach im Mühlkreis       ,951,743,709,78.13,ÖVP,hirschbach-im-mühlkreis,352593.0625
+334,2013,40606,Kaltenberg                    ,502,409,400,81.47,ÖVP,kaltenberg,138404.796875
+335,2013,40608,Königswiesen                  ,2569,1966,1880,76.53,ÖVP,königswiesen,1379142.0
+336,2013,40609,Lasberg                       ,2271,1716,1672,75.56,ÖVP,lasberg,436675.96875
+337,2013,40610,Leopoldschlag                 ,851,660,622,77.56,ÖVP,leopoldschlag,241014.390625
+338,2013,40611,Liebenau                      ,1409,1044,1012,74.1,ÖVP,liebenau,1298189.75
+339,2013,40612,Neumarkt im Mühlkreis         ,2538,1934,1864,76.2,ÖVP,neumarkt-im-mühlkreis,1158133.625
+340,2013,40613,Pierbach                      ,796,616,595,77.39,ÖVP,pierbach,647080.125
+341,2013,40614,Pregarten                     ,4142,3160,3063,76.29,SPÖ,pregarten,2090743.5
+342,2013,40615,Rainbach im Mühlkreis         ,2324,1692,1628,72.81,ÖVP,rainbach-im-mühlkreis,1211085.5
+343,2013,40619,Schönau im Mühlkreis          ,1573,1273,1232,80.93,ÖVP,schönau-im-mühlkreis,446143.9375
+344,2013,40620,Tragwein                      ,2474,1966,1908,79.47,SPÖ,tragwein,1070130.375
+345,2013,40621,Unterweißenbach               ,1893,1399,1341,73.9,ÖVP,unterweißenbach,573218.125
+346,2013,40622,Unterweitersdorf              ,1643,1311,1273,79.79,SPÖ,unterweitersdorf,727627.5625
+347,2013,40624,Wartberg ob der Aist          ,3402,2557,2481,75.16,SPÖ,wartberg-ob-der-aist,1410241.125
+348,2013,40625,Weitersfelden                 ,862,673,653,78.07,ÖVP,weitersfelden,214535.015625
+349,2013,40626,Windhaag bei Freistadt        ,1295,1001,964,77.3,ÖVP,windhaag-bei-freistadt,568843.4375
+350,2013,40627,Bad Zell                      ,2263,1809,1753,79.94,ÖVP,bad-zell,644778.125
+351,2013,40701,Altmünster                    ,7754,5371,5205,69.27,SPÖ,altmünster,2295643.0
+352,2013,40703,Bad Ischl                     ,10792,7138,6946,66.14,SPÖ,bad-ischl,3991663.75
+353,2013,40705,Gmunden                       ,10132,6262,6134,61.8,ÖVP,gmunden,4952305.0
+354,2013,40706,Gosau                         ,1467,1054,1015,71.85,SPÖ,gosau,1780255.0
+355,2013,40707,Grünau im Almtal              ,1623,1183,1147,72.89,SPÖ,grünau-im-almtal,508517.375
+356,2013,40708,Gschwandt                     ,2122,1618,1566,76.25,ÖVP,gschwandt,1443177.5
+357,2013,40709,Hallstatt                     ,640,475,464,74.22,SPÖ,hallstatt,247475.859375
+358,2013,40710,Kirchham                      ,1593,1185,1148,74.39,ÖVP,kirchham,700912.0625
+359,2013,40711,Laakirchen                    ,7122,5036,4914,70.71,SPÖ,laakirchen,3633420.75
+360,2013,40712,Obertraun                     ,588,441,422,75.0,SPÖ,obertraun,150062.5625
+361,2013,40713,Ohlsdorf                      ,3943,2792,2707,70.81,SPÖ,ohlsdorf,1221848.375
+362,2013,40714,Pinsdorf                      ,2940,2072,2018,70.48,SPÖ,pinsdorf,1711574.375
+363,2013,40718,Traunkirchen                  ,1330,938,910,70.53,ÖVP,traunkirchen,314679.375
+364,2013,40719,Scharnstein                   ,3710,2632,2556,70.94,SPÖ,scharnstein,1887554.125
+365,2013,40720,Vorchdorf                     ,5706,4037,3932,70.75,SPÖ,vorchdorf,2744474.0
+366,2013,40801,Aistersheim                   ,657,465,449,70.78,ÖVP,aistersheim,311534.625
+367,2013,40802,Bad Schallerbach              ,2899,1969,1920,67.92,SPÖ,bad-schallerbach,1068140.0
+368,2013,40804,Eschenau im Hausruckkreis     ,898,701,675,78.06,ÖVP,eschenau-im-hausruckkreis,262635.96875
+369,2013,40805,Gallspach                     ,1868,1293,1269,69.22,FPÖ,gallspach,1446597.75
+370,2013,40806,Gaspoltshofen                 ,2819,1923,1856,68.22,FPÖ,gaspoltshofen,1394021.5
+371,2013,40807,Geboltskirchen                ,1138,860,822,75.57,ÖVP,geboltskirchen,380195.84375
+372,2013,40808,Grieskirchen                  ,3551,2532,2457,71.3,SPÖ,grieskirchen,3943799.0
+373,2013,40809,Haag am Hausruck              ,1651,1166,1135,70.62,ÖVP,haag-am-hausruck,605898.1875
+374,2013,40810,Heiligenberg                  ,537,439,423,81.75,ÖVP,heiligenberg,252986.453125
+375,2013,40812,Kallham                       ,2063,1540,1481,74.65,ÖVP,kallham,665017.9375
+376,2013,40813,Kematen am Innbach            ,1028,733,715,71.3,FPÖ,kematen-am-innbach,307341.625
+377,2013,40814,Meggenhofen                   ,1085,827,810,76.22,ÖVP,meggenhofen,658524.125
+378,2013,40816,Natternbach                   ,1938,1462,1407,75.44,ÖVP,natternbach,739416.4375
+379,2013,40818,Neumarkt im Hausruckkreis     ,1115,737,723,66.1,SPÖ,neumarkt-im-hausruckkreis,547137.625
+380,2013,40819,Peuerbach                     ,1781,1254,1211,70.41,ÖVP,peuerbach,1559190.625
+381,2013,40820,Pötting                       ,444,349,344,78.6,ÖVP,pötting,119563.6328125
+382,2013,40821,Pollham                       ,777,608,586,78.25,ÖVP,pollham,368842.09375
+383,2013,40823,Rottenbach                    ,829,649,627,78.29,FPÖ,rottenbach,334942.25
+384,2013,40828,Steegen                       ,902,592,567,65.63,ÖVP,steegen,154046.75
+385,2013,40830,Tollet                        ,731,572,553,78.25,ÖVP,tollet,171225.0625
+386,2013,40831,Waizenkirchen                 ,2906,2174,2124,74.81,ÖVP,waizenkirchen,813145.25
+387,2013,40833,Weibern                       ,1297,940,899,72.47,ÖVP,weibern,435135.125
+388,2013,40834,Wendling                      ,630,462,444,73.33,ÖVP,wendling,252871.203125
+389,2013,40901,Edlbach                       ,524,390,385,74.43,ÖVP,edlbach,178875.4375
+390,2013,40902,Grünburg                      ,2881,1969,1917,68.34,SPÖ,grünburg,1453591.5
+391,2013,40907,Kremsmünster                  ,4751,3203,3133,67.42,ÖVP,kremsmünster,2287062.25
+392,2013,40912,Pettenbach                    ,3855,2892,2811,75.02,ÖVP,pettenbach,1749409.625
+393,2013,40917,Schlierbach                   ,2158,1527,1488,70.76,ÖVP,schlierbach,759527.6875
+394,2013,40918,Spital am Pyhrn               ,1730,1216,1199,70.29,SPÖ,spital-am-pyhrn,634560.5625
+395,2013,40919,Steinbach am Ziehberg         ,679,506,493,74.52,ÖVP,steinbach-am-ziehberg,958134.75
+396,2013,40921,Vorderstoder                  ,644,431,419,66.93,ÖVP,vorderstoder,635424.0
+397,2013,40923,Windischgarsten               ,1923,1250,1226,65.0,SPÖ,windischgarsten,1554030.5
+398,2013,41101,Allerheiligen im Mühlkreis    ,955,786,758,82.3,ÖVP,allerheiligen-im-mühlkreis,441769.5625
+399,2013,41102,Arbing                        ,1103,858,840,77.79,ÖVP,arbing,455015.78125
+400,2013,41103,Baumgartenberg                ,1290,954,932,73.95,ÖVP,baumgartenberg,975789.625
+401,2013,41105,Grein                         ,2408,1681,1625,69.81,SPÖ,grein,1421976.875
+402,2013,41106,Katsdorf                      ,2294,1783,1735,77.72,SPÖ,katsdorf,546430.5625
+403,2013,41107,Klam                          ,697,484,464,69.44,ÖVP,klam,369351.84375
+404,2013,41108,Bad Kreuzen                   ,1771,1334,1296,75.32,ÖVP,bad-kreuzen,836526.25
+405,2013,41111,Mauthausen                    ,3694,2723,2661,73.71,SPÖ,mauthausen,2861706.0
+406,2013,41113,Münzbach                      ,1298,1026,974,79.04,ÖVP,münzbach,614402.3125
+407,2013,41115,Pabneukirchen                 ,1377,993,961,72.11,ÖVP,pabneukirchen,590450.3125
+408,2013,41116,Perg                          ,6028,4311,4204,71.52,SPÖ,perg,3459805.5
+409,2013,41117,Rechberg                      ,733,563,544,76.81,ÖVP,rechberg,258569.9375
+410,2013,41123,Saxen                         ,1391,1111,1082,79.87,FPÖ,saxen,879872.4375
+411,2013,41124,Schwertberg                   ,4027,3007,2929,74.67,SPÖ,schwertberg,1301294.0
+412,2013,41125,Waldhausen im Strudengau      ,2284,1819,1769,79.64,ÖVP,waldhausen-im-strudengau,1485566.875
+413,2013,41201,Andrichsfurt                  ,560,365,350,65.18,ÖVP,andrichsfurt,220714.046875
+414,2013,41202,Antiesenhofen                 ,802,550,538,68.58,SPÖ,antiesenhofen,350735.375
+415,2013,41203,Aurolzmünster                 ,2322,1483,1454,63.87,FPÖ,aurolzmünster,774487.5625
+416,2013,41204,Eberschwang                   ,2719,1860,1803,68.41,SPÖ,eberschwang,595517.375
+417,2013,41205,Eitzing                       ,589,414,395,70.29,ÖVP,eitzing,623717.125
+418,2013,41206,Geiersberg                    ,428,304,295,71.03,ÖVP,geiersberg,257267.578125
+419,2013,41207,Geinberg                      ,1106,719,694,65.01,FPÖ,geinberg,651475.0625
+420,2013,41208,Gurten                        ,935,632,622,67.59,ÖVP,gurten,344869.5
+421,2013,41209,Hohenzell                     ,1672,1220,1175,72.97,ÖVP,hohenzell,665973.5
+422,2013,41210,Kirchdorf am Inn              ,483,363,356,75.16,ÖVP,kirchdorf-am-inn,165948.953125
+423,2013,41211,Kirchheim im Innkreis         ,565,443,428,78.41,ÖVP,kirchheim-im-innkreis,477381.9375
+424,2013,41212,Lambrechten                   ,1054,815,792,77.32,ÖVP,lambrechten,381936.375
+425,2013,41213,Lohnsburg am Kobernaußerwald  ,1810,1258,1216,69.5,ÖVP,lohnsburg-am-kobernaußerwald,580685.5625
+426,2013,41214,Mehrnbach                     ,1871,1256,1226,67.13,FPÖ,mehrnbach,858331.25
+427,2013,41215,Mettmach                      ,1990,1379,1325,69.3,FPÖ,mettmach,729820.625
+428,2013,41216,Mörschwang                    ,261,198,190,75.86,ÖVP,mörschwang,32123.400390625
+429,2013,41217,Mühlheim am Inn               ,537,390,378,72.63,SPÖ,mühlheim-am-inn,552742.8125
+430,2013,41218,Neuhofen im Innkreis          ,1807,1239,1220,68.57,ÖVP,neuhofen-im-innkreis,612292.625
+431,2013,41219,Obernberg am Inn              ,1148,609,602,53.05,FPÖ,obernberg-am-inn,1554996.5
+432,2013,41220,Ort im Innkreis               ,922,668,652,72.45,FPÖ,ort-im-innkreis,506471.9375
+433,2013,41221,Pattigham                     ,729,537,523,73.66,ÖVP,pattigham,225477.09375
+434,2013,41222,Peterskirchen                 ,547,410,401,74.95,ÖVP,peterskirchen,186325.515625
+435,2013,41223,Pramet                        ,819,626,618,76.43,ÖVP,pramet,228609.796875
+436,2013,41224,Reichersberg                  ,1128,791,769,70.12,ÖVP,reichersberg,571261.75
+437,2013,41225,Ried im Innkreis              ,8460,5159,5048,60.98,FPÖ,ried-im-innkreis,6008397.5
+438,2013,41229,Schildorn                     ,920,587,564,63.8,ÖVP,schildorn,787592.625
+439,2013,41230,Senftenbach                   ,594,428,412,72.05,ÖVP,senftenbach,213225.703125
+440,2013,41231,Taiskirchen im Innkreis       ,1972,1416,1386,71.81,ÖVP,taiskirchen-im-innkreis,780779.0
+441,2013,41232,Tumeltsham                    ,1246,851,822,68.3,FPÖ,tumeltsham,816044.25
+442,2013,41233,Utzenaich                     ,1216,871,847,71.63,ÖVP,utzenaich,779884.6875
+443,2013,41234,Waldzell                      ,1738,1203,1165,69.22,ÖVP,waldzell,829077.25
+444,2013,41235,Weilbach                      ,473,360,353,76.11,ÖVP,weilbach,222252.96875
+445,2013,41236,Wippenham                     ,445,323,311,72.58,SPÖ,wippenham,115774.0078125
+446,2013,41305,Arnreit                       ,894,652,624,72.93,ÖVP,arnreit,504325.75
+447,2013,41306,Atzesberg                     ,381,303,295,79.53,ÖVP,atzesberg,72136.4921875
+448,2013,41307,Auberg                        ,436,342,333,78.44,ÖVP,auberg,169698.765625
+449,2013,41311,Hörbich                       ,334,270,263,80.84,ÖVP,hörbich,90166.7734375
+450,2013,41312,Hofkirchen im Mühlkreis       ,1227,817,787,66.59,ÖVP,hofkirchen-im-mühlkreis,1017848.9375
+451,2013,41313,Julbach                       ,1315,942,917,71.63,ÖVP,julbach,501530.125
+452,2013,41314,Kirchberg ob der Donau        ,865,656,642,75.84,ÖVP,kirchberg-ob-der-donau,603182.9375
+453,2013,41315,Klaffer am Hochficht          ,1070,797,787,74.49,ÖVP,klaffer-am-hochficht,359998.78125
+454,2013,41316,Kleinzell im Mühlkreis        ,1224,875,855,71.49,ÖVP,kleinzell-im-mühlkreis,231885.109375
+455,2013,41317,Kollerschlag                  ,1189,887,856,74.6,ÖVP,kollerschlag,424354.90625
+456,2013,41318,Lembach im Mühlkreis          ,1295,870,834,67.18,ÖVP,lembach-im-mühlkreis,526163.375
+457,2013,41319,Lichtenau im Mühlkreis        ,442,318,304,71.95,ÖVP,lichtenau-im-mühlkreis,86289.4296875
+458,2013,41320,Nebelberg                     ,507,402,380,79.29,ÖVP,nebelberg,122243.84375
+459,2013,41321,Neufelden                     ,1002,670,659,66.87,ÖVP,neufelden,869544.375
+460,2013,41322,Niederkappel                  ,811,628,593,77.44,ÖVP,niederkappel,277921.46875
+461,2013,41323,Niederwaldkirchen             ,1422,1050,1022,73.84,ÖVP,niederwaldkirchen,1446846.75
+462,2013,41324,Oberkappel                    ,532,342,333,64.29,ÖVP,oberkappel,350241.65625
+463,2013,41325,Oepping                       ,1279,926,896,72.4,ÖVP,oepping,437024.53125
+464,2013,41326,Peilstein im Mühlviertel      ,1288,983,930,76.32,ÖVP,peilstein-im-mühlviertel,409891.90625
+465,2013,41327,Pfarrkirchen im Mühlkreis     ,1168,880,851,75.34,ÖVP,pfarrkirchen-im-mühlkreis,463410.71875
+466,2013,41328,Putzleinsdorf                 ,1243,906,873,72.89,ÖVP,putzleinsdorf,502463.875
+467,2013,41329,Neustift im Mühlkreis         ,1163,847,821,72.83,ÖVP,neustift-im-mühlkreis,854191.8125
+468,2013,41338,Sarleinsbach                  ,1876,1419,1354,75.64,ÖVP,sarleinsbach,498572.9375
+469,2013,41341,Schwarzenberg am Böhmerwald   ,501,356,346,71.06,ÖVP,schwarzenberg-am-böhmerwald,128281.9609375
+470,2013,41342,Ulrichsberg                   ,2417,1738,1666,71.91,ÖVP,ulrichsberg,735807.3125
+471,2013,41402,Andorf                        ,4056,3020,2953,74.46,FPÖ,andorf,3927880.75
+472,2013,41404,Diersbach                     ,1289,925,908,71.76,ÖVP,diersbach,514360.84375
+473,2013,41406,Eggerding                     ,1028,752,735,73.15,ÖVP,eggerding,227483.8125
+474,2013,41408,Enzenkirchen                  ,1443,983,956,68.12,FPÖ,enzenkirchen,630052.75
+475,2013,41411,Kopfing im Innkreis           ,1604,1143,1108,71.26,ÖVP,kopfing-im-innkreis,537847.8125
+476,2013,41412,Mayrhof                       ,227,187,180,82.38,ÖVP,mayrhof,52692.2109375
+477,2013,41414,Raab                          ,1819,1260,1233,69.27,FPÖ,raab,1252071.5
+478,2013,41415,Rainbach im Innkreis          ,1190,901,880,75.71,ÖVP,rainbach-im-innkreis,365467.84375
+479,2013,41416,Riedau                        ,1565,1053,1016,67.28,FPÖ,riedau,1011576.0625
+480,2013,41424,Sigharting                    ,640,512,498,80.0,ÖVP,sigharting,290896.125
+481,2013,41425,Suben                         ,962,660,647,68.61,ÖVP,suben,514672.1875
+482,2013,41427,Vichtenstein                  ,482,335,323,69.5,ÖVP,vichtenstein,280142.15625
+483,2013,41429,Wernstein am Inn              ,1197,871,851,72.77,ÖVP,wernstein-am-inn,356910.375
+484,2013,41501,Adlwang                       ,1365,1012,985,74.14,ÖVP,adlwang,1101835.875
+485,2013,41503,Bad Hall                      ,3860,2514,2447,65.13,ÖVP,bad-hall,1721048.625
+486,2013,41504,Dietach                       ,2333,1771,1734,75.91,SPÖ,dietach,667841.25
+487,2013,41505,Gaflenz                       ,1499,1105,1064,73.72,ÖVP,gaflenz,407118.71875
+488,2013,41506,Garsten                       ,5250,3836,3743,73.07,SPÖ,garsten,1292549.625
+489,2013,41507,Großraming                    ,2266,1764,1723,77.85,ÖVP,großraming,1003025.0625
+490,2013,41509,Losenstein                    ,1330,933,918,70.15,SPÖ,losenstein,498451.78125
+491,2013,41510,Maria Neustift                ,1311,1045,1007,79.71,ÖVP,maria-neustift,374020.125
+492,2013,41511,Pfarrkirchen bei Bad Hall     ,1759,1246,1214,70.84,SPÖ,pfarrkirchen-bei-bad-hall,507802.96875
+493,2013,41512,Reichraming                   ,1472,1130,1116,76.77,SPÖ,reichraming,427486.125
+494,2013,41513,Rohr im Kremstal              ,971,736,718,75.8,ÖVP,rohr-im-kremstal,478015.8125
+495,2013,41515,Schiedlberg                   ,1000,753,747,75.3,ÖVP,schiedlberg,649501.0625
+496,2013,41516,Sierning                      ,7330,5321,5187,72.59,SPÖ,sierning,1829427.5
+497,2013,41517,Ternberg                      ,2746,2036,1972,74.14,SPÖ,ternberg,1696766.0
+498,2013,41518,Waldneukirchen                ,1787,1363,1321,76.27,ÖVP,waldneukirchen,506066.0625
+499,2013,41521,Wolfern                       ,2471,1828,1796,73.98,ÖVP,wolfern,1363406.875
+500,2013,41522,Weyer  ,3495,2432,2394,69.59,SPÖ,weyer,2642416.0
+501,2013,41602,Altenberg bei Linz            ,3557,2694,2617,75.74,ÖVP,altenberg-bei-linz,1170471.625
+502,2013,41603,Bad Leonfelden                ,3269,2398,2307,73.36,ÖVP,bad-leonfelden,1900192.0
+503,2013,41604,Eidenberg                     ,1662,1259,1206,75.75,ÖVP,eidenberg,722577.9375
+504,2013,41605,Engerwitzdorf                 ,6978,5149,4976,73.79,SPÖ,engerwitzdorf,2296789.75
+505,2013,41607,Gallneukirchen                ,4980,3474,3393,69.76,SPÖ,gallneukirchen,2178519.75
+506,2013,41608,Goldwörth                     ,761,569,541,74.77,ÖVP,goldwörth,279385.5625
+507,2013,41610,Haibach im Mühlkreis          ,708,549,527,77.54,ÖVP,haibach-im-mühlkreis,222318.546875
+508,2013,41611,Hellmonsödt                   ,1789,1250,1225,69.87,ÖVP,hellmonsödt,1033920.5
+509,2013,41612,Herzogsdorf                   ,2019,1464,1396,72.51,ÖVP,herzogsdorf,1825492.25
+510,2013,41613,Kirchschlag bei Linz          ,1637,1199,1173,73.24,ÖVP,kirchschlag-bei-linz,769933.0
+511,2013,41614,Lichtenberg                   ,2150,1668,1628,77.58,ÖVP,lichtenberg,972707.1875
+512,2013,41615,Oberneukirchen                ,2600,1883,1810,72.42,ÖVP,oberneukirchen,964600.6875
+513,2013,41616,Ottenschlag im Mühlkreis      ,423,326,309,77.07,ÖVP,ottenschlag-im-mühlkreis,72220.203125
+514,2013,41617,Ottensheim                    ,3594,2548,2494,70.9,ÖVP,ottensheim,1700240.625
+515,2013,41618,Puchenau                      ,3746,2639,2597,70.45,ÖVP,puchenau,1397768.0
+516,2013,41619,Reichenau im Mühlkreis        ,1030,758,734,73.59,ÖVP,reichenau-im-mühlkreis,589293.375
+517,2013,41620,Reichenthal                   ,1180,901,872,76.36,ÖVP,reichenthal,471567.1875
+518,2013,41622,Schenkenfelden                ,1267,993,954,78.37,ÖVP,schenkenfelden,295967.4375
+519,2013,41623,Sonnberg im Mühlkreis         ,730,546,529,74.79,ÖVP,sonnberg-im-mühlkreis,157507.40625
+520,2013,41624,Steyregg                      ,3928,2787,2719,70.95,SPÖ,steyregg,3219682.5
+521,2013,41625,Vorderweißenbach              ,1668,1273,1241,76.32,ÖVP,vorderweißenbach,1765111.125
+522,2013,41626,Walding                       ,3272,2429,2368,74.24,SPÖ,walding,1396301.0
+523,2013,41701,Ampflwang im Hausruckwald     ,2756,2003,1942,72.68,SPÖ,ampflwang-im-hausruckwald,1349554.625
+524,2013,41703,Attnang-Puchheim              ,6177,4169,4070,67.49,SPÖ,attnang-puchheim,3748960.25
+525,2013,41705,Aurach am Hongar              ,1287,1007,976,78.24,FPÖ,aurach-am-hongar,352413.625
+526,2013,41706,Berg im Attergau              ,781,588,568,75.29,ÖVP,berg-im-attergau,177221.515625
+527,2013,41707,Desselbrunn                   ,1389,1037,1008,74.66,ÖVP,desselbrunn,360929.625
+528,2013,41708,Fornach                       ,748,583,552,77.94,ÖVP,fornach,204835.125
+529,2013,41709,Frankenburg am Hausruck       ,3911,3054,2953,78.09,SPÖ,frankenburg-am-hausruck,1131455.75
+530,2013,41710,Frankenmarkt                  ,2767,1990,1913,71.92,ÖVP,frankenmarkt,2129710.5
+531,2013,41711,Gampern                       ,2133,1653,1601,77.5,ÖVP,gampern,745161.625
+532,2013,41714,Manning                       ,663,501,484,75.57,ÖVP,manning,142009.6875
+533,2013,41715,Mondsee                       ,2443,1350,1327,55.26,ÖVP,mondsee,1728763.875
+534,2013,41717,Niederthalheim                ,817,645,626,78.95,ÖVP,niederthalheim,301360.25
+535,2013,41719,Oberhofen am Irrsee           ,1161,860,826,74.07,ÖVP,oberhofen-am-irrsee,286557.375
+536,2013,41720,Oberndorf bei Schwanenstadt   ,1137,810,782,71.24,SPÖ,oberndorf-bei-schwanenstadt,218201.71875
+537,2013,41721,Oberwang                      ,1261,962,934,76.29,ÖVP,oberwang,435519.15625
+538,2013,41723,Pfaffing                      ,1148,847,818,73.78,SPÖ,pfaffing,386495.0625
+539,2013,41724,Pilsbach                      ,508,411,401,80.91,ÖVP,pilsbach,84475.6015625
+540,2013,41725,Pitzenberg                    ,417,315,307,75.54,ÖVP,pitzenberg,69730.453125
+541,2013,41726,Pöndorf                       ,1846,1326,1276,71.83,ÖVP,pöndorf,432118.46875
+542,2013,41727,Puchkirchen am Trattberg      ,781,562,546,71.96,ÖVP,puchkirchen-am-trattberg,467739.0625
+543,2013,41728,Pühret                        ,492,358,344,72.76,ÖVP,pühret,114693.3828125
+544,2013,41729,Redleiten                     ,391,294,282,75.19,FPÖ,redleiten,93268.84375
+545,2013,41730,Redlham                       ,1174,840,819,71.55,SPÖ,redlham,256506.671875
+546,2013,41731,Regau                         ,4909,3612,3486,73.58,FPÖ,regau,1963463.875
+547,2013,41732,Rüstorf                       ,1615,1157,1128,71.64,SPÖ,rüstorf,1158314.625
+548,2013,41733,Rutzenham                     ,211,168,160,79.62,ÖVP,rutzenham,210644.375
+549,2013,41736,Schlatt                       ,1045,721,695,69.0,ÖVP,schlatt,235909.15625
+550,2013,41737,Schörfling am Attersee        ,2623,1801,1761,68.66,SPÖ,schörfling-am-attersee,775343.5
+551,2013,41738,Schwanenstadt                 ,2947,1978,1933,67.12,SPÖ,schwanenstadt,1532197.625
+552,2013,41739,Seewalchen am Attersee        ,4228,2990,2911,70.72,FPÖ,seewalchen-am-attersee,2128273.5
+553,2013,41740,Steinbach am Attersee         ,683,492,485,72.04,ÖVP,steinbach-am-attersee,113320.5234375
+554,2013,41742,Tiefgraben                    ,2786,1785,1734,64.07,ÖVP,tiefgraben,2024188.0
+555,2013,41744,Ungenach                      ,1165,889,863,76.31,ÖVP,ungenach,255873.46875
+556,2013,41745,Unterach am Attersee          ,1127,731,721,64.86,ÖVP,unterach-am-attersee,456208.5625
+557,2013,41746,Vöcklabruck                   ,9173,5950,5835,64.86,SPÖ,vöcklabruck,4159491.5
+558,2013,41747,Vöcklamarkt                   ,3679,2689,2607,73.09,ÖVP,vöcklamarkt,1457333.125
+559,2013,41748,Weißenkirchen im Attergau     ,759,559,541,73.65,ÖVP,weißenkirchen-im-attergau,197135.25
+560,2013,41749,Weyregg am Attersee           ,1267,859,844,67.8,ÖVP,weyregg-am-attersee,364702.9375
+561,2013,41750,Wolfsegg am Hausruck          ,1571,1023,994,65.12,SPÖ,wolfsegg-am-hausruck,1660114.625
+562,2013,41752,Zell am Pettenfirst           ,944,712,692,75.42,ÖVP,zell-am-pettenfirst,191051.0
+563,2013,41801,Aichkirchen                   ,430,331,323,76.98,ÖVP,aichkirchen,428337.09375
+564,2013,41802,Bachmanning                   ,506,361,358,71.34,ÖVP,bachmanning,249798.984375
+565,2013,41803,Bad Wimsbach-Neydharting      ,1939,1454,1417,74.99,ÖVP,bad-wimsbach-neydharting,2077367.25
+566,2013,41804,Buchkirchen                   ,3210,2313,2264,72.06,SPÖ,buchkirchen,1347487.125
+567,2013,41805,Eberstalzell                  ,1850,1336,1308,72.22,ÖVP,eberstalzell,1455828.25
+568,2013,41806,Edt bei Lambach               ,1625,1188,1169,73.11,FPÖ,edt-bei-lambach,488769.6875
+569,2013,41808,Gunskirchen                   ,4493,3297,3232,73.38,FPÖ,gunskirchen,2490091.0
+570,2013,41810,Krenglbach                    ,2372,1805,1767,76.1,SPÖ,krenglbach,1246741.25
+571,2013,41811,Lambach                       ,2441,1516,1494,62.11,SPÖ,lambach,1191699.625
+572,2013,41812,Marchtrenk                    ,9378,6578,6467,70.14,SPÖ,marchtrenk,5875613.0
+573,2013,41814,Offenhausen                   ,1269,938,911,73.92,ÖVP,offenhausen,520483.4375
+574,2013,41816,Pichl bei Wels                ,2173,1685,1636,77.54,ÖVP,pichl-bei-wels,917195.1875
+575,2013,41817,Sattledt                      ,1844,1329,1309,72.07,ÖVP,sattledt,1770094.25
+576,2013,41818,Schleißheim                   ,951,717,694,75.39,ÖVP,schleißheim,408169.25
+577,2013,41820,Stadl-Paura                   ,3591,2192,2129,61.04,FPÖ,stadl-paura,1390350.5
+578,2013,41822,Steinhaus                     ,1558,1177,1148,75.55,FPÖ,steinhaus,401018.6875
+579,2013,41823,Thalheim bei Wels             ,4238,2913,2863,68.74,ÖVP,thalheim-bei-wels,2009923.625
+580,2017,40101,Linz,140037,85255,84465,60.88,SPÖ,linz,77951536.0
+581,2017,40201,Steyr,27423,18213,18030,66.42,SPÖ,steyr,20022086.0
+582,2017,40301,Wels,39623,25053,24794,63.23,SPÖ,wels,34414036.0
+583,2017,40402,Aspach,1983,1295,1276,65.31,ÖVP,aspach,889960.5625
+584,2017,40403,Auerbach,434,332,328,76.5,ÖVP,auerbach,174812.90625
+585,2017,40404,Braunau am Inn,11864,6927,6852,58.39,FPÖ,braunau-am-inn,6790860.5
+586,2017,40405,Burgkirchen,2069,1472,1446,71.15,ÖVP,burgkirchen,830648.75
+587,2017,40406,Eggelsberg,1804,1191,1173,66.02,ÖVP,eggelsberg,3295412.75
+588,2017,40409,Geretsberg,878,620,611,70.62,ÖVP,geretsberg,410251.75
+589,2017,40410,Gilgenberg am Weilhart,1031,701,689,67.99,ÖVP,gilgenberg-am-weilhart,429207.9375
+590,2017,40411,Haigermoos,476,336,334,70.59,ÖVP,haigermoos,305380.5
+591,2017,40414,Hochburg-Ach,2207,1409,1397,63.84,ÖVP,hochburg-ach,2789320.25
+592,2017,40417,Kirchberg bei Mattighofen,926,646,636,69.76,ÖVP,kirchberg-bei-mattighofen,429130.90625
+593,2017,40418,Lengau,3592,2508,2460,69.82,FPÖ,lengau,2454341.25
+594,2017,40420,Maria Schmolln,1184,774,756,65.37,ÖVP,maria-schmolln,811812.125
+595,2017,40421,Mattighofen,3704,2308,2274,62.31,FPÖ,mattighofen,11570381.0
+596,2017,40422,Mauerkirchen,1671,978,965,58.53,FPÖ,mauerkirchen,940927.3125
+597,2017,40423,Mining,965,704,696,72.95,ÖVP,mining,456237.84375
+598,2017,40424,Moosbach,769,550,545,71.52,FPÖ,moosbach,362564.3125
+599,2017,40426,Munderfing,2275,1550,1523,68.13,ÖVP,munderfing,2543628.75
+600,2017,40428,Ostermiething,2422,1498,1477,61.85,ÖVP,ostermiething,1811013.125
+601,2017,40429,Palting,767,547,536,71.32,ÖVP,palting,525791.375
+602,2017,40430,Perwang am Grabensee,760,572,570,75.26,ÖVP,perwang-am-grabensee,659441.5625
+603,2017,40431,Pfaffstätt,768,542,533,70.57,ÖVP,pfaffstätt,413515.71875
+604,2017,40432,Pischelsdorf am Engelbach,1277,946,935,74.08,ÖVP,pischelsdorf-am-engelbach,547886.5625
+605,2017,40442,Schwand im Innkreis,759,542,539,71.41,ÖVP,schwand-im-innkreis,403003.90625
+606,2017,40443,Tarsdorf,1634,1090,1083,66.71,ÖVP,tarsdorf,760254.9375
+607,2017,40446,Weng im Innkreis,1151,790,777,68.64,ÖVP,weng-im-innkreis,1153338.25
+608,2017,40501,Alkoven,4630,3479,3448,75.14,SPÖ,alkoven,2757773.5
+609,2017,40503,Eferding,2898,1945,1920,67.12,SPÖ,eferding,4283624.0
+610,2017,40504,Fraham,1856,1349,1338,72.68,FPÖ,fraham,766884.5
+611,2017,40505,Haibach ob der Donau,1095,823,811,75.16,ÖVP,haibach-ob-der-donau,542152.4375
+612,2017,40506,Hartkirchen,3391,2646,2611,78.03,ÖVP,hartkirchen,1056649.625
+613,2017,40507,Hinzenbach,1599,1164,1150,72.8,ÖVP,hinzenbach,1115114.75
+614,2017,40508,Prambachkirchen,2288,1721,1703,75.22,ÖVP,prambachkirchen,2323875.25
+615,2017,40509,Pupping,1473,1060,1046,71.96,ÖVP,pupping,364556.96875
+616,2017,40511,Scharten,1754,1320,1306,75.26,FPÖ,scharten,890590.5
+617,2017,40512,Stroheim,1285,978,961,76.11,ÖVP,stroheim,863047.9375
+618,2017,40601,Freistadt,6115,4389,4313,71.77,ÖVP,freistadt,3518428.5
+619,2017,40602,Grünbach,1546,1139,1122,73.67,ÖVP,grünbach,794191.5625
+620,2017,40603,Gutau,2221,1638,1624,73.75,ÖVP,gutau,715824.0625
+621,2017,40604,Hagenberg im Mühlkreis,2229,1584,1569,71.06,SPÖ,hagenberg-im-mühlkreis,1287836.125
+622,2017,40605,Hirschbach im Mühlkreis,960,728,718,75.83,ÖVP,hirschbach-im-mühlkreis,324378.84375
+623,2017,40606,Kaltenberg,510,418,414,81.96,ÖVP,kaltenberg,154422.5625
+624,2017,40608,Königswiesen,2531,1924,1896,76.02,ÖVP,königswiesen,1901537.0
+625,2017,40609,Lasberg,2258,1679,1643,74.36,ÖVP,lasberg,532652.25
+626,2017,40610,Leopoldschlag,828,616,597,74.4,ÖVP,leopoldschlag,306724.375
+627,2017,40611,Liebenau,1357,986,968,72.66,ÖVP,liebenau,942277.8125
+628,2017,40612,Neumarkt im Mühlkreis,2610,1901,1869,72.84,ÖVP,neumarkt-im-mühlkreis,1161075.875
+629,2017,40613,Pierbach,794,593,588,74.69,ÖVP,pierbach,319473.125
+630,2017,40614,Pregarten,4240,3184,3141,75.09,SPÖ,pregarten,2636629.5
+631,2017,40615,Rainbach im Mühlkreis,2336,1656,1615,70.89,ÖVP,rainbach-im-mühlkreis,1827514.875
+632,2017,40619,Schönau im Mühlkreis,1561,1213,1192,77.71,ÖVP,schönau-im-mühlkreis,618141.4375
+633,2017,40620,Tragwein,2472,1922,1900,77.75,ÖVP,tragwein,1256282.125
+634,2017,40621,Unterweißenbach,1807,1345,1315,74.43,ÖVP,unterweißenbach,675867.3125
+635,2017,40622,Unterweitersdorf,1676,1303,1278,77.74,SPÖ,unterweitersdorf,967355.625
+636,2017,40624,Wartberg ob der Aist,3453,2496,2459,72.28,SPÖ,wartberg-ob-der-aist,1352781.375
+637,2017,40625,Weitersfelden,833,645,637,77.43,ÖVP,weitersfelden,238647.375
+638,2017,40626,Windhaag bei Freistadt,1264,950,930,75.16,ÖVP,windhaag-bei-freistadt,608587.5
+639,2017,40627,Bad Zell,2368,1794,1755,75.76,ÖVP,bad-zell,871986.5
+640,2017,40701,Altmünster,7843,5339,5264,68.07,ÖVP,altmünster,3773514.5
+641,2017,40703,Bad Ischl,10793,7143,7041,66.18,SPÖ,bad-ischl,4914132.0
+642,2017,40705,Gmunden,9821,6034,5989,61.44,ÖVP,gmunden,5677900.5
+643,2017,40706,Gosau,1454,990,974,68.09,SPÖ,gosau,928675.75
+644,2017,40707,Grünau im Almtal,1631,1193,1167,73.15,FPÖ,grünau-im-almtal,1234145.0
+645,2017,40708,Gschwandt,2181,1620,1597,74.28,ÖVP,gschwandt,851189.3125
+646,2017,40709,Hallstatt,596,456,448,76.51,SPÖ,hallstatt,412913.75
+647,2017,40710,Kirchham,1685,1180,1165,70.03,ÖVP,kirchham,943169.75
+648,2017,40711,Laakirchen,7128,4872,4806,68.35,SPÖ,laakirchen,4477234.5
+649,2017,40712,Obertraun,561,425,418,75.76,SPÖ,obertraun,237958.015625
+650,2017,40713,Ohlsdorf,4088,2933,2896,71.75,ÖVP,ohlsdorf,2771236.25
+651,2017,40714,Pinsdorf,2916,2098,2063,71.95,SPÖ,pinsdorf,1830072.5
+652,2017,40718,Traunkirchen,1334,874,863,65.52,ÖVP,traunkirchen,661055.5625
+653,2017,40719,Scharnstein,3776,2599,2543,68.83,SPÖ,scharnstein,6972751.0
+654,2017,40720,Vorchdorf,5744,4175,4111,72.68,FPÖ,vorchdorf,3562516.0
+655,2017,40801,Aistersheim,690,517,512,74.93,FPÖ,aistersheim,305747.96875
+656,2017,40802,Bad Schallerbach,3058,1989,1970,65.04,ÖVP,bad-schallerbach,2498862.0
+657,2017,40804,Eschenau im Hausruckkreis,884,694,682,78.51,ÖVP,eschenau-im-hausruckkreis,136065.03125
+658,2017,40805,Gallspach,1848,1266,1249,68.51,FPÖ,gallspach,1289405.75
+659,2017,40806,Gaspoltshofen,2846,1895,1856,66.58,FPÖ,gaspoltshofen,2203583.75
+660,2017,40807,Geboltskirchen,1147,814,797,70.97,ÖVP,geboltskirchen,426009.65625
+661,2017,40808,Grieskirchen,3559,2359,2325,66.28,ÖVP,grieskirchen,3860518.25
+662,2017,40809,Haag am Hausruck,1660,1134,1120,68.31,ÖVP,haag-am-hausruck,839954.1875
+663,2017,40810,Heiligenberg,562,459,454,81.67,ÖVP,heiligenberg,263757.75
+664,2017,40812,Kallham,2070,1411,1379,68.16,ÖVP,kallham,710030.9375
+665,2017,40813,Kematen am Innbach,1048,788,776,75.19,FPÖ,kematen-am-innbach,396617.15625
+666,2017,40814,Meggenhofen,1161,867,856,74.68,ÖVP,meggenhofen,773671.5
+667,2017,40816,Natternbach,1902,1430,1407,75.18,ÖVP,natternbach,969683.1875
+668,2017,40818,Neumarkt im Hausruckkreis,1116,700,695,62.72,FPÖ,neumarkt-im-hausruckkreis,1178918.5
+669,2017,40820,Pötting,443,342,336,77.2,ÖVP,pötting,154625.96875
+670,2017,40821,Pollham,797,568,562,71.27,ÖVP,pollham,371809.21875
+671,2017,40823,Rottenbach,837,637,632,76.11,FPÖ,rottenbach,375137.5
+672,2017,40828,Steegen,898,599,592,66.7,ÖVP,steegen,173193.5625
+673,2017,40830,Tollet,761,549,542,72.14,ÖVP,tollet,214370.75
+674,2017,40831,Waizenkirchen,2922,2098,2066,71.8,ÖVP,waizenkirchen,986130.6875
+675,2017,40833,Weibern,1301,929,909,71.41,ÖVP,weibern,612740.8125
+676,2017,40834,Wendling,667,475,469,71.21,ÖVP,wendling,185321.3125
+677,2017,40901,Edlbach,511,351,348,68.69,ÖVP,edlbach,177936.703125
+678,2017,40902,Grünburg,2892,1917,1886,66.29,FPÖ,grünburg,1669592.375
+679,2017,40907,Kremsmünster,4687,3245,3204,69.23,ÖVP,kremsmünster,2294771.5
+680,2017,40912,Pettenbach,3955,2868,2819,72.52,FPÖ,pettenbach,2619959.5
+681,2017,40917,Schlierbach,2186,1514,1483,69.26,ÖVP,schlierbach,889246.1875
+682,2017,40918,Spital am Pyhrn,1744,1164,1146,66.74,FPÖ,spital-am-pyhrn,724424.5
+683,2017,40919,Steinbach am Ziehberg,684,511,502,74.71,ÖVP,steinbach-am-ziehberg,432297.0625
+684,2017,40921,Vorderstoder,662,411,401,62.08,ÖVP,vorderstoder,464048.03125
+685,2017,40923,Windischgarsten,1893,1221,1207,64.5,ÖVP,windischgarsten,2218700.5
+686,2017,41101,Allerheiligen im Mühlkreis,984,780,770,79.27,ÖVP,allerheiligen-im-mühlkreis,420492.28125
+687,2017,41102,Arbing,1141,855,847,74.93,ÖVP,arbing,602033.25
+688,2017,41103,Baumgartenberg,1342,956,945,71.24,FPÖ,baumgartenberg,998215.8125
+689,2017,41105,Grein,2368,1548,1526,65.37,ÖVP,grein,817563.0625
+690,2017,41106,Katsdorf,2443,1832,1812,74.99,ÖVP,katsdorf,632674.625
+691,2017,41107,Klam,737,483,474,65.54,ÖVP,klam,347004.375
+692,2017,41108,Bad Kreuzen,1776,1262,1232,71.06,ÖVP,bad-kreuzen,864485.4375
+693,2017,41111,Mauthausen,3642,2549,2508,69.99,SPÖ,mauthausen,2558432.75
+694,2017,41113,Münzbach,1303,965,947,74.06,ÖVP,münzbach,894078.4375
+695,2017,41115,Pabneukirchen,1329,966,953,72.69,ÖVP,pabneukirchen,866945.125
+696,2017,41116,Perg,6196,4375,4321,70.61,ÖVP,perg,4845643.5
+697,2017,41117,Rechberg,756,592,588,78.31,ÖVP,rechberg,302228.9375
+698,2017,41123,Saxen,1420,1073,1053,75.56,FPÖ,saxen,967814.4375
+699,2017,41124,Schwertberg,3990,2918,2871,73.13,SPÖ,schwertberg,3075546.25
+700,2017,41125,Waldhausen im Strudengau,2298,1676,1655,72.93,ÖVP,waldhausen-im-strudengau,1407124.875
+701,2017,41201,Andrichsfurt,603,421,411,69.82,ÖVP,andrichsfurt,292100.84375
+702,2017,41202,Antiesenhofen,815,470,465,57.67,FPÖ,antiesenhofen,655868.9375
+703,2017,41203,Aurolzmünster,2291,1479,1462,64.56,FPÖ,aurolzmünster,1013198.625
+704,2017,41204,Eberschwang,2693,1804,1782,66.99,FPÖ,eberschwang,1662843.375
+705,2017,41205,Eitzing,633,447,440,70.62,ÖVP,eitzing,375775.84375
+706,2017,41206,Geiersberg,434,281,274,64.75,ÖVP,geiersberg,201859.90625
+707,2017,41207,Geinberg,1083,642,632,59.28,FPÖ,geinberg,665734.0625
+708,2017,41208,Gurten,942,586,582,62.21,ÖVP,gurten,814640.5625
+709,2017,41209,Hohenzell,1743,1224,1205,70.22,ÖVP,hohenzell,1595442.25
+710,2017,41210,Kirchdorf am Inn,489,363,358,74.23,ÖVP,kirchdorf-am-inn,174278.296875
+711,2017,41211,Kirchheim im Innkreis,578,430,422,74.39,ÖVP,kirchheim-im-innkreis,234732.84375
+712,2017,41212,Lambrechten,1063,796,785,74.88,ÖVP,lambrechten,488856.5
+713,2017,41213,Lohnsburg am Kobernaußerwald,1816,1201,1190,66.13,ÖVP,lohnsburg-am-kobernaußerwald,1175442.25
+714,2017,41214,Mehrnbach,1865,1161,1143,62.25,FPÖ,mehrnbach,1050597.125
+715,2017,41215,Mettmach,1934,1360,1342,70.32,FPÖ,mettmach,3138729.75
+716,2017,41216,Mörschwang,267,196,194,73.41,ÖVP,mörschwang,41304.359375
+717,2017,41217,Mühlheim am Inn,526,400,396,76.05,ÖVP,mühlheim-am-inn,270418.96875
+718,2017,41218,Neuhofen im Innkreis,1914,1309,1291,68.39,ÖVP,neuhofen-im-innkreis,2664806.25
+719,2017,41219,Obernberg am Inn,1131,644,639,56.94,FPÖ,obernberg-am-inn,804660.8125
+720,2017,41220,Ort im Innkreis,948,647,641,68.25,FPÖ,ort-im-innkreis,544408.5625
+721,2017,41221,Pattigham,718,511,506,71.17,ÖVP,pattigham,292806.9375
+722,2017,41222,Peterskirchen,569,423,415,74.34,ÖVP,peterskirchen,266315.71875
+723,2017,41223,Pramet,835,590,584,70.66,ÖVP,pramet,200463.796875
+724,2017,41224,Reichersberg,1139,781,770,68.57,ÖVP,reichersberg,921539.5
+725,2017,41225,Ried im Innkreis,8352,5100,5036,61.06,FPÖ,ried-im-innkreis,6998911.0
+726,2017,41229,Schildorn,954,631,626,66.14,ÖVP,schildorn,573787.375
+727,2017,41230,Senftenbach,589,413,405,70.12,ÖVP,senftenbach,326133.71875
+728,2017,41231,Taiskirchen im Innkreis,1946,1463,1442,75.18,ÖVP,taiskirchen-im-innkreis,2282520.75
+729,2017,41232,Tumeltsham,1243,838,827,67.42,ÖVP,tumeltsham,685795.375
+730,2017,41233,Utzenaich,1197,847,836,70.76,ÖVP,utzenaich,817169.875
+731,2017,41234,Waldzell,1752,1237,1211,70.61,ÖVP,waldzell,1906388.0
+732,2017,41235,Weilbach,472,330,327,69.92,ÖVP,weilbach,295374.3125
+733,2017,41236,Wippenham,457,340,334,74.4,ÖVP,wippenham,153997.3125
+734,2017,41305,Arnreit,900,723,713,80.33,ÖVP,arnreit,534105.375
+735,2017,41306,Atzesberg,369,296,294,80.22,ÖVP,atzesberg,78235.9609375
+736,2017,41307,Auberg,436,348,341,79.82,ÖVP,auberg,212515.296875
+737,2017,41311,Hörbich,336,280,271,83.33,ÖVP,hörbich,107733.71875
+738,2017,41312,Hofkirchen im Mühlkreis,1203,840,832,69.83,ÖVP,hofkirchen-im-mühlkreis,1076821.75
+739,2017,41313,Julbach,1271,901,889,70.89,ÖVP,julbach,547931.6875
+740,2017,41314,Kirchberg ob der Donau,870,641,631,73.68,ÖVP,kirchberg-ob-der-donau,360604.875
+741,2017,41315,Klaffer am Hochficht,1077,770,767,71.49,ÖVP,klaffer-am-hochficht,577535.6875
+742,2017,41316,Kleinzell im Mühlkreis,1285,890,880,69.26,ÖVP,kleinzell-im-mühlkreis,1283950.375
+743,2017,41317,Kollerschlag,1201,886,875,73.77,ÖVP,kollerschlag,482917.5625
+744,2017,41318,Lembach im Mühlkreis,1260,879,862,69.76,ÖVP,lembach-im-mühlkreis,1136674.25
+745,2017,41319,Lichtenau im Mühlkreis,417,279,273,66.91,ÖVP,lichtenau-im-mühlkreis,165439.40625
+746,2017,41320,Nebelberg,498,398,392,79.92,ÖVP,nebelberg,183045.9375
+747,2017,41321,Neufelden,953,660,654,69.25,ÖVP,neufelden,902892.5625
+748,2017,41322,Niederkappel,794,602,592,75.82,ÖVP,niederkappel,333047.0
+749,2017,41323,Niederwaldkirchen,1468,1036,1024,70.57,ÖVP,niederwaldkirchen,1299103.625
+750,2017,41324,Oberkappel,520,357,347,68.65,ÖVP,oberkappel,441575.71875
+751,2017,41325,Oepping,1287,949,938,73.74,ÖVP,oepping,520729.34375
+752,2017,41326,Peilstein im Mühlviertel,1276,969,956,75.94,ÖVP,peilstein-im-mühlviertel,458576.78125
+753,2017,41327,Pfarrkirchen im Mühlkreis,1175,880,867,74.89,ÖVP,pfarrkirchen-im-mühlkreis,634049.5625
+754,2017,41328,Putzleinsdorf,1243,926,910,74.5,ÖVP,putzleinsdorf,619568.0
+755,2017,41329,Neustift im Mühlkreis,1151,803,789,69.77,ÖVP,neustift-im-mühlkreis,757672.5625
+756,2017,41338,Sarleinsbach,1845,1390,1368,75.34,ÖVP,sarleinsbach,1378127.25
+757,2017,41341,Schwarzenberg am Böhmerwald,457,344,340,75.27,ÖVP,schwarzenberg-am-böhmerwald,122656.09375
+758,2017,41342,Ulrichsberg,2362,1666,1645,70.53,ÖVP,ulrichsberg,871457.125
+759,2017,41343,Aigen-Schlägl,2598,1705,1686,65.63,ÖVP,aigen-schlägl,1660973.375
+760,2017,41344,Rohrbach-Berg,4175,2835,2774,67.9,ÖVP,rohrbach-berg,1922227.0
+761,2017,41402,Andorf,4074,3059,3018,75.09,FPÖ,andorf,1595236.0
+762,2017,41404,Diersbach,1294,930,924,71.87,ÖVP,diersbach,442699.8125
+763,2017,41406,Eggerding,1058,800,793,75.61,ÖVP,eggerding,247373.25
+764,2017,41408,Enzenkirchen,1450,1035,1021,71.38,FPÖ,enzenkirchen,407663.09375
+765,2017,41411,Kopfing im Innkreis,1625,1179,1164,72.55,ÖVP,kopfing-im-innkreis,671419.375
+766,2017,41412,Mayrhof,244,197,195,80.74,ÖVP,mayrhof,47783.01953125
+767,2017,41414,Raab,1796,1267,1250,70.55,FPÖ,raab,792868.9375
+768,2017,41415,Rainbach im Innkreis,1175,895,881,76.17,ÖVP,rainbach-im-innkreis,671532.625
+769,2017,41416,Riedau,1602,1008,993,62.92,FPÖ,riedau,708033.0
+770,2017,41424,Sigharting,668,504,498,75.45,ÖVP,sigharting,324331.78125
+771,2017,41425,Suben,938,617,611,65.78,ÖVP,suben,368329.4375
+772,2017,41427,Vichtenstein,457,322,319,70.46,ÖVP,vichtenstein,285346.25
+773,2017,41429,Wernstein am Inn,1219,845,835,69.32,ÖVP,wernstein-am-inn,413824.40625
+774,2017,41501,Adlwang,1432,990,970,69.13,ÖVP,adlwang,976344.1875
+775,2017,41503,Bad Hall,3981,2537,2492,63.73,ÖVP,bad-hall,2199010.5
+776,2017,41504,Dietach,2469,1849,1824,74.89,ÖVP,dietach,3684707.75
+777,2017,41505,Gaflenz,1517,1141,1131,75.21,ÖVP,gaflenz,587352.0625
+778,2017,41506,Garsten,5287,3708,3666,70.13,ÖVP,garsten,2004128.75
+779,2017,41507,Großraming,2187,1649,1629,75.4,ÖVP,großraming,1465192.25
+780,2017,41509,Losenstein,1294,897,891,69.32,SPÖ,losenstein,385739.09375
+781,2017,41510,Maria Neustift,1282,1001,987,78.08,ÖVP,maria-neustift,472150.34375
+782,2017,41511,Pfarrkirchen bei Bad Hall,1796,1288,1279,71.71,ÖVP,pfarrkirchen-bei-bad-hall,564297.5625
+783,2017,41512,Reichraming,1471,1096,1083,74.51,SPÖ,reichraming,480653.78125
+784,2017,41513,Rohr im Kremstal,1067,741,738,69.45,ÖVP,rohr-im-kremstal,570789.3125
+785,2017,41515,Schiedlberg,996,708,702,71.08,ÖVP,schiedlberg,499749.84375
+786,2017,41516,Sierning,7358,5318,5251,72.28,SPÖ,sierning,3800951.5
+787,2017,41517,Ternberg,2782,1998,1974,71.82,ÖVP,ternberg,1103621.875
+788,2017,41518,Waldneukirchen,1779,1317,1306,74.03,ÖVP,waldneukirchen,1381637.5
+789,2017,41521,Wolfern,2587,1814,1798,70.12,ÖVP,wolfern,667268.75
+790,2017,41522,Weyer,3430,2398,2372,69.91,SPÖ,weyer,2655545.75
+791,2017,41602,Altenberg bei Linz,3601,2706,2670,75.15,ÖVP,altenberg-bei-linz,2168317.0
+792,2017,41603,Bad Leonfelden,3295,2424,2380,73.57,ÖVP,bad-leonfelden,1706900.5
+793,2017,41604,Eidenberg,1682,1254,1231,74.55,ÖVP,eidenberg,1309520.0
+794,2017,41605,Engerwitzdorf,7034,5153,5089,73.26,ÖVP,engerwitzdorf,3231722.25
+795,2017,41607,Gallneukirchen,5196,3553,3519,68.38,SPÖ,gallneukirchen,2142172.25
+796,2017,41608,Goldwörth,697,492,488,70.59,ÖVP,goldwörth,334563.5
+797,2017,41610,Haibach im Mühlkreis,742,545,535,73.45,ÖVP,haibach-im-mühlkreis,212122.59375
+798,2017,41611,Hellmonsödt,1820,1252,1240,68.79,ÖVP,hellmonsödt,1021095.0
+799,2017,41612,Herzogsdorf,2075,1456,1434,70.17,ÖVP,herzogsdorf,865624.125
+800,2017,41613,Kirchschlag bei Linz,1705,1177,1163,69.03,ÖVP,kirchschlag-bei-linz,939253.3125
+801,2017,41614,Lichtenberg,2154,1561,1549,72.47,ÖVP,lichtenberg,1902744.875
+802,2017,41615,Oberneukirchen,2592,1876,1844,72.38,ÖVP,oberneukirchen,1395160.5
+803,2017,41616,Ottenschlag im Mühlkreis,425,334,330,78.59,ÖVP,ottenschlag-im-mühlkreis,121126.3984375
+804,2017,41617,Ottensheim,3676,2590,2568,70.46,ÖVP,ottensheim,3050416.25
+805,2017,41618,Puchenau,3669,2452,2433,66.83,ÖVP,puchenau,1638809.5
+806,2017,41619,Reichenau im Mühlkreis,1048,778,763,74.24,ÖVP,reichenau-im-mühlkreis,1678975.125
+807,2017,41620,Reichenthal,1187,895,883,75.4,ÖVP,reichenthal,826207.0
+808,2017,41622,Schenkenfelden,1287,929,907,72.18,ÖVP,schenkenfelden,391409.15625
+809,2017,41623,Sonnberg im Mühlkreis,773,595,587,76.97,ÖVP,sonnberg-im-mühlkreis,284052.15625
+810,2017,41624,Steyregg,3893,2809,2796,72.16,SPÖ,steyregg,1871680.75
+811,2017,41626,Walding,3370,2375,2343,70.47,ÖVP,walding,1940080.25
+812,2017,41701,Ampflwang im Hausruckwald,2617,1881,1857,71.88,SPÖ,ampflwang-im-hausruckwald,2345611.75
+813,2017,41703,Attnang-Puchheim,5803,3533,3498,60.88,SPÖ,attnang-puchheim,3055678.0
+814,2017,41705,Aurach am Hongar,1363,999,988,73.29,FPÖ,aurach-am-hongar,331570.0625
+815,2017,41706,Berg im Attergau,806,588,581,72.95,ÖVP,berg-im-attergau,202695.953125
+816,2017,41707,Desselbrunn,1442,1057,1038,73.3,ÖVP,desselbrunn,1030486.25
+817,2017,41708,Fornach,762,591,574,77.56,ÖVP,fornach,1208065.875
+818,2017,41709,Frankenburg am Hausruck,3905,2952,2893,75.6,FPÖ,frankenburg-am-hausruck,1333606.0
+819,2017,41710,Frankenmarkt,2725,1983,1945,72.77,ÖVP,frankenmarkt,3511068.0
+820,2017,41711,Gampern,2297,1750,1713,76.19,ÖVP,gampern,1257282.75
+821,2017,41714,Manning,655,485,478,74.05,ÖVP,manning,149692.171875
+822,2017,41715,Mondsee,2556,1462,1454,57.2,ÖVP,mondsee,2362808.75
+823,2017,41717,Niederthalheim,864,682,676,78.94,ÖVP,niederthalheim,328181.78125
+824,2017,41719,Oberhofen am Irrsee,1228,879,864,71.58,ÖVP,oberhofen-am-irrsee,368750.625
+825,2017,41720,Oberndorf bei Schwanenstadt,1120,837,826,74.73,FPÖ,oberndorf-bei-schwanenstadt,837388.1875
+826,2017,41721,Oberwang,1328,950,936,71.54,ÖVP,oberwang,575952.625
+827,2017,41723,Pfaffing,1178,857,841,72.75,ÖVP,pfaffing,432527.09375
+828,2017,41724,Pilsbach,531,389,384,73.26,ÖVP,pilsbach,76508.9765625
+829,2017,41725,Pitzenberg,420,327,324,77.86,ÖVP,pitzenberg,69433.8125
+830,2017,41726,Pöndorf,1862,1310,1288,70.35,ÖVP,pöndorf,592689.3125
+831,2017,41727,Puchkirchen am Trattberg,792,602,594,76.01,ÖVP,puchkirchen-am-trattberg,376322.3125
+832,2017,41728,Pühret,494,369,360,74.7,ÖVP,pühret,115686.578125
+833,2017,41729,Redleiten,410,267,261,65.12,FPÖ,redleiten,117543.1328125
+834,2017,41730,Redlham,1211,872,860,72.01,ÖVP,redlham,399720.875
+835,2017,41731,Regau,5056,3707,3664,73.32,FPÖ,regau,3672923.5
+836,2017,41732,Rüstorf,1661,1146,1133,68.99,FPÖ,rüstorf,895599.4375
+837,2017,41733,Rutzenham,219,163,160,74.43,ÖVP,rutzenham,225834.1875
+838,2017,41736,Schlatt,1106,706,696,63.83,ÖVP,schlatt,254997.40625
+839,2017,41737,Schörfling am Attersee,2729,1771,1760,64.9,FPÖ,schörfling-am-attersee,3408349.0
+840,2017,41738,Schwanenstadt,2930,1968,1949,67.17,FPÖ,schwanenstadt,2893287.25
+841,2017,41739,Seewalchen am Attersee,4373,2995,2964,68.49,SPÖ,seewalchen-am-attersee,2142470.5
+842,2017,41740,Steinbach am Attersee,671,481,473,71.68,ÖVP,steinbach-am-attersee,143378.421875
+843,2017,41742,Tiefgraben,2933,1799,1782,61.34,ÖVP,tiefgraben,1630799.0
+844,2017,41744,Ungenach,1187,921,913,77.59,ÖVP,ungenach,299832.90625
+845,2017,41745,Unterach am Attersee,1126,632,620,56.13,ÖVP,unterach-am-attersee,1228110.625
+846,2017,41746,Vöcklabruck,9002,5905,5860,65.6,SPÖ,vöcklabruck,7795593.5
+847,2017,41747,Vöcklamarkt,3744,2691,2645,71.88,ÖVP,vöcklamarkt,1807139.625
+848,2017,41748,Weißenkirchen im Attergau,768,585,583,76.17,ÖVP,weißenkirchen-im-attergau,238428.203125
+849,2017,41749,Weyregg am Attersee,1306,822,818,62.94,ÖVP,weyregg-am-attersee,482562.25
+850,2017,41750,Wolfsegg am Hausruck,1520,1016,1006,66.84,SPÖ,wolfsegg-am-hausruck,1300971.875
+851,2017,41752,Zell am Pettenfirst,985,660,654,67.01,ÖVP,zell-am-pettenfirst,297312.8125
+852,2017,41801,Aichkirchen,441,310,305,70.29,ÖVP,aichkirchen,311442.125
+853,2017,41802,Bachmanning,510,369,365,72.35,ÖVP,bachmanning,262732.09375
+854,2017,41803,Bad Wimsbach-Neydharting,1977,1431,1413,72.38,ÖVP,bad-wimsbach-neydharting,766004.75
+855,2017,41804,Buchkirchen,3274,2352,2322,71.84,FPÖ,buchkirchen,1555790.5
+856,2017,41805,Eberstalzell,1985,1401,1379,70.58,ÖVP,eberstalzell,1539965.625
+857,2017,41806,Edt bei Lambach,1710,1215,1207,71.05,FPÖ,edt-bei-lambach,819173.375
+858,2017,41808,Gunskirchen,4610,3311,3279,71.82,FPÖ,gunskirchen,3582689.75
+859,2017,41810,Krenglbach,2459,1834,1814,74.58,ÖVP,krenglbach,1946804.75
+860,2017,41811,Lambach,2354,1409,1396,59.86,FPÖ,lambach,2070967.5
+861,2017,41812,Marchtrenk,9528,6775,6695,71.11,FPÖ,marchtrenk,10848559.0
+862,2017,41814,Offenhausen,1256,985,971,78.42,ÖVP,offenhausen,787873.5
+863,2017,41816,Pichl bei Wels,2201,1630,1619,74.06,ÖVP,pichl-bei-wels,1352520.875
+864,2017,41817,Sattledt,1910,1339,1322,70.1,FPÖ,sattledt,2696691.5
+865,2017,41818,Schleißheim,1014,753,743,74.26,ÖVP,schleißheim,1204024.25
+866,2017,41820,Stadl-Paura,3613,2254,2232,62.39,FPÖ,stadl-paura,1519925.5
+867,2017,41822,Steinhaus,1688,1155,1144,68.42,FPÖ,steinhaus,2754245.75
+868,2017,41823,Thalheim bei Wels,4223,2840,2815,67.25,ÖVP,thalheim-bei-wels,2085508.125
+869,2019,40101,Linz,138154,73739,72939,53.37,SPÖ,linz,85149560.0
+870,2019,40201,Steyr,27006,16521,16295,61.18,SPÖ,steyr,22856090.0
+871,2019,40301,Wels,39157,22631,22289,57.8,SPÖ,wels,36137852.0
+872,2019,40402,Aspach,1998,1176,1160,58.86,ÖVP,aspach,2187970.0
+873,2019,40403,Auerbach,449,312,307,69.49,ÖVP,auerbach,212878.078125
+874,2019,40404,Braunau am Inn,11603,6271,6186,54.05,ÖVP,braunau-am-inn,7453446.5
+875,2019,40405,Burgkirchen,2080,1326,1305,63.75,ÖVP,burgkirchen,1300510.875
+876,2019,40406,Eggelsberg,1852,1095,1076,59.13,ÖVP,eggelsberg,1736391.875
+877,2019,40409,Geretsberg,873,550,544,63.0,ÖVP,geretsberg,528017.75
+878,2019,40410,Gilgenberg am Weilhart,1041,658,652,63.21,ÖVP,gilgenberg-am-weilhart,420770.875
+879,2019,40411,Haigermoos,486,327,322,67.28,ÖVP,haigermoos,350039.8125
+880,2019,40414,Hochburg-Ach,2211,1329,1308,60.11,ÖVP,hochburg-ach,1249591.125
+881,2019,40417,Kirchberg bei Mattighofen,932,618,607,66.31,ÖVP,kirchberg-bei-mattighofen,532926.75
+882,2019,40418,Lengau,3611,2243,2179,62.12,ÖVP,lengau,2372978.5
+883,2019,40420,Maria Schmolln,1180,735,725,62.29,ÖVP,maria-schmolln,609814.625
+884,2019,40421,Mattighofen,3753,2094,2061,55.8,ÖVP,mattighofen,5256352.0
+885,2019,40422,Mauerkirchen,1645,845,838,51.37,ÖVP,mauerkirchen,863469.25
+886,2019,40423,Mining,982,616,612,62.73,ÖVP,mining,430265.59375
+887,2019,40424,Moosbach,773,499,489,64.55,ÖVP,moosbach,414274.0625
+888,2019,40426,Munderfing,2276,1416,1382,62.21,ÖVP,munderfing,1680823.875
+889,2019,40428,Ostermiething,2435,1413,1382,58.03,ÖVP,ostermiething,1413374.25
+890,2019,40429,Palting,796,514,503,64.57,ÖVP,palting,486297.0
+891,2019,40430,Perwang am Grabensee,783,510,507,65.13,ÖVP,perwang-am-grabensee,494374.21875
+892,2019,40431,Pfaffstätt,784,523,516,66.71,ÖVP,pfaffstätt,525038.6875
+893,2019,40432,Pischelsdorf am Engelbach,1276,826,814,64.73,ÖVP,pischelsdorf-am-engelbach,544828.75
+894,2019,40442,Schwand im Innkreis,767,503,496,65.58,ÖVP,schwand-im-innkreis,261905.53125
+895,2019,40443,Tarsdorf,1632,1017,1004,62.32,ÖVP,tarsdorf,792436.1875
+896,2019,40446,Weng im Innkreis,1144,705,693,61.63,ÖVP,weng-im-innkreis,611715.75
+897,2019,40501,Alkoven,4639,3273,3228,70.55,ÖVP,alkoven,3421951.25
+898,2019,40503,Eferding,2927,1797,1775,61.39,ÖVP,eferding,4622216.0
+899,2019,40504,Fraham,1871,1170,1154,62.53,ÖVP,fraham,1075845.25
+900,2019,40505,Haibach ob der Donau,1095,743,729,67.85,ÖVP,haibach-ob-der-donau,438434.03125
+901,2019,40506,Hartkirchen,3384,2426,2388,71.69,ÖVP,hartkirchen,1675377.0
+902,2019,40507,Hinzenbach,1620,1096,1075,67.65,ÖVP,hinzenbach,905747.75
+903,2019,40508,Prambachkirchen,2276,1473,1451,64.72,ÖVP,prambachkirchen,1240484.25
+904,2019,40509,Pupping,1455,981,971,67.42,ÖVP,pupping,423809.59375
+905,2019,40511,Scharten,1772,1229,1210,69.36,ÖVP,scharten,821250.25
+906,2019,40512,Stroheim,1336,921,902,68.94,ÖVP,stroheim,922094.0625
+907,2019,40601,Freistadt,6134,4074,4005,66.42,ÖVP,freistadt,4128806.75
+908,2019,40602,Grünbach,1572,985,968,62.66,ÖVP,grünbach,753322.375
+909,2019,40603,Gutau,2237,1601,1584,71.57,ÖVP,gutau,1087045.375
+910,2019,40604,Hagenberg im Mühlkreis,2249,1455,1435,64.7,ÖVP,hagenberg-im-mühlkreis,2499955.75
+911,2019,40605,Hirschbach im Mühlkreis,958,630,624,65.76,ÖVP,hirschbach-im-mühlkreis,430914.90625
+912,2019,40606,Kaltenberg,499,425,421,85.17,ÖVP,kaltenberg,224267.40625
+913,2019,40608,Königswiesen,2511,1730,1700,68.9,ÖVP,königswiesen,2012897.75
+914,2019,40609,Lasberg,2328,1640,1608,70.45,ÖVP,lasberg,694000.5
+915,2019,40610,Leopoldschlag,832,599,578,72.0,ÖVP,leopoldschlag,357754.3125
+916,2019,40611,Liebenau,1335,908,888,68.01,ÖVP,liebenau,579157.0625
+917,2019,40612,Neumarkt im Mühlkreis,2581,1781,1738,69.0,ÖVP,neumarkt-im-mühlkreis,1323707.0
+918,2019,40613,Pierbach,805,596,576,74.04,ÖVP,pierbach,246037.96875
+919,2019,40614,Pregarten,4415,3012,2957,68.22,ÖVP,pregarten,4135410.0
+920,2019,40615,Rainbach im Mühlkreis,2349,1553,1510,66.11,ÖVP,rainbach-im-mühlkreis,1784351.25
+921,2019,40619,Schönau im Mühlkreis,1567,1199,1172,76.52,ÖVP,schönau-im-mühlkreis,681112.4375
+922,2019,40620,Tragwein,2498,1803,1776,72.18,ÖVP,tragwein,1059289.25
+923,2019,40621,Unterweißenbach,1775,1223,1197,68.9,ÖVP,unterweißenbach,744480.375
+924,2019,40622,Unterweitersdorf,1757,1242,1212,70.69,ÖVP,unterweitersdorf,935931.0
+925,2019,40624,Wartberg ob der Aist,3516,2316,2284,65.87,ÖVP,wartberg-ob-der-aist,1353781.375
+926,2019,40625,Weitersfelden,826,574,559,69.49,ÖVP,weitersfelden,313817.875
+927,2019,40626,Windhaag bei Freistadt,1263,863,841,68.33,ÖVP,windhaag-bei-freistadt,557182.1875
+928,2019,40627,Bad Zell,2343,1693,1650,72.26,ÖVP,bad-zell,1007728.4375
+929,2019,40701,Altmünster,7779,4960,4848,63.76,ÖVP,altmünster,3961439.25
+930,2019,40703,Bad Ischl,10750,6076,5959,56.52,ÖVP,bad-ischl,6023339.5
+931,2019,40705,Gmunden,9732,5449,5371,55.99,ÖVP,gmunden,6673758.5
+932,2019,40706,Gosau,1427,927,891,64.96,SPÖ,gosau,662781.875
+933,2019,40707,Grünau im Almtal,1622,1033,1014,63.69,ÖVP,grünau-im-almtal,1066387.75
+934,2019,40708,Gschwandt,2230,1532,1511,68.7,ÖVP,gschwandt,1646672.125
+935,2019,40709,Hallstatt,579,385,380,66.49,SPÖ,hallstatt,273228.625
+936,2019,40710,Kirchham,1724,1120,1096,64.97,ÖVP,kirchham,811578.4375
+937,2019,40711,Laakirchen,7075,4419,4327,62.46,SPÖ,laakirchen,4944601.0
+938,2019,40712,Obertraun,552,378,368,68.48,SPÖ,obertraun,148913.90625
+939,2019,40713,Ohlsdorf,4074,2623,2574,64.38,ÖVP,ohlsdorf,2010331.25
+940,2019,40714,Pinsdorf,3018,1867,1828,61.86,ÖVP,pinsdorf,2011167.125
+941,2019,40718,Traunkirchen,1351,833,821,61.66,ÖVP,traunkirchen,419864.4375
+942,2019,40719,Scharnstein,3774,2361,2320,62.56,ÖVP,scharnstein,3010197.0
+943,2019,40720,Vorchdorf,5747,3810,3756,66.3,ÖVP,vorchdorf,5932933.5
+944,2019,40801,Aistersheim,714,441,431,61.76,ÖVP,aistersheim,544337.9375
+945,2019,40802,Bad Schallerbach,3086,1794,1773,58.13,ÖVP,bad-schallerbach,1587030.75
+946,2019,40804,Eschenau im Hausruckkreis,897,663,645,73.91,ÖVP,eschenau-im-hausruckkreis,183836.15625
+947,2019,40805,Gallspach,1838,1079,1069,58.71,ÖVP,gallspach,1271722.0
+948,2019,40806,Gaspoltshofen,2842,1661,1614,58.44,ÖVP,gaspoltshofen,2167885.25
+949,2019,40807,Geboltskirchen,1160,792,777,68.28,ÖVP,geboltskirchen,443775.28125
+950,2019,40808,Grieskirchen,3522,2160,2124,61.33,ÖVP,grieskirchen,3219078.25
+951,2019,40809,Haag am Hausruck,1662,1080,1066,64.98,ÖVP,haag-am-hausruck,757745.625
+952,2019,40810,Heiligenberg,569,449,445,78.91,ÖVP,heiligenberg,226487.1875
+953,2019,40812,Kallham,2060,1250,1222,60.68,ÖVP,kallham,814867.3125
+954,2019,40813,Kematen am Innbach,1079,726,711,67.28,ÖVP,kematen-am-innbach,425830.28125
+955,2019,40814,Meggenhofen,1187,785,763,66.13,ÖVP,meggenhofen,744611.5625
+956,2019,40816,Natternbach,1870,1272,1240,68.02,ÖVP,natternbach,1004038.6875
+957,2019,40818,Neumarkt im Hausruckkreis,1101,649,638,58.95,ÖVP,neumarkt-im-hausruckkreis,629097.25
+958,2019,40820,Pötting,455,333,331,73.19,ÖVP,pötting,166651.328125
+959,2019,40821,Pollham,788,478,468,60.66,ÖVP,pollham,350704.84375
+960,2019,40823,Rottenbach,846,557,544,65.84,ÖVP,rottenbach,424018.125
+961,2019,40828,Steegen,916,555,546,60.59,ÖVP,steegen,245518.234375
+962,2019,40830,Tollet,762,511,506,67.06,ÖVP,tollet,204017.984375
+963,2019,40831,Waizenkirchen,2918,1976,1952,67.72,ÖVP,waizenkirchen,1513375.625
+964,2019,40833,Weibern,1300,828,808,63.69,ÖVP,weibern,631689.5625
+965,2019,40834,Wendling,688,439,434,63.81,ÖVP,wendling,464889.5
+966,2019,40835,Peuerbach,3729,2339,2308,62.72,ÖVP,peuerbach,1930577.5
+967,2019,40901,Edlbach,503,316,313,62.82,ÖVP,edlbach,239475.546875
+968,2019,40902,Grünburg,2940,1746,1714,59.39,ÖVP,grünburg,2015112.0
+969,2019,40907,Kremsmünster,4708,2963,2921,62.94,ÖVP,kremsmünster,2494258.5
+970,2019,40912,Pettenbach,4057,2685,2637,66.18,ÖVP,pettenbach,2517113.75
+971,2019,40917,Schlierbach,2183,1416,1401,64.86,ÖVP,schlierbach,2309174.0
+972,2019,40918,Spital am Pyhrn,1758,1061,1051,60.35,ÖVP,spital-am-pyhrn,765705.6875
+973,2019,40919,Steinbach am Ziehberg,686,451,444,65.74,ÖVP,steinbach-am-ziehberg,186038.203125
+974,2019,40921,Vorderstoder,662,408,396,61.63,ÖVP,vorderstoder,598414.4375
+975,2019,40923,Windischgarsten,1875,1087,1064,57.97,ÖVP,windischgarsten,1644834.375
+976,2019,41101,Allerheiligen im Mühlkreis,1021,753,739,73.75,ÖVP,allerheiligen-im-mühlkreis,450125.15625
+977,2019,41102,Arbing,1158,813,800,70.21,ÖVP,arbing,672339.875
+978,2019,41103,Baumgartenberg,1364,942,924,69.06,ÖVP,baumgartenberg,1001624.1875
+979,2019,41105,Grein,2296,1436,1408,62.54,ÖVP,grein,854130.0625
+980,2019,41106,Katsdorf,2525,1689,1656,66.89,ÖVP,katsdorf,617924.625
+981,2019,41107,Klam,761,462,455,60.71,ÖVP,klam,394810.4375
+982,2019,41108,Bad Kreuzen,1781,1148,1124,64.46,ÖVP,bad-kreuzen,963912.0625
+983,2019,41111,Mauthausen,3641,2324,2287,63.83,SPÖ,mauthausen,2531590.75
+984,2019,41113,Münzbach,1309,961,920,73.41,ÖVP,münzbach,820383.5625
+985,2019,41115,Pabneukirchen,1329,903,883,67.95,ÖVP,pabneukirchen,1685332.25
+986,2019,41116,Perg,6364,4097,4031,64.38,ÖVP,perg,5087111.0
+987,2019,41117,Rechberg,751,549,540,73.1,ÖVP,rechberg,280820.9375
+988,2019,41123,Saxen,1381,964,938,69.8,ÖVP,saxen,1100737.0
+989,2019,41124,Schwertberg,3957,2668,2622,67.42,SPÖ,schwertberg,3467462.75
+990,2019,41125,Waldhausen im Strudengau,2285,1558,1519,68.18,ÖVP,waldhausen-im-strudengau,1164985.25
+991,2019,41201,Andrichsfurt,605,392,386,64.79,ÖVP,andrichsfurt,304456.75
+992,2019,41202,Antiesenhofen,813,451,442,55.47,ÖVP,antiesenhofen,668028.5
+993,2019,41203,Aurolzmünster,2249,1260,1242,56.02,ÖVP,aurolzmünster,1687110.5
+994,2019,41204,Eberschwang,2719,1644,1603,60.46,ÖVP,eberschwang,1004479.375
+995,2019,41205,Eitzing,655,399,393,60.92,ÖVP,eitzing,375310.53125
+996,2019,41206,Geiersberg,423,255,252,60.28,ÖVP,geiersberg,208677.984375
+997,2019,41207,Geinberg,1052,527,520,50.1,ÖVP,geinberg,728305.75
+998,2019,41208,Gurten,929,554,550,59.63,ÖVP,gurten,555938.5
+999,2019,41209,Hohenzell,1797,1156,1132,64.33,ÖVP,hohenzell,1273027.25
+1000,2019,41210,Kirchdorf am Inn,504,345,339,68.45,ÖVP,kirchdorf-am-inn,166416.046875
+1001,2019,41211,Kirchheim im Innkreis,587,407,397,69.34,ÖVP,kirchheim-im-innkreis,293764.875
+1002,2019,41212,Lambrechten,1077,700,693,65.0,ÖVP,lambrechten,561577.0
+1003,2019,41213,Lohnsburg am Kobernaußerwald,1818,1117,1099,61.44,ÖVP,lohnsburg-am-kobernaußerwald,1938376.5
+1004,2019,41214,Mehrnbach,1856,1065,1058,57.38,ÖVP,mehrnbach,966967.3125
+1005,2019,41215,Mettmach,1917,1204,1175,62.81,ÖVP,mettmach,2473880.5
+1006,2019,41216,Mörschwang,271,179,176,66.05,ÖVP,mörschwang,63040.578125
+1007,2019,41217,Mühlheim am Inn,520,346,342,66.54,ÖVP,mühlheim-am-inn,243425.28125
+1008,2019,41218,Neuhofen im Innkreis,1925,1197,1179,62.18,ÖVP,neuhofen-im-innkreis,1112019.125
+1009,2019,41219,Obernberg am Inn,1148,555,550,48.34,ÖVP,obernberg-am-inn,684694.25
+1010,2019,41220,Ort im Innkreis,921,585,580,63.52,ÖVP,ort-im-innkreis,556238.3125
+1011,2019,41221,Pattigham,756,469,466,62.04,ÖVP,pattigham,2359397.0
+1012,2019,41222,Peterskirchen,577,395,389,68.46,ÖVP,peterskirchen,285780.65625
+1013,2019,41223,Pramet,834,522,520,62.59,ÖVP,pramet,202490.796875
+1014,2019,41224,Reichersberg,1149,678,665,59.01,ÖVP,reichersberg,558427.125
+1015,2019,41225,Ried im Innkreis,8345,4542,4493,54.43,ÖVP,ried-im-innkreis,8865078.0
+1016,2019,41229,Schildorn,962,583,569,60.6,ÖVP,schildorn,407321.09375
+1017,2019,41230,Senftenbach,618,345,335,55.83,ÖVP,senftenbach,311081.84375
+1018,2019,41231,Taiskirchen im Innkreis,1931,1288,1261,66.7,ÖVP,taiskirchen-im-innkreis,1264962.5
+1019,2019,41232,Tumeltsham,1265,751,740,59.37,ÖVP,tumeltsham,778330.0625
+1020,2019,41233,Utzenaich,1199,771,752,64.3,ÖVP,utzenaich,530171.125
+1021,2019,41234,Waldzell,1766,1136,1119,64.33,ÖVP,waldzell,5664059.5
+1022,2019,41235,Weilbach,482,321,317,66.6,ÖVP,weilbach,332486.03125
+1023,2019,41236,Wippenham,448,294,287,65.63,ÖVP,wippenham,135919.078125
+1024,2019,41305,Arnreit,909,693,681,76.24,ÖVP,arnreit,496293.15625
+1025,2019,41306,Atzesberg,369,292,287,79.13,ÖVP,atzesberg,81460.15625
+1026,2019,41307,Auberg,427,311,306,72.83,ÖVP,auberg,247742.15625
+1027,2019,41311,Hörbich,325,260,255,80.0,ÖVP,hörbich,99270.359375
+1028,2019,41312,Hofkirchen im Mühlkreis,1206,751,736,62.27,ÖVP,hofkirchen-im-mühlkreis,1310936.25
+1029,2019,41313,Julbach,1283,846,819,65.94,ÖVP,julbach,519146.625
+1030,2019,41314,Kirchberg ob der Donau,861,581,573,67.48,ÖVP,kirchberg-ob-der-donau,463303.28125
+1031,2019,41315,Klaffer am Hochficht,1054,677,668,64.23,ÖVP,klaffer-am-hochficht,494929.46875
+1032,2019,41316,Kleinzell im Mühlkreis,1312,878,863,66.92,ÖVP,kleinzell-im-mühlkreis,439192.78125
+1033,2019,41317,Kollerschlag,1192,839,827,70.39,ÖVP,kollerschlag,526642.125
+1034,2019,41318,Lembach im Mühlkreis,1235,784,769,63.48,ÖVP,lembach-im-mühlkreis,878641.1875
+1035,2019,41319,Lichtenau im Mühlkreis,404,238,232,58.91,ÖVP,lichtenau-im-mühlkreis,99340.3125
+1036,2019,41320,Nebelberg,497,385,380,77.46,ÖVP,nebelberg,202453.1875
+1037,2019,41321,Neufelden,931,588,578,63.16,ÖVP,neufelden,985511.375
+1038,2019,41322,Niederkappel,789,562,543,71.23,ÖVP,niederkappel,364388.6875
+1039,2019,41323,Niederwaldkirchen,1456,968,962,66.48,ÖVP,niederwaldkirchen,1796099.125
+1040,2019,41324,Oberkappel,527,313,306,59.39,ÖVP,oberkappel,489144.125
+1041,2019,41325,Oepping,1311,890,874,67.89,ÖVP,oepping,606358.9375
+1042,2019,41326,Peilstein im Mühlviertel,1268,895,877,70.58,ÖVP,peilstein-im-mühlviertel,696748.8125
+1043,2019,41327,Pfarrkirchen im Mühlkreis,1161,802,790,69.08,ÖVP,pfarrkirchen-im-mühlkreis,544984.25
+1044,2019,41328,Putzleinsdorf,1253,857,847,68.4,ÖVP,putzleinsdorf,467889.65625
+1045,2019,41329,Neustift im Mühlkreis,1146,774,760,67.54,ÖVP,neustift-im-mühlkreis,536052.625
+1046,2019,41338,Sarleinsbach,1839,1329,1306,72.27,ÖVP,sarleinsbach,894240.4375
+1047,2019,41341,Schwarzenberg am Böhmerwald,457,326,319,71.33,ÖVP,schwarzenberg-am-böhmerwald,118292.71875
+1048,2019,41342,Ulrichsberg,2349,1503,1474,63.98,ÖVP,ulrichsberg,883830.5625
+1049,2019,41343,Aigen-Schlägl,2618,1565,1540,59.78,ÖVP,aigen-schlägl,4395895.5
+1050,2019,41344,Rohrbach-Berg,4159,2587,2542,62.2,ÖVP,rohrbach-berg,3930120.5
+1051,2019,41402,Andorf,4103,2850,2811,69.46,ÖVP,andorf,1682552.0
+1052,2019,41404,Diersbach,1310,844,835,64.43,ÖVP,diersbach,426928.46875
+1053,2019,41406,Eggerding,1053,658,647,62.49,ÖVP,eggerding,287378.25
+1054,2019,41408,Enzenkirchen,1442,971,954,67.34,ÖVP,enzenkirchen,680476.875
+1055,2019,41411,Kopfing im Innkreis,1625,1104,1080,67.94,ÖVP,kopfing-im-innkreis,659868.0
+1056,2019,41412,Mayrhof,249,176,174,70.68,ÖVP,mayrhof,63007.08984375
+1057,2019,41414,Raab,1819,1138,1125,62.56,ÖVP,raab,945155.0
+1058,2019,41415,Rainbach im Innkreis,1187,830,819,69.92,ÖVP,rainbach-im-innkreis,471633.46875
+1059,2019,41416,Riedau,1586,918,905,57.88,ÖVP,riedau,795472.375
+1060,2019,41424,Sigharting,678,497,478,73.3,ÖVP,sigharting,361993.5
+1061,2019,41425,Suben,951,563,555,59.2,ÖVP,suben,448668.09375
+1062,2019,41427,Vichtenstein,446,299,296,67.04,ÖVP,vichtenstein,245147.546875
+1063,2019,41429,Wernstein am Inn,1210,742,735,61.32,ÖVP,wernstein-am-inn,435605.28125
+1064,2019,41501,Adlwang,1473,957,938,64.97,ÖVP,adlwang,953809.5
+1065,2019,41503,Bad Hall,4034,2253,2227,55.85,ÖVP,bad-hall,4605376.0
+1066,2019,41504,Dietach,2484,1734,1720,69.81,ÖVP,dietach,1278336.875
+1067,2019,41505,Gaflenz,1536,1062,1045,69.14,ÖVP,gaflenz,604165.0625
+1068,2019,41506,Garsten,5172,3397,3329,65.68,ÖVP,garsten,2017280.5
+1069,2019,41507,Großraming,2166,1499,1463,69.21,ÖVP,großraming,1235483.375
+1070,2019,41509,Losenstein,1305,814,803,62.38,ÖVP,losenstein,514348.0
+1071,2019,41510,Maria Neustift,1288,907,888,70.42,ÖVP,maria-neustift,522572.15625
+1072,2019,41511,Pfarrkirchen bei Bad Hall,1825,1281,1266,70.19,ÖVP,pfarrkirchen-bei-bad-hall,581461.5
+1073,2019,41512,Reichraming,1447,971,957,67.1,SPÖ,reichraming,448799.71875
+1074,2019,41513,Rohr im Kremstal,1073,672,667,62.63,ÖVP,rohr-im-kremstal,710098.875
+1075,2019,41515,Schiedlberg,1015,662,654,65.22,ÖVP,schiedlberg,755433.9375
+1076,2019,41516,Sierning,7343,4866,4777,66.27,SPÖ,sierning,3002277.0
+1077,2019,41517,Ternberg,2777,1788,1761,64.39,ÖVP,ternberg,1033265.125
+1078,2019,41518,Waldneukirchen,1768,1218,1205,68.89,ÖVP,waldneukirchen,970650.25
+1079,2019,41521,Wolfern,2605,1665,1640,63.92,ÖVP,wolfern,860932.5625
+1080,2019,41522,Weyer,3378,2208,2177,65.36,ÖVP,weyer,1824328.25
+1081,2019,41602,Altenberg bei Linz,3674,2540,2506,69.13,ÖVP,altenberg-bei-linz,1633616.0
+1082,2019,41603,Bad Leonfelden,3332,2136,2085,64.11,ÖVP,bad-leonfelden,1454858.375
+1083,2019,41604,Eidenberg,1696,1208,1180,71.23,ÖVP,eidenberg,1182741.375
+1084,2019,41605,Engerwitzdorf,7027,4717,4632,67.13,ÖVP,engerwitzdorf,2875340.0
+1085,2019,41607,Gallneukirchen,5242,3259,3213,62.17,ÖVP,gallneukirchen,2415524.0
+1086,2019,41608,Goldwörth,693,470,465,67.82,ÖVP,goldwörth,364391.75
+1087,2019,41610,Haibach im Mühlkreis,749,508,496,67.82,ÖVP,haibach-im-mühlkreis,223333.53125
+1088,2019,41611,Hellmonsödt,1890,1182,1167,62.54,ÖVP,hellmonsödt,905488.875
+1089,2019,41612,Herzogsdorf,2164,1389,1361,64.19,ÖVP,herzogsdorf,1121538.375
+1090,2019,41613,Kirchschlag bei Linz,1721,1148,1130,66.71,ÖVP,kirchschlag-bei-linz,1026521.3125
+1091,2019,41614,Lichtenberg,2178,1520,1500,69.79,ÖVP,lichtenberg,1306631.75
+1092,2019,41615,Oberneukirchen,2596,1721,1682,66.29,ÖVP,oberneukirchen,1116317.5
+1093,2019,41616,Ottenschlag im Mühlkreis,433,305,298,70.44,ÖVP,ottenschlag-im-mühlkreis,124193.5390625
+1094,2019,41617,Ottensheim,3725,2370,2357,63.62,ÖVP,ottensheim,3792566.25
+1095,2019,41618,Puchenau,3648,2273,2253,62.31,ÖVP,puchenau,1650087.125
+1096,2019,41619,Reichenau im Mühlkreis,1031,692,677,67.12,ÖVP,reichenau-im-mühlkreis,1411429.875
+1097,2019,41620,Reichenthal,1201,822,806,68.44,ÖVP,reichenthal,1015986.4375
+1098,2019,41622,Schenkenfelden,1303,882,869,67.69,ÖVP,schenkenfelden,398968.625
+1099,2019,41623,Sonnberg im Mühlkreis,794,529,517,66.62,ÖVP,sonnberg-im-mühlkreis,280328.46875
+1100,2019,41624,Steyregg,3881,2536,2504,65.34,ÖVP,steyregg,1696378.125
+1101,2019,41626,Walding,3378,2168,2131,64.18,ÖVP,walding,1948051.25
+1102,2019,41628,Vorderweißenbach,2161,1517,1479,70.2,ÖVP,vorderweißenbach,1309376.5
+1103,2019,41701,Ampflwang im Hausruckwald,2560,1656,1630,64.69,SPÖ,ampflwang-im-hausruckwald,2079827.25
+1104,2019,41703,Attnang-Puchheim,5672,3128,3092,55.15,SPÖ,attnang-puchheim,3946252.5
+1105,2019,41705,Aurach am Hongar,1373,933,912,67.95,ÖVP,aurach-am-hongar,370230.34375
+1106,2019,41706,Berg im Attergau,827,574,566,69.41,ÖVP,berg-im-attergau,204793.15625
+1107,2019,41707,Desselbrunn,1412,920,909,65.16,ÖVP,desselbrunn,649520.4375
+1108,2019,41708,Fornach,758,557,534,73.48,ÖVP,fornach,432240.46875
+1109,2019,41709,Frankenburg am Hausruck,3933,2715,2650,69.03,ÖVP,frankenburg-am-hausruck,1980345.25
+1110,2019,41710,Frankenmarkt,2681,1736,1689,64.75,ÖVP,frankenmarkt,2003158.5
+1111,2019,41711,Gampern,2338,1666,1616,71.26,ÖVP,gampern,1145112.0
+1112,2019,41714,Manning,654,429,421,65.6,ÖVP,manning,143039.34375
+1113,2019,41715,Mondsee,2600,1361,1348,52.35,ÖVP,mondsee,2506083.75
+1114,2019,41717,Niederthalheim,841,583,564,69.32,ÖVP,niederthalheim,353713.84375
+1115,2019,41719,Oberhofen am Irrsee,1248,813,801,65.14,ÖVP,oberhofen-am-irrsee,494192.09375
+1116,2019,41720,Oberndorf bei Schwanenstadt,1097,750,732,68.37,ÖVP,oberndorf-bei-schwanenstadt,397141.4375
+1117,2019,41721,Oberwang,1377,855,838,62.09,ÖVP,oberwang,601462.1875
+1118,2019,41723,Pfaffing,1185,799,776,67.43,ÖVP,pfaffing,516307.6875
+1119,2019,41724,Pilsbach,521,361,358,69.29,ÖVP,pilsbach,111753.4375
+1120,2019,41725,Pitzenberg,448,295,289,65.85,ÖVP,pitzenberg,90795.0390625
+1121,2019,41726,Pöndorf,1878,1175,1153,62.57,ÖVP,pöndorf,1150813.625
+1122,2019,41727,Puchkirchen am Trattberg,814,517,501,63.51,ÖVP,puchkirchen-am-trattberg,513717.59375
+1123,2019,41728,Pühret,496,341,327,68.75,ÖVP,pühret,140168.703125
+1124,2019,41729,Redleiten,401,265,255,66.08,ÖVP,redleiten,142030.0625
+1125,2019,41730,Redlham,1293,859,838,66.43,ÖVP,redlham,370759.96875
+1126,2019,41731,Regau,5020,3391,3338,67.55,ÖVP,regau,1996945.75
+1127,2019,41732,Rüstorf,1678,1034,1012,61.62,ÖVP,rüstorf,2243587.5
+1128,2019,41733,Rutzenham,222,168,167,75.68,ÖVP,rutzenham,580559.5625
+1129,2019,41736,Schlatt,1093,651,635,59.56,ÖVP,schlatt,339505.0625
+1130,2019,41737,Schörfling am Attersee,2695,1561,1543,57.92,ÖVP,schörfling-am-attersee,2277464.5
+1131,2019,41738,Schwanenstadt,2967,1824,1794,61.48,ÖVP,schwanenstadt,6403154.0
+1132,2019,41739,Seewalchen am Attersee,4514,2817,2755,62.41,ÖVP,seewalchen-am-attersee,10513573.0
+1133,2019,41740,Steinbach am Attersee,679,422,414,62.15,ÖVP,steinbach-am-attersee,162704.3125
+1134,2019,41742,Tiefgraben,2967,1641,1618,55.31,ÖVP,tiefgraben,1636760.125
+1135,2019,41744,Ungenach,1178,854,838,72.5,ÖVP,ungenach,1004093.8125
+1136,2019,41745,Unterach am Attersee,1179,615,611,52.16,ÖVP,unterach-am-attersee,995747.0
+1137,2019,41746,Vöcklabruck,8994,5229,5163,58.14,ÖVP,vöcklabruck,9263480.0
+1138,2019,41747,Vöcklamarkt,3812,2434,2383,63.85,ÖVP,vöcklamarkt,1710228.625
+1139,2019,41748,Weißenkirchen im Attergau,771,503,499,65.24,ÖVP,weißenkirchen-im-attergau,286915.6875
+1140,2019,41749,Weyregg am Attersee,1275,758,747,59.45,ÖVP,weyregg-am-attersee,442886.90625
+1141,2019,41750,Wolfsegg am Hausruck,1518,929,913,61.2,ÖVP,wolfsegg-am-hausruck,1262474.5
+1142,2019,41752,Zell am Pettenfirst,1010,680,670,67.33,ÖVP,zell-am-pettenfirst,296763.46875
+1143,2019,41801,Aichkirchen,452,311,308,68.81,ÖVP,aichkirchen,315051.8125
+1144,2019,41802,Bachmanning,511,331,324,64.77,ÖVP,bachmanning,266422.4375
+1145,2019,41803,Bad Wimsbach-Neydharting,2017,1326,1304,65.74,ÖVP,bad-wimsbach-neydharting,1154186.375
+1146,2019,41804,Buchkirchen,3299,2114,2081,64.08,ÖVP,buchkirchen,1865348.375
+1147,2019,41805,Eberstalzell,2054,1371,1350,66.75,ÖVP,eberstalzell,2478964.0
+1148,2019,41806,Edt bei Lambach,1750,1129,1109,64.51,ÖVP,edt-bei-lambach,942133.8125
+1149,2019,41808,Gunskirchen,4639,3022,2979,65.14,ÖVP,gunskirchen,4430023.5
+1150,2019,41810,Krenglbach,2470,1626,1600,65.83,ÖVP,krenglbach,1386150.75
+1151,2019,41811,Lambach,2371,1306,1295,55.08,ÖVP,lambach,1696780.0
+1152,2019,41812,Marchtrenk,9807,6249,6130,63.72,SPÖ,marchtrenk,9995547.0
+1153,2019,41814,Offenhausen,1274,866,854,67.97,ÖVP,offenhausen,472177.09375
+1154,2019,41816,Pichl bei Wels,2209,1516,1493,68.63,ÖVP,pichl-bei-wels,1735765.875
+1155,2019,41817,Sattledt,1972,1277,1260,64.76,ÖVP,sattledt,1472814.875
+1156,2019,41818,Schleißheim,1053,717,702,68.09,ÖVP,schleißheim,1228616.875
+1157,2019,41820,Stadl-Paura,3593,2053,2019,57.14,ÖVP,stadl-paura,2037889.75
+1158,2019,41822,Steinhaus,1716,1073,1063,62.53,ÖVP,steinhaus,1015453.3125
+1159,2019,41823,Thalheim bei Wels,4218,2630,2610,62.35,ÖVP,thalheim-bei-wels,1912633.125
