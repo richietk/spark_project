@@ -3,11 +3,11 @@
 This project analyzes municipal education spending and election outcomes in Upper Austria scalably using Apache Spark. The goal is to understand the relationship between public spending, voter turnout, and election results. We predict election winners using machine learning models and analyze factors influencing political outcomes.
 
 **Project Structure**
-- webscraper.ipynb: Scrapes municipal spending data from a government website.
-- etl.ipynb: Extracts, transforms, and merges election and spending data into a clean dataset.
-- predict_winner.ipynb: Uses Spark ML to predict election winners based on total education spending and demographics.
-- predict_winner_subcats.ipynb: Predicts winners using subcategory-level spending instead of total spending.
-- spending_turnout.ipynb: Analyzes the relationship between public spending and voter turnout.
+- `webscraper.ipynb`: Scrapes municipal spending data from a government website.
+- `etl.ipynb: Extracts`, transforms, and merges election and spending data into a clean dataset.
+- `predict_winner.ipynb`: Uses Spark ML to predict election winners based on total education spending and demographics.
+- `predict_winner_subcats.ipynb`: Predicts winners using subcategory-level spending instead of total spending.
+- `spending_turnout.ipynb`: Analyzes the relationship between public spending and voter turnout.
 
 **Data Sources**
 - Municipal education spending: Scraped from public government websites using `webscraper.ipynb`.
