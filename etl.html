@@ -14266,6 +14266,8 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>We first run the scraping script. Since the script takes a long time (if we assume an HTTP request takes 0.5 seconds and parsing/extracting takes 0.1 seconds, the scraping would take almost an hour), we do not run the script right now for convenience. However, the data from a scrape (date accessed: 2/4/2025) is saved in <code>data/Bildungsausgaben_Gemeinden_Oberösterreich_data_2007_bis_2019.csv</code></p>
+<p>Same applies for the education and total spending per capita dataset saved in <code>Bildungsausgaben_zu_Gesamtausgaben_Gemeinden_Oberösterreich_data_2007_bis_2019.csv</code> (date accessed: 2/13/2025)</p>
+<p>The script for both scrapes is accessible in <code>webscraper.ipynb</code> and</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14504,6 +14506,7 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
     <span class="sd">&quot;&quot;&quot;lowercase, trim, replace spaces with dashes (i.e. slugify)&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">regexp_replace</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">col_name</span><span class="p">))),</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
 
+<span class="c1">### ----- Total spending per municipality per year</span>
 
 <span class="c1"># --- read &amp; transform municipal spending data ---</span>
 <span class="n">spending_csv</span> <span class="o">=</span> <span class="s2">&quot;data/Bildungsausgaben_Gemeinden_Oberösterreich_data_2007_bis_2019.csv&quot;</span>
@@ -14547,6 +14550,25 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
 
 <span class="c1"># add lowercase municipality</span>
 <span class="n">df_spending_agg</span> <span class="o">=</span> <span class="n">df_spending_agg</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Municipality_Lowercase&quot;</span><span class="p">,</span> <span class="n">standardize_municipality</span><span class="p">(</span><span class="s2">&quot;Municipality&quot;</span><span class="p">))</span>
+
+<span class="c1">### ----- Total spending per capita and education spending per capita per municipality per year</span>
+<span class="n">edu_total_csv</span> <span class="o">=</span> <span class="s2">&quot;data/Bildungsausgaben_zu_Gesamtausgaben_Gemeinden_Oberösterreich_data_2007_bis_2019.csv&quot;</span>
+<span class="n">edu_vs_total</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+         <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;inferSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">edu_total_csv</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Standardize to match the other df</span>
+<span class="n">edu_vs_total</span> <span class="o">=</span> <span class="n">edu_vs_total</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;Gemeinde&quot;</span><span class="p">,</span> <span class="s2">&quot;Municipality&quot;</span><span class="p">)</span>
+<span class="n">edu_vs_total</span> <span class="o">=</span> <span class="n">edu_vs_total</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+    <span class="s2">&quot;Municipality_Lowercase&quot;</span><span class="p">,</span>
+    <span class="n">F</span><span class="o">.</span><span class="n">regexp_replace</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Municipality&quot;</span><span class="p">))),</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">edu_vs_total</span> <span class="o">=</span> <span class="n">edu_vs_total</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">))</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -14579,6 +14601,45 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Afterwards, we need to pivot the per capita dataset. This is because current the dataset has a new row for each municipality-year-totalspending/total_education_spending. Instead, we want two columns, one for education spending and one for total spending.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># pivot the data</span>
+<span class="c1"># Unterricht, Erziehung, Sport und Wissenschaft = education spending per capita</span>
+<span class="c1"># Summe = total spending p.c.</span>
+<span class="n">edu_vs_total_pivot</span> <span class="o">=</span> <span class="n">edu_vs_total</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;Municipality_Lowercase&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;Abschnitt&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Unterricht, Erziehung, Sport und Wissenschaft&quot;</span><span class="p">,</span> <span class="s2">&quot;Summe&quot;</span><span class="p">])</span> \
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="s2">&quot;Betrag in Euro&quot;</span><span class="p">))</span>
+
+<span class="c1"># rename the pivoted columns for clarity.</span>
+<span class="c1"># PC = per capita</span>
+<span class="n">edu_vs_total_pivot</span> <span class="o">=</span> <span class="n">edu_vs_total_pivot</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span>
+    <span class="s2">&quot;Unterricht, Erziehung, Sport und Wissenschaft&quot;</span><span class="p">,</span> <span class="s2">&quot;Education_Spending_PC&quot;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span>
+    <span class="s2">&quot;Summe&quot;</span><span class="p">,</span> <span class="s2">&quot;Total_Spending_PC&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Calculate the percentage of spending on education.</span>
+<span class="n">edu_vs_total_pivot</span> <span class="o">=</span> <span class="n">edu_vs_total_pivot</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+    <span class="s2">&quot;Edu_Spending_Percentage&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Education_Spending_PC&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Total_Spending_PC&quot;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>After this, we process the election data for the available years. We initialize an empty DataFrame with predefined columns to store the cleaned data. The predefined columns are consistent amongst Austrian election datasets. Therefore, this script would presumably work for any election data across Austria. For including other countries, at first, we would need to standardize their election data to this format.</p>
 <p>We read the CSV into Spark, standardize column names, and identify party vote columns. We convert party vote counts to integers and determine the winning party for each municipality, which we will use for predictive analysis later on. We also add a slugified version of the municipality name for consistency.</p>
 <p>Once cleaned, the election data is merged into a single DataFrame and joined with the spending data using slugified municipality name and year. Since spending data only covers 2007–2019, elections from 2024 are automatically excluded. However, upon adding recent spending data, 2024 would be automatically included without needing manual modification to this script. Finally, we save the merged dataset as a CSV.</p>
@@ -14587,7 +14648,7 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># --- read &amp; transform election data ---</span>
@@ -14661,6 +14722,11 @@ Converted: OÖ 2013.xlsx (Sheet: WAHLDAT) -&gt; /home/jovyan/DP2/Project/data/O�
 <span class="c1"># --- merging and output ---</span>
 <span class="c1"># join dfs</span>
 <span class="n">merged_df</span> <span class="o">=</span> <span class="n">all_election_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_spending_agg</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Municipality_Lowercase&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;inner&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;Municipality&quot;</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">edu_vs_total_pivot</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Municipality_Lowercase&quot;</span><span class="p">,</span> <span class="s2">&quot;Year&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+
+<span class="c1"># drop total spending per capita as it is not that relevant for our research topic</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;Gesamtausgaben&quot;</span><span class="p">)</span>
+
 <span class="c1"># write to csv</span>
 <span class="n">merged_df</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;latin1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data/merged_data.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged data sample:&quot;</span><span class="p">)</span>
@@ -14690,15 +14756,15 @@ Processing data for 2017
 Processing data for 2019
 Processing data for 2024
 Merged data sample:
-+----------------------+----+---------------+------------------------------+---------------+------------------+----------------+---------------+-------------+-------------------+
-|Municipality_Lowercase|Year|Municipality_ID|Municipality_Name             |Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe     |
-+----------------------+----+---------------+------------------------------+---------------+------------------+----------------+---------------+-------------+-------------------+
-|linz                  |2008|40101          |Linz                          |142125         |96209             |94496           |67.69          |SPO          |1.203534975E8      |
-|steyr                 |2008|40201          |Steyr                         |28962          |20765             |20335           |71.7           |SPO          |3.377888836328125E7|
-|wels                  |2008|40301          |Wels                          |40994          |28803             |28288           |70.26          |SPO          |5.50799846875E7    |
-|aspach                |2008|40402          |Aspach                        |1869           |1390              |1346            |74.37          |OVP          |1433794.4849853516 |
-|auerbach              |2008|40403          |Auerbach                      |411            |310               |301             |75.43          |OVP          |160001.2024230957  |
-+----------------------+----+---------------+------------------------------+---------------+------------------+----------------+---------------+-------------+-------------------+
++----------------------+----+---------------+------------------------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+
+|Municipality_Lowercase|Year|Municipality_ID|Municipality_Name             |Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe     |Education_Spending_PC|Total_Spending_PC|Edu_Spending_Percentage|
++----------------------+----+---------------+------------------------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+
+|linz                  |2008|40101          |Linz                          |142125         |96209             |94496           |67.69          |SPO          |1.203534975E8      |319.61816451293      |3378.0490982967  |9.461619864379408      |
+|steyr                 |2008|40201          |Steyr                         |28962          |20765             |20335           |71.7           |SPO          |3.377888836328125E7|436.81479839648      |3132.9064381223  |13.942797431840445     |
+|wels                  |2008|40301          |Wels                          |40994          |28803             |28288           |70.26          |SPO          |5.50799846875E7    |471.85801422085      |3152.7184429024  |14.966703267877495     |
+|aspach                |2008|40402          |Aspach                        |1869           |1390              |1346            |74.37          |OVP          |1433794.4849853516 |306.75962772786      |2834.8965554129  |10.82084025754445      |
+|auerbach              |2008|40403          |Auerbach                      |411            |310               |301             |75.43          |OVP          |160001.2024230957  |152.3820952381       |2021.9030666667  |7.536567788549646      |
++----------------------+----+---------------+------------------------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+
 only showing top 5 rows
 
 </pre>
@@ -14712,7 +14778,7 @@ only showing top 5 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>

@@ -14346,13 +14346,13 @@ Downloaded: data/OOE_Bev_Hoechste_abgeschl_Ausbildung.csv
 <div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
 
 <span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span><span class="p">,</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">broadcast</span><span class="p">,</span> <span class="n">udf</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">broadcast</span><span class="p">,</span> <span class="n">udf</span><span class="p">,</span> <span class="n">when</span><span class="p">,</span> <span class="n">col</span>
 <span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">StringType</span>
 <span class="kn">from</span> <span class="nn">pyspark.sql.window</span> <span class="kn">import</span> <span class="n">Window</span>
 <span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="kn">import</span> <span class="n">VectorAssembler</span><span class="p">,</span> <span class="n">StringIndexer</span>
-<span class="kn">from</span> <span class="nn">pyspark.ml.classification</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml.classification</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="n">OneVsRest</span>
 <span class="kn">from</span> <span class="nn">pyspark.ml</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="kn">from</span> <span class="nn">pyspark.ml.evaluation</span> <span class="kn">import</span> <span class="n">MulticlassClassificationEvaluator</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml.evaluation</span> <span class="kn">import</span> <span class="n">MulticlassClassificationEvaluator</span><span class="p">,</span> <span class="n">BinaryClassificationEvaluator</span>
 <span class="kn">from</span> <span class="nn">unidecode</span> <span class="kn">import</span> <span class="n">unidecode</span> <span class="c1"># https://pypi.org/project/Unidecode/</span>
 
 <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;MunicipalSpendingAndElectionAnalysis&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
@@ -14415,15 +14415,15 @@ Downloaded: data/OOE_Bev_Hoechste_abgeschl_Ausbildung.csv
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Loaded data/merged_data.csv
 First 5 rows now after adding id (and casting Year):
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---+
-|Municipality_Lowercase|Year|Municipality_ID|Municipality_Name|Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe     |id |
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---+
-|linz                  |2008|40101          |Linz             |142125         |96209             |94496           |67.69          |SPO          |1.203534975E8      |0  |
-|steyr                 |2008|40201          |Steyr            |28962          |20765             |20335           |71.7           |SPO          |3.377888836328125E7|1  |
-|wels                  |2008|40301          |Wels             |40994          |28803             |28288           |70.26          |SPO          |5.50799846875E7    |2  |
-|aspach                |2008|40402          |Aspach           |1869           |1390              |1346            |74.37          |OVP          |1433794.4849853516 |3  |
-|auerbach              |2008|40403          |Auerbach         |411            |310               |301             |75.43          |OVP          |160001.2024230957  |4  |
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---+
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+---+
+|Municipality_Lowercase|Year|Municipality_ID|Municipality_Name|Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe     |Education_Spending_PC|Total_Spending_PC|Edu_Spending_Percentage|id |
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+---+
+|linz                  |2008|40101          |Linz             |142125         |96209             |94496           |67.69          |SPO          |1.203534975E8      |319.61816451293      |3378.0490982967  |9.461619864379408      |0  |
+|steyr                 |2008|40201          |Steyr            |28962          |20765             |20335           |71.7           |SPO          |3.377888836328125E7|436.81479839648      |3132.9064381223  |13.942797431840445     |1  |
+|wels                  |2008|40301          |Wels             |40994          |28803             |28288           |70.26          |SPO          |5.50799846875E7    |471.85801422085      |3152.7184429024  |14.966703267877495     |2  |
+|aspach                |2008|40402          |Aspach           |1869           |1390              |1346            |74.37          |OVP          |1433794.4849853516 |306.75962772786      |2834.8965554129  |10.82084025754445      |3  |
+|auerbach              |2008|40403          |Auerbach         |411            |310               |301             |75.43          |OVP          |160001.2024230957  |152.3820952381       |2021.9030666667  |7.536567788549646      |4  |
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+---+
 only showing top 5 rows
 
 </pre>
@@ -14643,7 +14643,7 @@ Done
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(1240, 11)
+<pre>(1240, 14)
 (4818, 3)
 (3066, 3)
 (2628, 3)
@@ -14803,15 +14803,15 @@ only showing top 3 rows
 
 Row count after joining demographics: 1240
 Sample merged_df after joining demographics:
-+---+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+------------------+--------------------+-------------------+
-|id |Municipality_Lowercase|Year|Municipality_ID|Municipality_Name|Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe    |Austria_Ratio     |Uni_Grad_Ratio      |Pop_65plus_Ratio   |
-+---+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+------------------+--------------------+-------------------+
-|26 |tarsdorf              |2008|40443          |Tarsdorf         |1578           |1062              |1010            |67.3           |OVP          |1241949.890625    |0.9342235410484668|0.025025025025025027|0.15015015015015015|
-|29 |alkoven               |2008|40501          |Alkoven          |4224           |3360              |3276            |79.55          |SPO          |1852952.8623046875|0.9445953286257469|0.05830849478390462 |0.17343517138599107|
-|474|weilbach              |2013|41235          |Weilbach         |473            |360               |353             |76.11          |OVP          |444505.93994140625|0.9523026315789473|0.03536977491961415 |0.19614147909967847|
-|964|pupping               |2019|40509          |Pupping          |1455           |981               |971             |67.42          |OVP          |847619.1716403961 |0.9467190128996074|0.06543075245365322 |0.20065430752453653|
-|65 |grnau-im-almtal       |2008|40707          |Grnau im Almtal  |1665           |1316              |1271            |79.04          |SPO          |639171.8681640625 |null              |null                |null               |
-+---+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+------------------+--------------------+-------------------+
++---+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+---------------------+-----------------+-----------------------+------------------+--------------------+-------------------+
+|id |Municipality_Lowercase|Year|Municipality_ID|Municipality_Name|Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe    |Education_Spending_PC|Total_Spending_PC|Edu_Spending_Percentage|Austria_Ratio     |Uni_Grad_Ratio      |Pop_65plus_Ratio   |
++---+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+---------------------+-----------------+-----------------------+------------------+--------------------+-------------------+
+|26 |tarsdorf              |2008|40443          |Tarsdorf         |1578           |1062              |1010            |67.3           |OVP          |1241949.890625    |310.33231384308      |2207.8512093953  |14.055852700693347     |0.9342235410484668|0.025025025025025027|0.15015015015015015|
+|29 |alkoven               |2008|40501          |Alkoven          |4224           |3360              |3276            |79.55          |SPO          |1852952.8623046875|175.66864050057      |1997.0596037163  |8.796364423659199      |0.9445953286257469|0.05830849478390462 |0.17343517138599107|
+|474|weilbach              |2013|41235          |Weilbach         |473            |360               |353             |76.11          |OVP          |444505.93994140625|353.343354531        |2272.1790620032  |15.550858664258843     |0.9523026315789473|0.03536977491961415 |0.19614147909967847|
+|964|pupping               |2019|40509          |Pupping          |1455           |981               |971             |67.42          |OVP          |847619.1716403961 |233.37531938326      |2594.0902973568  |8.996422353572404      |0.9467190128996074|0.06543075245365322 |0.20065430752453653|
+|65 |grnau-im-almtal       |2008|40707          |Grnau im Almtal  |1665           |1316              |1271            |79.04          |SPO          |639171.8681640625 |149.33921962617      |2845.0468831776  |5.249095208560315      |null              |null                |null               |
++---+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+---------------------+-----------------+-----------------------+------------------+--------------------+-------------------+
 only showing top 5 rows
 
 </pre>
@@ -14838,13 +14838,14 @@ only showing top 5 rows
 <span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;-inf&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># Drop rows with missing key columns</span>
-<span class="n">cols_required</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Spending_Summe&quot;</span><span class="p">,</span> <span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">,</span> <span class="s2">&quot;Winning_Party&quot;</span><span class="p">,</span>
+<span class="n">cols_required</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Education_Spending_PC&quot;</span><span class="p">,</span> <span class="s2">&quot;Edu_Spending_Percentage&quot;</span><span class="p">,</span> <span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">,</span> <span class="s2">&quot;Winning_Party&quot;</span><span class="p">,</span>
                  <span class="s2">&quot;Austria_Ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;Uni_Grad_Ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;Pop_65plus_Ratio&quot;</span><span class="p">]</span>
 <span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">cols_required</span><span class="p">)</span>
 
 
 <span class="c1"># ensure correct types</span>
-<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Spending_Summe&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Spending_Summe&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span> \
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Education_Spending_PC&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Education_Spending_PC&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span> \
+                     <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Edu_Spending_Percentage&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Edu_Spending_Percentage&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span> \
                      <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span> \
                      <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Austria_Ratio&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Austria_Ratio&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span> \
                      <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Uni_Grad_Ratio&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Uni_Grad_Ratio&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span> \
@@ -14885,7 +14886,10 @@ root
  |-- gueltige_Stimmen: integer (nullable = true)
  |-- Wahlbeteiligung: float (nullable = true)
  |-- Winning_Party: string (nullable = true)
- |-- Spending_Summe: float (nullable = true)
+ |-- Spending_Summe: double (nullable = true)
+ |-- Education_Spending_PC: float (nullable = true)
+ |-- Total_Spending_PC: double (nullable = true)
+ |-- Edu_Spending_Percentage: float (nullable = true)
  |-- Austria_Ratio: float (nullable = true)
  |-- Uni_Grad_Ratio: float (nullable = true)
  |-- Pop_65plus_Ratio: float (nullable = true)
@@ -14925,7 +14929,8 @@ root
 <span class="c1"># we assemble a single feature vector from selected columns</span>
 <span class="n">assembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span>
     <span class="n">inputCols</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;Spending_Summe&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Education_Spending_PC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Edu_Spending_Percentage&quot;</span><span class="p">,</span>
         <span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">,</span>
         <span class="s2">&quot;Austria_Ratio&quot;</span><span class="p">,</span>
         <span class="s2">&quot;Uni_Grad_Ratio&quot;</span><span class="p">,</span>
@@ -15033,13 +15038,14 @@ root
 only showing top 5 rows
 
 
-Test Accuracy = 75.36%
+Test Accuracy = 72.46%
 
-Spending_Summe: 0.3874
-Wahlbeteiligung: 0.2048
-Austria_Ratio: 0.1713
-Uni_Grad_Ratio: 0.1333
-Pop_65plus_Ratio: 0.1032
+Education_Spending_PC: 0.0915
+Edu_Spending_Percentage: 0.1015
+Wahlbeteiligung: 0.1927
+Austria_Ratio: 0.3468
+Uni_Grad_Ratio: 0.1153
+Pop_65plus_Ratio: 0.1523
 </pre>
 </div>
 </div>
@@ -15052,15 +15058,187 @@ Pop_65plus_Ratio: 0.1032
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Discussion:</strong></p>
-<p>Our model predicted with ~75% accuracy the winning party. We consider this a good accuracy, considering we have only little data on previous elections.</p>
-<p>We can also see that the sum of education spending is the most important feature our of the 5 we considered. This raises further questions on what sub-category of education spending is the most important in predicting election results. We will do this analysis in another script (<code>predict_winner_subcategories.ipynb</code>).</p>
-<p>Additionally, the voter turnout (Wahlbeteiligung) seems also relatively significant. This raises the question how voter turnout influences election results.</p>
+<p>Our model predicted with ~72% accuracy the winning party. We consider this a good accuracy, considering we have only little data on previous elections.</p>
+<p>As for feature importances, we see that <code>Austria_Ratio</code>, i.e. the ratio of austrians to total municipal population, is the strongest predictor with 34.7%. This might indicate that whether areas have a high or low proportion of Austrian citizens significantly influences election outcomes. This could be due to differences in political preferences between predominantly Austrian municipalities and those with larger foreign populations, as well as a reaction to the increase (or decrease) in the share of foreign population in the municipality.</p>
+<p>After that, <code>Wahlbeteiligung</code>, i.e. voter turnout, is the second most powerful feature with 19.3%, indicating that participation levels strongly impact electoral results. Some parties may benefit from higher engagement, while others may perform better when voter turnout is lower. This suggests mobilization efforts or even voter apathy play a key role in election outcomes.</p>
+<p>Interestingly, <code>Education_Spending_PC</code> and <code>Edu_Spending_Percentage</code> are the weakest predictors of all considered in this model. This might indicate that education spending is not as strong of a predictor, as voter turnout or other demographic statistics, such as the ratio of Austrians (34.7%) or elderly population (15.2%)</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now, we will analyze how accurately the model can predict specific parties' winnings and the feature importances for each of the specific partys. For this, we will use the One-vs.-rest classification. While this could be done manually as well (by using a binary label whether winning party = specified party or not), we will use spark's built in OneVsRest method, since it's parallelized, optimized, and scalable.</p>
+<p>Docs: <a href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.classification.OneVsRest.html">https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.classification.OneVsRest.html</a></p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># index the labels into numeric labels</span>
+<span class="n">label_indexer</span> <span class="o">=</span> <span class="n">StringIndexer</span><span class="p">(</span>
+    <span class="n">inputCol</span><span class="o">=</span><span class="s2">&quot;Winning_Party&quot;</span><span class="p">,</span>
+    <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;label&quot;</span><span class="p">,</span>
+    <span class="n">handleInvalid</span><span class="o">=</span><span class="s2">&quot;skip&quot;</span>
+<span class="p">)</span>
+<span class="n">label_indexer_model</span> <span class="o">=</span> <span class="n">label_indexer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">merged_df</span><span class="p">)</span> <span class="c1"># fit on existing data</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">label_indexer_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">merged_df</span><span class="p">)</span> <span class="c1"># apply the mapping to the dataset</span>
+<span class="n">parties</span> <span class="o">=</span> <span class="n">label_indexer_model</span><span class="o">.</span><span class="n">labels</span>  <span class="c1"># store the winning party labels</span>
+
+<span class="c1"># assemble feature vector</span>
+<span class="n">assembler_ovr</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span>
+    <span class="n">inputCols</span><span class="o">=</span><span class="n">feature_cols</span><span class="p">,</span>
+    <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;features_ovr&quot;</span><span class="p">,</span>
+    <span class="n">handleInvalid</span><span class="o">=</span><span class="s2">&quot;skip&quot;</span>
+<span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">assembler_ovr</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">merged_df</span><span class="p">)</span> <span class="c1"># transform to include feature vector</span>
+
+<span class="c1"># define random forest classifier</span>
+<span class="c1"># this is the base classifier for the OvR. All one-vs-rest classifiers will use random forest.</span>
+<span class="n">base_classifier</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;label&quot;</span><span class="p">,</span>
+    <span class="n">featuresCol</span><span class="o">=</span><span class="s2">&quot;features_ovr&quot;</span><span class="p">,</span>
+    <span class="n">numTrees</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">maxDepth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="c1"># define OVR classifier</span>
+<span class="c1"># it will train a binary classifier (party X or not) for each party.</span>
+<span class="n">ovr</span> <span class="o">=</span> <span class="n">OneVsRest</span><span class="p">(</span><span class="n">classifier</span><span class="o">=</span><span class="n">base_classifier</span><span class="p">,</span> <span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="n">featuresCol</span><span class="o">=</span><span class="s2">&quot;features_ovr&quot;</span><span class="p">)</span>
+
+<span class="c1"># # split data, fit on OVR, make predictions, test overall accuracy.</span>
+<span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">randomSplit</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">ovr_model</span> <span class="o">=</span> <span class="n">ovr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">ovr_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">MulticlassClassificationEvaluator</span><span class="p">(</span><span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="n">predictionCol</span><span class="o">=</span><span class="s2">&quot;prediction&quot;</span><span class="p">,</span> <span class="n">metricName</span><span class="o">=</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">One-Vs-Rest Test Accuracy = </span><span class="si">{</span><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># since pyspark&#39;s OneVsRest does not directly provide AUC or feature importances,</span>
+<span class="c1"># we will manually compute them for each binary classifier.</span>
+
+<span class="c1"># parties from labelindexer</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">party</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">parties</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== One-vs-Rest for: </span><span class="si">{</span><span class="n">party</span><span class="si">}</span><span class="s2"> vs. ALL ===&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get the corresponding binary model for the party</span>
+    <span class="n">binary_model</span> <span class="o">=</span> <span class="n">ovr_model</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="c1"># create a binary test set for the current party (1 if current party, 0 if not)</span>
+    <span class="n">test_binary</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;binary_label&quot;</span><span class="p">,</span> <span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="c1"># make predictions for AUC evaluation and then compute AUC (area under ROC curve)</span>
+    <span class="n">binary_preds</span> <span class="o">=</span> <span class="n">binary_model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_binary</span><span class="p">)</span>
+    <span class="n">evaluator_bin</span> <span class="o">=</span> <span class="n">BinaryClassificationEvaluator</span><span class="p">(</span><span class="n">labelCol</span><span class="o">=</span><span class="s2">&quot;binary_label&quot;</span><span class="p">,</span> <span class="n">rawPredictionCol</span><span class="o">=</span><span class="s2">&quot;rawPrediction&quot;</span><span class="p">,</span> <span class="n">metricName</span><span class="o">=</span><span class="s2">&quot;areaUnderROC&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area Under ROC for </span><span class="si">{</span><span class="n">party</span><span class="si">}</span><span class="s2"> vs. All: </span><span class="si">{</span><span class="n">evaluator_bin</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">binary_preds</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># extract feature importances</span>
+    <span class="n">importances</span> <span class="o">=</span> <span class="n">binary_model</span><span class="o">.</span><span class="n">featureImportances</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feature_cols</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">importances</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Done</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>
+One-Vs-Rest Test Accuracy = 76.44%
+
+
+=== One-vs-Rest for: OVP vs. ALL ===
+Area Under ROC for OVP vs. All: 0.782
+  Education_Spending_PC: 0.0787
+  Edu_Spending_Percentage: 0.0919
+  Wahlbeteiligung: 0.1666
+  Austria_Ratio: 0.4238
+  Uni_Grad_Ratio: 0.1316
+  Pop_65plus_Ratio: 0.1074
+
+=== One-vs-Rest for: SPO vs. ALL ===
+Area Under ROC for SPO vs. All: 0.788
+  Education_Spending_PC: 0.1135
+  Edu_Spending_Percentage: 0.1018
+  Wahlbeteiligung: 0.2087
+  Austria_Ratio: 0.3238
+  Uni_Grad_Ratio: 0.1137
+  Pop_65plus_Ratio: 0.1386
+
+=== One-vs-Rest for: FPO vs. ALL ===
+Area Under ROC for FPO vs. All: 0.669
+  Education_Spending_PC: 0.1318
+  Edu_Spending_Percentage: 0.1448
+  Wahlbeteiligung: 0.1601
+  Austria_Ratio: 0.2443
+  Uni_Grad_Ratio: 0.1739
+  Pop_65plus_Ratio: 0.1452
+
+Done
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Discussion:</strong></p>
+<p>The One-Vs-Rest model achieved an overall test accuracy of 76.44%. The AUC scores vary between parties, indicating that the model predicts some outcomes more reliably than others.</p>
+<p>SPÖ (AUC = 0.788) and ÖVP (AUC = 0.782) are well-predicted, suggesting that their voting patterns align more closely with the features in the dataset.</p>
+<p>FPÖ (AUC = 0.669) is weaker. This implies that spending, demographic ratios, and turnout do not fully capture FPÖ voting behavior, likely due to external socio-political factors.</p>
+<p>Education spending (<code>Education_Spending_PC</code> and <code>Edu_Spending_Percentage</code>) does not seem to be very important in predicting ÖVP/SPÖ votes, however, surprisingly, they appear to be relatively important for FPÖ predictions (13.18% and 14.48% respectively).</p>
+<p><strong>ÖVP vs. ALL (AUC = 0.782)</strong></p>
+<p>The most influential feature is Austria_Ratio (42.38%), making it the strongest single predictor in the entire model. This suggests that ÖVP is most favored in areas with a high proportion of Austrian-born citizens, which aligns with their historically conservative, rural, and stability-oriented voter base.</p>
+<p>Voter turnout (16.66%) is the second most important factor, reinforcing that ÖVP benefits from higher electoral participation.</p>
+<p><strong>SPÖ vs. ALL (AUC = 0.788)</strong></p>
+<p>Austria_Ratio (32.38%) remains a strong predictor but is lower than for ÖVP, reflecting SPÖ’s broader appeal in urban and mixed-demographic areas.</p>
+<p>Voter turnout (20.87%) is also an influential feature, suggesting SPÖ’s success is highly dependent on mobilization efforts—consistent with center-left parties relying on strong engagement from younger, working-class, and urban voters.</p>
+<p><strong>FPÖ vs. ALL (AUC = 0.669)</strong></p>
+<p>Austria_Ratio (24.43%) is still a key factor, but it is much weaker than for ÖVP (42.38%), confirming that FPÖ does not rely as exclusively on Austrian-born majority areas. This supports the idea that FPÖ can perform well in both high and low Austria_Ratio areas, depending on economic conditions and voter dissatisfaction.</p>
+<p>Turnout (16.01%) is important, suggesting FPÖ’s performance is influenced by voter disengagement likely due to its ability to attract protest votes in low-turnout elections.</p>
+<p>University education ratio (Uni_Grad_Ratio = 17.39%) is surprisingly high, higher than both ÖVP (13.16%) and SPÖ (11.37%). This could indicat:</p>
+<ul>
+<li>a shift in FPÖ support among educated voters.</li>
+<li>that university education correlates with regions where FPÖ has electoral strength<ul>
+<li>note: this might not mean direct FPÖ support from graduates. Peri-urban areas surrounding towns often have a higher percentage of university graduates (compared to rural areas) and a stronger FPÖ presence.</li>
+</ul>
+</li>
+</ul>
+<p>The relatively weak AUC suggests FPÖ’s voting patterns are influenced by external socio-political factors not fully captured by spending or demographic data, such as nationalism, anti-immigration sentiment, or dissatisfaction with mainstream politics.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>In <code>predict_winner_subcategories.ipynb</code>, we will analyze whether the subcategories of education spending gives us more insight into the prediction of the winning party.</p>
+<p>In <code>spending_turnout.ipynb</code>, we will analyze the connection between spending and voter turnout.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>

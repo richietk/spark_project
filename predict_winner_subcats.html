@@ -14427,15 +14427,15 @@ a.anchor-link {
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Election data:
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+
-|Municipality_Lowercase|Year|Municipality_ID|Municipality_Name|Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe     |
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+
-|linz                  |2008|40101          |Linz             |142125         |96209             |94496           |67.69          |SPO          |1.203534975E8      |
-|steyr                 |2008|40201          |Steyr            |28962          |20765             |20335           |71.7           |SPO          |3.377888836328125E7|
-|wels                  |2008|40301          |Wels             |40994          |28803             |28288           |70.26          |SPO          |5.50799846875E7    |
-|aspach                |2008|40402          |Aspach           |1869           |1390              |1346            |74.37          |OVP          |1433794.4849853516 |
-|auerbach              |2008|40403          |Auerbach         |411            |310               |301             |75.43          |OVP          |160001.2024230957  |
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+
+|Municipality_Lowercase|Year|Municipality_ID|Municipality_Name|Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe     |Education_Spending_PC|Total_Spending_PC|Edu_Spending_Percentage|
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+
+|linz                  |2008|40101          |Linz             |142125         |96209             |94496           |67.69          |SPO          |1.203534975E8      |319.61816451293      |3378.0490982967  |9.461619864379408      |
+|steyr                 |2008|40201          |Steyr            |28962          |20765             |20335           |71.7           |SPO          |3.377888836328125E7|436.81479839648      |3132.9064381223  |13.942797431840445     |
+|wels                  |2008|40301          |Wels             |40994          |28803             |28288           |70.26          |SPO          |5.50799846875E7    |471.85801422085      |3152.7184429024  |14.966703267877495     |
+|aspach                |2008|40402          |Aspach           |1869           |1390              |1346            |74.37          |OVP          |1433794.4849853516 |306.75962772786      |2834.8965554129  |10.82084025754445      |
+|auerbach              |2008|40403          |Auerbach         |411            |310               |301             |75.43          |OVP          |160001.2024230957  |152.3820952381       |2021.9030666667  |7.536567788549646      |
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+-------------------+---------------------+-----------------+-----------------------+
 only showing top 5 rows
 
 Subcategory spending:
@@ -14503,9 +14503,29 @@ only showing top 5 rows
 <span class="c1"># identify subcategory columns (columns that start with &quot;SubCat_&quot;)</span>
 <span class="c1"># we exclude SubCat_Summe because it is just the sum of the subcategories and</span>
 <span class="c1">#  including them would thus distort the results</span>
+<span class="c1"># Ensure the new columns are available and cast to float</span>
+<span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">,</span> <span class="s2">&quot;Education_Spending_PC&quot;</span><span class="p">,</span> <span class="s2">&quot;Edu_Spending_Percentage&quot;</span><span class="p">]:</span>
+    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="n">col_name</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">col_name</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span>
+    
 <span class="n">subcat_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;SubCat_&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">col</span> <span class="o">!=</span> <span class="s2">&quot;SubCat_Summe&quot;</span><span class="p">]</span>
-<span class="c1"># We’ll include &quot;Wahlbeteiligung&quot; to our feature set</span>
-<span class="n">feature_cols</span> <span class="o">=</span> <span class="n">subcat_cols</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">]</span>
+
+<span class="c1"># for each subcategory, we compute its per capita value:</span>
+<span class="c1"># SubCat_*_PC = (absolute subcat spending / SubCat_Summe) * Education_Spending_PC</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">subcat_cols</span><span class="p">:</span>
+    <span class="n">new_col_name</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="s2">&quot;_PC&quot;</span>
+    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="n">new_col_name</span><span class="p">,</span>
+        <span class="n">F</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;SubCat_Summe&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">otherwise</span><span class="p">((</span><span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;SubCat_Summe&quot;</span><span class="p">))</span> <span class="o">*</span> <span class="n">F</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Education_Spending_PC&quot;</span><span class="p">))</span>
+    <span class="p">)</span>
+<span class="c1"># drop absolute subcategory spendings</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="o">*</span><span class="n">subcat_cols</span><span class="p">)</span>
+
+<span class="c1"># new per capita subcat cols</span>
+<span class="n">subcat_pc_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="s2">&quot;_PC&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">subcat_cols</span><span class="p">]</span>
+<span class="c1"># add following to feature cols, we will use them in model training</span>
+<span class="n">feature_cols</span> <span class="o">=</span> <span class="n">subcat_pc_cols</span>  <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">,</span> <span class="s2">&quot;Education_Spending_PC&quot;</span><span class="p">,</span> <span class="s2">&quot;Edu_Spending_Percentage&quot;</span><span class="p">]</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Feature columns used for modeling:&quot;</span><span class="p">,</span> <span class="n">feature_cols</span><span class="p">)</span>
 
 <span class="c1"># Ensure that all feature columns are of type float</span>
@@ -14546,17 +14566,17 @@ only showing top 5 rows
 +---------------+
 only showing top 5 rows
 
-Feature columns used for modeling: [&#39;SubCat_Allgemeinbildender_Unterricht&#39;, &#39;SubCat_Ausserschulische_Jugenerziehung&#39;, &#39;SubCat_Berufsb_Unterricht&#39;, &#39;SubCat_Erwachsenenbildung&#39;, &#39;SubCat_Forschung_und_Wissenschaft&#39;, &#39;SubCat_Forderung_des_Unterrichtes&#39;, &#39;SubCat_Gesonderte_Verwaltung&#39;, &#39;SubCat_Sport_und_ausserschulische_Leibeserziehung&#39;, &#39;SubCat_Vorschulische_Erziehung&#39;, &#39;Wahlbeteiligung&#39;]
+Feature columns used for modeling: [&#39;SubCat_Allgemeinbildender_Unterricht_PC&#39;, &#39;SubCat_Ausserschulische_Jugenerziehung_PC&#39;, &#39;SubCat_Berufsb_Unterricht_PC&#39;, &#39;SubCat_Erwachsenenbildung_PC&#39;, &#39;SubCat_Forschung_und_Wissenschaft_PC&#39;, &#39;SubCat_Forderung_des_Unterrichtes_PC&#39;, &#39;SubCat_Gesonderte_Verwaltung_PC&#39;, &#39;SubCat_Sport_und_ausserschulische_Leibeserziehung_PC&#39;, &#39;SubCat_Vorschulische_Erziehung_PC&#39;, &#39;Wahlbeteiligung&#39;, &#39;Education_Spending_PC&#39;, &#39;Edu_Spending_Percentage&#39;]
 Merged data (post cleaning):
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+------------------------------------+--------------------------------------+-------------------------+-------------------------+---------------------------------+---------------------------------+----------------------------+-------------------------------------------------+------------+------------------------------+
-|Municipality_Lowercase|Year|Municipality_ID|Municipality_Name|Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe    |SubCat_Allgemeinbildender_Unterricht|SubCat_Ausserschulische_Jugenerziehung|SubCat_Berufsb_Unterricht|SubCat_Erwachsenenbildung|SubCat_Forschung_und_Wissenschaft|SubCat_Forderung_des_Unterrichtes|SubCat_Gesonderte_Verwaltung|SubCat_Sport_und_ausserschulische_Leibeserziehung|SubCat_Summe|SubCat_Vorschulische_Erziehung|
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+------------------------------------+--------------------------------------+-------------------------+-------------------------+---------------------------------+---------------------------------+----------------------------+-------------------------------------------------+------------+------------------------------+
-|waldneukirchen        |2008|41518          |Waldneukirchen   |1723           |1415              |1374            |82.12          |OVP          |1007483.3046875   |293467.84                           |14717.73                              |39020.56                 |0.0                      |0.0                              |20067.39                         |0.0                         |38048.17                                         |503741.65625|98419.95                      |
-|gaspoltshofen         |2013|40806          |Gaspoltshofen    |2819           |1923              |1856            |68.22          |FPO          |2788042.989868164 |962090.3                            |1340.57                               |60795.91                 |400.0                    |1385.0                           |112647.74                        |0.0                         |23207.47                                         |1394021.5   |232154.48                     |
-|pabneukirchen         |2019|41115          |Pabneukirchen    |1329           |903               |883             |67.95          |OVP          |3370664.49609375  |1375974.0                           |0.0                                   |14186.91                 |400.0                    |200.0                            |65282.31                         |0.0                         |35131.12                                         |1685332.25  |194157.9                      |
-|schwanenstadt         |2013|41738          |Schwanenstadt    |2947           |1978              |1933            |67.12          |SPO          |3064395.228515625 |973917.0                            |139692.83                             |31703.06                 |824.0                    |50.0                             |42832.31                         |0.0                         |166526.5                                         |1532197.625 |176651.9                      |
-|oberwang              |2019|41721          |Oberwang         |1377           |855               |838             |62.09          |OVP          |1202924.3754882812|209689.5                            |0.0                                   |22959.92                 |0.0                      |0.0                              |4934.28                          |0.0                         |13916.27                                         |601462.1875 |349962.22                     |
-+----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+------------------------------------+--------------------------------------+-------------------------+-------------------------+---------------------------------+---------------------------------+----------------------------+-------------------------------------------------+------------+------------------------------+
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+---------------------+-----------------+-----------------------+------------+---------------------------------------+-----------------------------------------+----------------------------+----------------------------+------------------------------------+------------------------------------+-------------------------------+----------------------------------------------------+---------------------------------+
+|Municipality_Lowercase|Year|Municipality_ID|Municipality_Name|Wahlberechtigte|abgegebene_Stimmen|gueltige_Stimmen|Wahlbeteiligung|Winning_Party|Spending_Summe    |Education_Spending_PC|Total_Spending_PC|Edu_Spending_Percentage|SubCat_Summe|SubCat_Allgemeinbildender_Unterricht_PC|SubCat_Ausserschulische_Jugenerziehung_PC|SubCat_Berufsb_Unterricht_PC|SubCat_Erwachsenenbildung_PC|SubCat_Forschung_und_Wissenschaft_PC|SubCat_Forderung_des_Unterrichtes_PC|SubCat_Gesonderte_Verwaltung_PC|SubCat_Sport_und_ausserschulische_Leibeserziehung_PC|SubCat_Vorschulische_Erziehung_PC|
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+---------------------+-----------------+-----------------------+------------+---------------------------------------+-----------------------------------------+----------------------------+----------------------------+------------------------------------+------------------------------------+-------------------------------+----------------------------------------------------+---------------------------------+
+|waldneukirchen        |2008|41518          |Waldneukirchen   |1723           |1415              |1374            |82.12          |OVP          |1007483.3046875   |228.45427            |1698.9230294785  |13.447005              |503741.65625|133.092                                |6.674708                                 |17.696398                   |0.0                         |0.0                                 |9.100858                            |0.0                            |17.255407                                           |44.6349                          |
+|gaspoltshofen         |2013|40806          |Gaspoltshofen    |2819           |1923              |1856            |68.22          |FPO          |2788042.989868164 |397.95074            |2513.7077248073  |15.831226              |1394021.5   |274.64752                              |0.38269195                               |17.355383                   |0.11418784                  |0.39537537                          |32.157505                           |0.0                            |6.625027                                            |66.27305                         |
+|pabneukirchen         |2019|41115          |Pabneukirchen    |1329           |903               |883             |67.95          |OVP          |3370664.49609375  |990.207              |3034.3461750881  |32.63329               |1685332.25  |808.4454                               |0.0                                      |8.335435                    |0.23501763                  |0.117508814                         |38.35623                            |0.0                            |20.641083                                           |114.076324                       |
+|schwanenstadt         |2013|41738          |Schwanenstadt    |2947           |1978              |1933            |67.12          |SPO          |3064395.228515625 |377.5746             |3073.7619935929  |12.283793              |1532197.625 |239.99927                              |34.42406                                 |7.8124843                   |0.2030557                   |0.012321341                         |10.55503                            |0.0                            |41.036594                                           |43.53177                         |
+|oberwang              |2019|41721          |Oberwang         |1377           |855               |838             |62.09          |OVP          |1202924.3754882812|345.27106            |2197.0773249139  |15.715016              |601462.1875 |120.37285                              |0.0                                      |13.180206                   |0.0                         |0.0                                 |2.8325372                           |0.0                            |7.9886737                                           |200.89679                        |
++----------------------+----+---------------+-----------------+---------------+------------------+----------------+---------------+-------------+------------------+---------------------+-----------------+-----------------------+------------+---------------------------------------+-----------------------------------------+----------------------------+----------------------------+------------------------------------+------------------------------------+-------------------------------+----------------------------------------------------+---------------------------------+
 only showing top 5 rows
 
 </pre>
@@ -14651,18 +14671,20 @@ Predictions:
 only showing top 5 rows
 
 
-Test Accuracy = 73.49%
+Test Accuracy = 71.63%
 
-SubCat_Allgemeinbildender_Unterricht: 0.1620
-SubCat_Ausserschulische_Jugenerziehung: 0.1929
-SubCat_Berufsb_Unterricht: 0.1029
-SubCat_Erwachsenenbildung: 0.1225
-SubCat_Forschung_und_Wissenschaft: 0.0662
-SubCat_Forderung_des_Unterrichtes: 0.0476
-SubCat_Gesonderte_Verwaltung: 0.0387
-SubCat_Sport_und_ausserschulische_Leibeserziehung: 0.0883
-SubCat_Vorschulische_Erziehung: 0.0608
-Wahlbeteiligung: 0.1183
+SubCat_Allgemeinbildender_Unterricht_PC: 0.0703
+SubCat_Ausserschulische_Jugenerziehung_PC: 0.2513
+SubCat_Berufsb_Unterricht_PC: 0.0689
+SubCat_Erwachsenenbildung_PC: 0.1185
+SubCat_Forschung_und_Wissenschaft_PC: 0.0551
+SubCat_Forderung_des_Unterrichtes_PC: 0.0420
+SubCat_Gesonderte_Verwaltung_PC: 0.0770
+SubCat_Sport_und_ausserschulische_Leibeserziehung_PC: 0.0667
+SubCat_Vorschulische_Erziehung_PC: 0.0602
+Wahlbeteiligung: 0.0734
+Education_Spending_PC: 0.0640
+Edu_Spending_Percentage: 0.0526
 </pre>
 </div>
 </div>
@@ -14675,8 +14697,8 @@ Wahlbeteiligung: 0.1183
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Discussion:</strong></p>
-<p>Our model predicted with ~73.5% accuracy the winning party. We consider this a good accuracy, considering we have only little data on previous elections.</p>
-<p>Now that we analyzed the feature importance of the subcategories, we can deduct that <code>Ausserschulische_Jugenerziehung</code> and <code>Allgemeinbildender_Unterricht</code> have the highest importance in predicting the winning party. After that, <code>SubCat_Erwachsenenbildung</code> and <code>Wahlbeteiligung</code> are also relatively important. This tell us which parts of education investment are most relevant to the model, and, indirectly, to us.</p>
+<p>Our model predicted with ~71.6% accuracy the winning party. We consider this a good accuracy, considering we have only little data on previous elections.</p>
+<p>Now that we analyzed the feature importance of the subcategories, we can deduct that <code>Erwachsenenbildung_PC</code> have the highest importance in predicting the winning party (11.85%). After that, <code>Wahlbeteiligung</code> and <code>SubCat_Gesonderte_Verwaltung_PC</code> are also relatively important.</p>
 
 </div>
 </div>
@@ -14775,47 +14797,53 @@ Wahlbeteiligung: 0.1183
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>
-One-Vs-Rest Test Accuracy = 80.84%
+One-Vs-Rest Test Accuracy = 78.04%
 
 
 === One-vs-Rest for: OVP vs. ALL ===
-Area Under ROC for OVP vs. All: 0.809
-  SubCat_Allgemeinbildender_Unterricht: 0.1634
-  SubCat_Ausserschulische_Jugenerziehung: 0.1776
-  SubCat_Berufsb_Unterricht: 0.0877
-  SubCat_Erwachsenenbildung: 0.1352
-  SubCat_Forschung_und_Wissenschaft: 0.0665
-  SubCat_Forderung_des_Unterrichtes: 0.0488
-  SubCat_Gesonderte_Verwaltung: 0.0248
-  SubCat_Sport_und_ausserschulische_Leibeserziehung: 0.0757
-  SubCat_Vorschulische_Erziehung: 0.1052
-  Wahlbeteiligung: 0.1151
+Area Under ROC for OVP vs. All: 0.772
+  SubCat_Allgemeinbildender_Unterricht_PC: 0.0816
+  SubCat_Ausserschulische_Jugenerziehung_PC: 0.2043
+  SubCat_Berufsb_Unterricht_PC: 0.0566
+  SubCat_Erwachsenenbildung_PC: 0.1429
+  SubCat_Forschung_und_Wissenschaft_PC: 0.0951
+  SubCat_Forderung_des_Unterrichtes_PC: 0.0452
+  SubCat_Gesonderte_Verwaltung_PC: 0.0890
+  SubCat_Sport_und_ausserschulische_Leibeserziehung_PC: 0.0564
+  SubCat_Vorschulische_Erziehung_PC: 0.0461
+  Wahlbeteiligung: 0.0851
+  Education_Spending_PC: 0.0414
+  Edu_Spending_Percentage: 0.0563
 
 === One-vs-Rest for: SPO vs. ALL ===
 Area Under ROC for SPO vs. All: 0.839
-  SubCat_Allgemeinbildender_Unterricht: 0.1378
-  SubCat_Ausserschulische_Jugenerziehung: 0.1847
-  SubCat_Berufsb_Unterricht: 0.0720
-  SubCat_Erwachsenenbildung: 0.1685
-  SubCat_Forschung_und_Wissenschaft: 0.0826
-  SubCat_Forderung_des_Unterrichtes: 0.0316
-  SubCat_Gesonderte_Verwaltung: 0.0509
-  SubCat_Sport_und_ausserschulische_Leibeserziehung: 0.0735
-  SubCat_Vorschulische_Erziehung: 0.0721
-  Wahlbeteiligung: 0.1263
+  SubCat_Allgemeinbildender_Unterricht_PC: 0.0767
+  SubCat_Ausserschulische_Jugenerziehung_PC: 0.1500
+  SubCat_Berufsb_Unterricht_PC: 0.0608
+  SubCat_Erwachsenenbildung_PC: 0.1249
+  SubCat_Forschung_und_Wissenschaft_PC: 0.1016
+  SubCat_Forderung_des_Unterrichtes_PC: 0.0349
+  SubCat_Gesonderte_Verwaltung_PC: 0.1470
+  SubCat_Sport_und_ausserschulische_Leibeserziehung_PC: 0.0418
+  SubCat_Vorschulische_Erziehung_PC: 0.0725
+  Wahlbeteiligung: 0.0810
+  Education_Spending_PC: 0.0463
+  Edu_Spending_Percentage: 0.0624
 
 === One-vs-Rest for: FPO vs. ALL ===
-Area Under ROC for FPO vs. All: 0.603
-  SubCat_Allgemeinbildender_Unterricht: 0.1288
-  SubCat_Ausserschulische_Jugenerziehung: 0.0628
-  SubCat_Berufsb_Unterricht: 0.1090
-  SubCat_Erwachsenenbildung: 0.0717
-  SubCat_Forschung_und_Wissenschaft: 0.0239
-  SubCat_Forderung_des_Unterrichtes: 0.1238
-  SubCat_Gesonderte_Verwaltung: 0.0316
-  SubCat_Sport_und_ausserschulische_Leibeserziehung: 0.1621
-  SubCat_Vorschulische_Erziehung: 0.1506
-  Wahlbeteiligung: 0.1359
+Area Under ROC for FPO vs. All: 0.633
+  SubCat_Allgemeinbildender_Unterricht_PC: 0.1363
+  SubCat_Ausserschulische_Jugenerziehung_PC: 0.0712
+  SubCat_Berufsb_Unterricht_PC: 0.0992
+  SubCat_Erwachsenenbildung_PC: 0.0505
+  SubCat_Forschung_und_Wissenschaft_PC: 0.0380
+  SubCat_Forderung_des_Unterrichtes_PC: 0.0713
+  SubCat_Gesonderte_Verwaltung_PC: 0.0350
+  SubCat_Sport_und_ausserschulische_Leibeserziehung_PC: 0.0983
+  SubCat_Vorschulische_Erziehung_PC: 0.0807
+  Wahlbeteiligung: 0.1078
+  Education_Spending_PC: 0.0797
+  Edu_Spending_Percentage: 0.1319
 
 Done
 
@@ -14831,27 +14859,26 @@ Done
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Discussion:</strong></p>
-<p>The One-Vs-Rest model achieved an overall test accuracy of 80.84%, which is relatively strong. However, the Area Under ROC (AUC) scores vary significantly between parties, indicating that the model predicts some parties better than others.</p>
-<p>SPÖ (AUC = 0.839) and ÖVP (AUC = 0.809) are well-predicted.</p>
-<p>FPÖ (AUC = 0.603) is much weaker, close to random guessing (0.5).</p>
-<p>This suggests that the features used (spending categories &amp; turnout) do not explain FPÖ victories as well as they do for SPÖ and ÖVP.</p>
+<p>The One-Vs-Rest model achieved an overall test accuracy of 78.04%, which is relatively strong. However, the Area Under ROC (AUC) scores vary significantly between parties, indicating that the model predicts some parties better than others.</p>
+<p>SPÖ (AUC = 0.839) and ÖVP (AUC = 0.772) are well-predicted.</p>
+<p>FPÖ (AUC = 0.633) is much weaker, closer to random guessing (0.5).</p>
+<p>This suggests that the features used (spending categories, turnout, education spending %) do not explain FPÖ victories as well as they do for SPÖ and ÖVP.</p>
 <p>Interpretations:</p>
-<p><strong>ÖVP vs. ALL (AUC = 0.809)</strong></p>
+<p><strong>ÖVP vs. ALL (AUC = 0.772)</strong></p>
 <ul>
-<li>The most influential features are general education spending (16.34%) and extracurricular youth education (17.76%)</li>
+<li>The most influential features are extracurricular youth education (20.43%) and adult education (14.29%)</li>
 </ul>
 <p><strong>SPÖ vs. ALL (AUC = 0.839)</strong></p>
 <ul>
-<li>Extracurricular youth education (18.47%) and adult education (16.85%) are the strongest factors</li>
+<li>Extracurricular youth education (15.00%) and <code>Gesonderte_Verwaltung</code> i.e. administrative costs (14.70%)  are the strongest factors. Adult education (12.49%) is also important.</li>
 </ul>
 <p>Both of these parties are known for their stance supporting public infrastructure (including education) spending, so these results are expected.</p>
-<p>Voter turnout (12.63%) plays a slighly larger role for SPÖ than for ÖVP (11.51%), however this indicates that both parties benefit from low or high turnouts, most likely from high.</p>
-<p><strong>FPÖ vs. ALL (AUC = 0.603)</strong></p>
+<p>Voter turnout (8.10%) plays a slighly larger role for SPÖ than for ÖVP (8.51%). This might indicate that both parties benefit from low or high turnouts, most likely from high.</p>
+<p><strong>FPÖ vs. ALL (AUC = 0.633)</strong></p>
 <ul>
-<li>The low AUC suggests that spending and voter turnout are poor predictors of FPÖ wins.</li>
-<li>Sports &amp; extracurricular activities (16.21%) and early childhood education (15.06%) are more relevant here, which is relatively unexpected given FPÖ's right-wing, anti-establishment stance.</li>
-<li>This may indicate that FPÖ wins in regions where voters react negatively to social spending, rather than benefiting from it.</li>
-<li>Turnout (13.59%) is more influential than for ÖVP/SPÖ. This might indicate that FPÖ benefits from either low or high turnouts</li>
+<li>The low AUC suggests that spending and voter turnout are not very good predictors of FPÖ wins.</li>
+<li>General education (13.63%) and the ratio of education spending to total spending (13.19%) are more relevant here, which is relatively unexpected given FPÖ's right-wing, anti-establishment stance.</li>
+<li>Turnout (10.78%) is more influential than for ÖVP/SPÖ. This might indicate that FPÖ benefits from either low or high turnouts.</li>
 <li>The low AUC score is expected for FPÖ, since the party benefits from other external factors not captured in this dataset, e.g. anti-establishment sentiment or sociocultural issues.</li>
 </ul>
 
@@ -14859,7 +14886,7 @@ Done
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Although further analysis is unrelated to our research topic, we will analyze the relationship between voter turnout and party wins out of interest.</p>
+<p>Although the analysis below is unrelated to our research topic, we will analyze the relationship between voter turnout and party wins out of interest.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14868,26 +14895,45 @@ Done
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load merged_data</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load the data</span>
 <span class="n">merged_data</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;data/merged_data.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">merged_data</span> <span class="o">=</span> <span class="n">merged_data</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span>
 
-<span class="c1"># get median turnout. we will split turnout to &quot;High&quot; and &quot;Low&quot; around the median.</span>
-<span class="n">median_turnout</span> <span class="o">=</span> <span class="n">merged_data</span><span class="o">.</span><span class="n">approxQuantile</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="mf">0.01</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median Turnout: </span><span class="si">{</span><span class="n">median_turnout</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="c1"># compute mean and stdev</span>
+<span class="n">turnout_stats</span> <span class="o">=</span> <span class="n">merged_data</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+    <span class="n">F</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;mean_turnout&quot;</span><span class="p">),</span>
+    <span class="n">F</span><span class="o">.</span><span class="n">stddev</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;stddev_turnout&quot;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">mean_turnout</span> <span class="o">=</span> <span class="n">turnout_stats</span><span class="p">[</span><span class="s2">&quot;mean_turnout&quot;</span><span class="p">]</span>
+<span class="n">stddev_turnout</span> <span class="o">=</span> <span class="n">turnout_stats</span><span class="p">[</span><span class="s2">&quot;stddev_turnout&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean Turnout: </span><span class="si">{</span><span class="n">mean_turnout</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Standard Deviation: </span><span class="si">{</span><span class="n">stddev_turnout</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># compute deviation from mean</span>
+<span class="n">merged_data</span> <span class="o">=</span> <span class="n">merged_data</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Turnout_Deviation&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">mean_turnout</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">))</span>
+
+<span class="c1"># assign turnout categories based on st dev</span>
+<span class="c1"># &lt;=1σ near median</span>
+<span class="c1"># 1&lt;σ&lt;=2 moderate high/low (depending on the direction of the deviance of turnout from mean)</span>
+<span class="c1"># 2&lt;σ extreme high/low</span>
 
 <span class="n">merged_data</span> <span class="o">=</span> <span class="n">merged_data</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
     <span class="s2">&quot;Turnout_Category&quot;</span><span class="p">,</span>
-    <span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Wahlbeteiligung&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">median_turnout</span><span class="p">,</span> <span class="s2">&quot;High Turnout&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">&quot;Low Turnout&quot;</span><span class="p">)</span>
+    <span class="n">when</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Turnout_Deviation&quot;</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">stddev_turnout</span><span class="p">,</span> <span class="s2">&quot;Near Mean&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">when</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Turnout_Deviation&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">stddev_turnout</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Turnout_Deviation&quot;</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">stddev_turnout</span><span class="p">),</span> <span class="s2">&quot;Moderate High&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">when</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Turnout_Deviation&quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">stddev_turnout</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Turnout_Deviation&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">stddev_turnout</span><span class="p">),</span> <span class="s2">&quot;Moderate Low&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Turnout_Deviation&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">stddev_turnout</span><span class="p">,</span> <span class="s2">&quot;Extreme High&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">&quot;Extreme Low&quot;</span><span class="p">)</span>
 <span class="p">)</span>
 
-<span class="c1"># we count party wins across turnout categories and the total party wins</span>
+<span class="c1"># count party wins across turnout categories</span>
 <span class="n">party_wins</span> <span class="o">=</span> <span class="n">merged_data</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;Winning_Party&quot;</span><span class="p">,</span> <span class="s2">&quot;Turnout_Category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">total_wins_per_party</span> <span class="o">=</span> <span class="n">party_wins</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;Winning_Party&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;total_wins&quot;</span><span class="p">))</span>
 
-<span class="c1"># calculate turnout category wins / total wins</span>
+<span class="c1"># calculate total wins per party and calculate turnout category wins / total wins</span>
+<span class="n">total_wins_per_party</span> <span class="o">=</span> <span class="n">party_wins</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;Winning_Party&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;total_wins&quot;</span><span class="p">))</span>
 <span class="n">party_wins</span> <span class="o">=</span> <span class="n">party_wins</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">total_wins_per_party</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;Winning_Party&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span> \
-                       <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Percentage&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;total_wins&quot;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+                       <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Percentage&quot;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;total_wins&quot;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Party Win Distribution by Turnout Level:&quot;</span><span class="p">)</span>
 <span class="n">party_wins</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">&quot;Winning_Party&quot;</span><span class="p">,</span> <span class="s2">&quot;Turnout_Category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -14912,18 +14958,26 @@ Done
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Median Turnout: 72.11%
+<pre>Mean Turnout: 71.77%, Standard Deviation: 6.66%
 Party Win Distribution by Turnout Level:
-+-------------+----------------+-----+----------+------------------+
-|Winning_Party|Turnout_Category|count|total_wins|        Percentage|
-+-------------+----------------+-----+----------+------------------+
-|          FPO|    High Turnout|   31|        87| 35.63218390804598|
-|          FPO|     Low Turnout|   56|        87| 64.36781609195403|
-|          OVP|    High Turnout|  448|       911|49.176728869374315|
-|          OVP|     Low Turnout|  463|       911| 50.82327113062569|
-|          SPO|    High Turnout|  143|       242| 59.09090909090909|
-|          SPO|     Low Turnout|   99|       242|40.909090909090914|
-+-------------+----------------+-----+----------+------------------+
++-------------+----------------+-----+----------+----------+
+|Winning_Party|Turnout_Category|count|total_wins|Percentage|
++-------------+----------------+-----+----------+----------+
+|          FPO|     Extreme Low|    5|        87|      5.75|
+|          FPO|   Moderate High|    3|        87|      3.45|
+|          FPO|    Moderate Low|   15|        87|     17.24|
+|          FPO|       Near Mean|   64|        87|     73.56|
+|          OVP|    Extreme High|   14|       911|      1.54|
+|          OVP|     Extreme Low|   28|       911|      3.07|
+|          OVP|   Moderate High|  136|       911|     14.93|
+|          OVP|    Moderate Low|  135|       911|     14.82|
+|          OVP|       Near Mean|  598|       911|     65.64|
+|          SPO|    Extreme High|    1|       242|      0.41|
+|          SPO|     Extreme Low|    4|       242|      1.65|
+|          SPO|   Moderate High|   43|       242|     17.77|
+|          SPO|    Moderate Low|   18|       242|      7.44|
+|          SPO|       Near Mean|  176|       242|     72.73|
++-------------+----------------+-----+----------+----------+
 
 
 Done
@@ -14939,10 +14993,19 @@ Done
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Discussion</strong></p>
-<p>As suspectedm, voter turnout affects electoral success for different parties.</p>
-<p>ÖVP (Austrian People's Party), a center-right, traditionally conservative party, tends to perform better in high-turnout municipalities. This aligns with expectations, as such parties often benefit from high participation among older, wealthier, or more politically engaged voters.</p>
-<p>SPÖ (Social Democratic Party of Austria), a center-left party, shows a balanced distribution between high and low-turnout areas. This is relatively expected, as social democratic parties tend to mobilize both working-class voters and urban voters, who may not always vote at the same rate.</p>
-<p>FPÖ (Freedom Party of Austria), a right-wing populist and nationalist party, seems to have a stronger presence in low-turnout areas. This suggests that FPÖ voters are motivated to vote for their party even when overall turnout is low, possibly because the party appeals to disenfranchised or protest voters who feel alienated from the mainstream political system. However, since FPÖ does well in high-turnout areas too, it may indicate broader societal shifts toward populist or anti-establishment sentiments.</p>
+<p>As suspected, voter turnout does affect electoral success for different parties.</p>
+<p><strong>ÖVP (Austrian People's Party)</strong></p>
+<p>ÖVP, a center-right, traditionally conservative party, performs strongly in Near Median turnout areas (65.64%), while its success in Moderate High (14.93%) and Moderate Low (14.82%) turnout areas is nearly identical.</p>
+<p>Interestingly, ÖVP does not perform significantly better in extreme turnout scenarios, with only 1.54% of wins in Extreme High turnout and 3.07% in Extreme Low turnout.</p>
+<p>This suggests that ÖVP’s voter base is relatively stable across different turnout levels, reinforcing the idea that the party appeals to an established, consistent voterbase, irrespective of voter turnout.</p>
+<p><strong>SPÖ (Social Democratic Party of Austria)</strong></p>
+<p>SPÖ, a center-left party, also sees most of its victories in Near Median turnout areas (72.73%), but with relatively strong presence in Moderate High turnout (17.77%).</p>
+<p>SPÖ underperforms in Extreme High turnout (0.41%) and Extreme Low turnout (1.65%), indicating that it does not significantly benefit from electoral volatility.</p>
+<p>The party's strong relative performance in Moderate High turnout areas suggests that higher turnout slightly favors SPÖ, which aligns with expectations that left-leaning parties benefit when voter mobilization efforts succeed.</p>
+<p>However, SPÖ's lower success in Moderate Low (7.44%) and Extreme Low turnout areas (1.65%) suggests that it struggles when voter participation drops significantly.</p>
+<p><strong>FPÖ (Freedom Party of Austria)</strong></p>
+<p>FPÖ, a right-wing populist and nationalist party, shows an overwhelming concentration of wins in Near Median turnout areas (73.56%), but its second-highest win category is Moderate Low turnout (17.24%). It also performs well in Extreme Low (5.75%) turnouts compared to other parties. Moderate High turnout (3.45%) is weak and it has no wins in Extreme High turnout areas.</p>
+<p>Unlike ÖVP, which remains relatively stable across turnout conditions, FPÖ shows a clear bias toward lower turnout conditions, reinforcing the idea that it benefits more from disengaged voters than from high-turnout mobilization efforts.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
