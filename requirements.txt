@@ -1,0 +1,8 @@
+pyspark
+beautifulsoup4
+pandas
+matplotlib
+seaborn
+unidecode
+requests
+jupyter
